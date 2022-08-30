@@ -11,7 +11,7 @@
         <!--Dashboard-->
         <scene sceneID="nn1-4q-LI5">
             <objects>
-                <viewController id="CAE-vo-wVd" sceneMemberID="viewController">
+                <viewController id="CAE-vo-wVd" customClass="DashboardViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ghc-NQ-Iid">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,19 +45,22 @@
         <!--Inventory-->
         <scene sceneID="VHr-UA-ZPT">
             <objects>
-                <tableViewController id="Va6-Ml-tsV" sceneMemberID="viewController">
+                <tableViewController id="Va6-Ml-tsV" customClass="InventoryTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="NPZ-9H-4on">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mmZ-as-TOq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InventoryCell" id="mmZ-as-TOq">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mmZ-as-TOq" id="3tm-Wr-usc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="iqI-Yl-9Jj" kind="show" id="Zwg-XI-p1X"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -77,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="2684.057971014493" y="462.72321428571428"/>
         </scene>
-        <!--Add Disc-->
+        <!--Add/Edit Disc-->
         <scene sceneID="hmE-E4-nI2">
             <objects>
                 <tableViewController id="iqI-Yl-9Jj" sceneMemberID="viewController">
@@ -120,7 +123,7 @@
                             <outlet property="delegate" destination="iqI-Yl-9Jj" id="wW9-fH-g2R"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Disc" id="zAe-Fa-VDh">
+                    <navigationItem key="navigationItem" title="Add/Edit Disc" id="zAe-Fa-VDh">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ko1-Nq-fGs"/>
                     </navigationItem>
                 </tableViewController>
@@ -148,6 +151,9 @@
             <point key="canvasLocation" x="1773.913043478261" y="462.72321428571428"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="0Pc-KY-6eL"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
