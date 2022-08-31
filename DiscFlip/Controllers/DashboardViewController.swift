@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This class/view controller displays running totals and other financial data
 class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {

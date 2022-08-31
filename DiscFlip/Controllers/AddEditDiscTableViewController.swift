@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This class/table view controller handles the creating of new discs and editing of existing discs
 class AddEditDiscTableViewController: UITableViewController {
 
     var disc: Disc?
@@ -18,7 +19,7 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var soldPriceTextField: UITextField!
     @IBOutlet var saveButton: UIBarButtonItem!
     
-    
+    // Initialize with disc data
     init?(coder: NSCoder, disc: Disc?) {
         self.disc = disc
         super.init(coder: coder)
@@ -30,6 +31,7 @@ class AddEditDiscTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         
+        // Fill in existing disc data (if any) and update view title
         if let disc = disc {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
@@ -46,6 +48,7 @@ class AddEditDiscTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    // Enable and disable the save button based on text field validation
     func updateSaveButtonState() {
         let nameText = nameTextField.text ?? ""
         let plasticText = plasticTextField.text ?? ""
@@ -55,12 +58,14 @@ class AddEditDiscTableViewController: UITableViewController {
         !purchasePriceText.isEmpty && !estSellPriceText.isEmpty
     }
     
+    // Trigger the save button state update when text is edited
     @IBAction func textEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
     }
     
     // MARK: - Navigation
     
+    // Compile the disc data for sending back to the inventory table view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Make sure we're saving and not cancelling
         guard segue.identifier == "saveUnwind" else { return }
