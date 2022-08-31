@@ -14,7 +14,7 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var plasticTextField: UITextField!
     @IBOutlet var purchasePriceTextField: UITextField!
-    @IBOutlet var estSellingPriceTextField: UITextField!
+    @IBOutlet var estSellPriceTextField: UITextField!
     @IBOutlet var soldPriceTextField: UITextField!
     @IBOutlet var saveButton: UIBarButtonItem!
     
@@ -34,7 +34,7 @@ class AddEditDiscTableViewController: UITableViewController {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
             purchasePriceTextField.text = String(disc.purchasePrice)
-            estSellingPriceTextField.text = String(disc.estSellPrice)
+            estSellPriceTextField.text = String(disc.estSellPrice)
             soldPriceTextField.text = String(disc.soldPrice)
             title = "Edit Disc"
         } else {
@@ -50,13 +50,29 @@ class AddEditDiscTableViewController: UITableViewController {
         let nameText = nameTextField.text ?? ""
         let plasticText = plasticTextField.text ?? ""
         let purchasePriceText = purchasePriceTextField.text ?? ""
-        let estSellingPriceText = estSellingPriceTextField.text ?? ""
+        let estSellPriceText = estSellPriceTextField.text ?? ""
         saveButton.isEnabled = !nameText.isEmpty && !plasticText.isEmpty &&
-        !purchasePriceText.isEmpty && !estSellingPriceText.isEmpty
+        !purchasePriceText.isEmpty && !estSellPriceText.isEmpty
     }
     
     @IBAction func textEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Make sure we're saving and not cancelling
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        let name = nameTextField.text!
+        let plastic = plasticTextField.text!
+        let purchasePrice = purchasePriceTextField.text!
+        let estSellPrice = estSellPriceTextField.text!
+        let soldPrice = soldPriceTextField.text!
+        
+        // TODO: Limit price text fields to 4 digits to avoid Int overflow
+        disc = Disc(name: name, plastic: plastic, purchasePrice: Int(purchasePrice)!, estSellPrice: Int(estSellPrice)!, soldPrice: Int(soldPrice) ?? 0)
     }
 
 }

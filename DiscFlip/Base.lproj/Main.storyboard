@@ -173,7 +173,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoW-25-1H5">
                                                     <rect key="frame" x="20" y="4" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="WFh-dI-d8m"/>
                                                     </connections>
@@ -201,7 +201,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-vv-Rfa">
                                                     <rect key="frame" x="20" y="5" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="moy-K1-D4z"/>
                                                     </connections>
@@ -229,7 +229,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ou2-sl-uyc">
                                                     <rect key="frame" x="20" y="4" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -261,7 +261,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="estSellingPriceTextField" destination="Mjc-vv-Rfa" id="VSq-pg-co0"/>
+                        <outlet property="estSellPriceTextField" destination="Mjc-vv-Rfa" id="ZWU-24-Muy"/>
                         <outlet property="nameTextField" destination="Wuk-Lv-72G" id="uvf-7G-Gi4"/>
                         <outlet property="plasticTextField" destination="v66-3e-AIC" id="SIb-du-PvT"/>
                         <outlet property="purchasePriceTextField" destination="qoW-25-1H5" id="KyZ-Ba-C2S"/>

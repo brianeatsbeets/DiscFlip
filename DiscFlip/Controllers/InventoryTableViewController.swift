@@ -51,9 +51,20 @@ class InventoryTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToInventoryTableViewController(segue: UIStoryboardSegue) {
-        if segue.identifier == "saveUnwind" {
-            // Save disc data
-            
+        // Check if we're coming back from saving a disc
+        guard segue.identifier == "saveUnwind",
+                let sourceViewController = segue.source as? AddEditDiscTableViewController,
+                let disc = sourceViewController.disc else { return }
+        
+        // Check if a disc was selected form editing, and if so, update it
+        // If not, add a new row
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            inventory[selectedIndexPath.row] = disc
+            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+        } else {
+            let newIndexPath = IndexPath(row: inventory.count, section: 0)
+            inventory.append(disc)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
     }
     
