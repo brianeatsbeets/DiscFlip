@@ -14,7 +14,7 @@ class Disc {
     var estSellPrice: Int
     var soldPrice: Int
     
-    init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int = 0, soldPrice: Int = 0) {
+    init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int, soldPrice: Int = 0) {
         self.name = name
         self.plastic = plastic
         self.purchasePrice = purchasePrice

@@ -99,7 +99,7 @@
         <!--Add/Edit Disc-->
         <scene sceneID="hmE-E4-nI2">
             <objects>
-                <tableViewController id="iqI-Yl-9Jj" sceneMemberID="viewController">
+                <tableViewController id="iqI-Yl-9Jj" customClass="AddEditDiscTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="2Xg-T0-t9K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,10 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wuk-Lv-72G">
                                                     <rect key="frame" x="20" y="5" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="Edr-dI-QIJ"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -142,7 +145,10 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v66-3e-AIC">
                                                     <rect key="frame" x="20" y="5" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="Uo3-88-1tn"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -167,7 +173,10 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoW-25-1H5">
                                                     <rect key="frame" x="20" y="4" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="WFh-dI-d8m"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -180,7 +189,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Estimated Selling Price (optional)" id="sTp-9Z-yg0">
+                            <tableViewSection headerTitle="Estimated Selling Price" id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uwX-Dl-mZL">
                                         <rect key="frame" x="0.0" y="330.5" width="414" height="43.5"/>
@@ -192,7 +201,10 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-vv-Rfa">
                                                     <rect key="frame" x="20" y="5" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="moy-K1-D4z"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -217,7 +229,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ou2-sl-uyc">
                                                     <rect key="frame" x="20" y="4" width="374" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -237,10 +249,28 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add/Edit Disc" id="zAe-Fa-VDh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ko1-Nq-fGs"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gZx-Sf-8oe">
+                            <connections>
+                                <segue destination="HHc-1d-kZ2" kind="unwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="qcT-j5-yhe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ko1-Nq-fGs">
+                            <connections>
+                                <segue destination="HHc-1d-kZ2" kind="unwind" identifier="saveUnwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="H7E-qt-iLF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="estSellingPriceTextField" destination="Mjc-vv-Rfa" id="VSq-pg-co0"/>
+                        <outlet property="nameTextField" destination="Wuk-Lv-72G" id="uvf-7G-Gi4"/>
+                        <outlet property="plasticTextField" destination="v66-3e-AIC" id="SIb-du-PvT"/>
+                        <outlet property="purchasePriceTextField" destination="qoW-25-1H5" id="KyZ-Ba-C2S"/>
+                        <outlet property="saveButton" destination="Ko1-Nq-fGs" id="ylp-xy-W9F"/>
+                        <outlet property="soldPriceTextField" destination="Ou2-sl-uyc" id="1PM-bh-1UO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofP-Of-gmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="HHc-1d-kZ2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4447.826086956522" y="462.72321428571428"/>
         </scene>

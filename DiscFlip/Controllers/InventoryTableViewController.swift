@@ -9,7 +9,7 @@ import UIKit
 
 class InventoryTableViewController: UITableViewController {
     
-    var inventory: [Disc] = [Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 17)]
+    var inventory: [Disc] = [Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 17, estSellPrice: 12)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,13 @@ class InventoryTableViewController: UITableViewController {
             // Adding Emoji
             return AddEditDiscTableViewController(coder: coder,
                disc: nil)
+        }
+    }
+    
+    @IBAction func unwindToInventoryTableViewController(segue: UIStoryboardSegue) {
+        if segue.identifier == "saveUnwind" {
+            // Save disc data
+            
         }
     }
     
