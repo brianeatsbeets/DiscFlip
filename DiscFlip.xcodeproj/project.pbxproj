@@ -13,7 +13,6 @@
 		E1F3C45E28B7B25A0039013E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F3C45C28B7B25A0039013E /* Main.storyboard */; };
 		E1F3C46028B7B2600039013E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1F3C45F28B7B2600039013E /* Assets.xcassets */; };
 		E1F3C46328B7B2600039013E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F3C46128B7B2600039013E /* LaunchScreen.storyboard */; };
-		E1F3C46D28BCEE2F0039013E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C46C28BCEE2F0039013E /* Item.swift */; };
 		E1F3C46F28BCF1C30039013E /* Disc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C46E28BCF1C30039013E /* Disc.swift */; };
 		E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */; };
 		E1F3C47628BCFC840039013E /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */; };
@@ -28,7 +27,6 @@
 		E1F3C45F28B7B2600039013E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1F3C46228B7B2600039013E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1F3C46428B7B2600039013E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1F3C46C28BCEE2F0039013E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E1F3C46E28BCF1C30039013E /* Disc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disc.swift; sourceTree = "<group>"; };
 		E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 		E1F3C46A28BCEDBA0039013E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E1F3C46C28BCEE2F0039013E /* Item.swift */,
 				E1F3C46E28BCF1C30039013E /* Disc.swift */,
 			);
 			path = Models;
@@ -166,7 +163,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1F3C46D28BCEE2F0039013E /* Item.swift in Sources */,
 				E1F3C46F28BCF1C30039013E /* Disc.swift in Sources */,
 				E1F3C47628BCFC840039013E /* InventoryTableViewController.swift in Sources */,
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,

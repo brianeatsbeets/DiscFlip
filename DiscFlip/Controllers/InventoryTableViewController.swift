@@ -9,7 +9,7 @@ import UIKit
 
 class InventoryTableViewController: UITableViewController {
     
-    var inventory: [Item] = [Disc(name: "Thunderbird", purchasePrice: 17, plastic: "Champion")]
+    var inventory: [Disc] = [Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 17)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,57 +27,29 @@ class InventoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InventoryCell", for: indexPath)
-        let item = inventory[indexPath.row]
+        let disc = inventory[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
-        
-        var primaryText = item.name
-        if let disc = item as? Disc {
-            primaryText = "\(disc.plastic) " + primaryText
-        }
-        content.text = primaryText
-        
-        content.secondaryText = "Purchase price: $\(item.purchasePrice)"
-        
+        content.text = disc.plastic + " " + disc.name
+        content.secondaryText = "Purchase price: $\(disc.purchasePrice)"
         cell.contentConfiguration = content
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    @IBSegueAction func addEditDisc(_ coder: NSCoder, sender: Any?) -> UITableViewController? {
+        if let cell = sender as? UITableViewCell,
+           let indexPath = tableView.indexPath(for: cell) {
+            // Editing Disc
+            let discToEdit = inventory[indexPath.row]
+            return AddEditDiscTableViewController(coder: coder, disc: discToEdit)
+        } else {
+            // Adding Emoji
+            return AddEditDiscTableViewController(coder: coder,
+               disc: nil)
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
 
     /*
     // MARK: - Navigation

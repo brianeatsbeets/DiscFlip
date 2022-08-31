@@ -6,12 +6,19 @@
 //
 
 // This class represents a disc to be sold
-class Disc: Item {
+class Disc {
     
+    var name: String
     var plastic: String
+    var purchasePrice: Int
+    var estSellPrice: Int
+    var soldPrice: Int
     
-    init(name: String, purchasePrice: Int, estSellPrice: Int = 0, soldPrice: Int = 0, plastic: String) {
+    init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int = 0, soldPrice: Int = 0) {
+        self.name = name
         self.plastic = plastic
-        super.init(name: name, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice)
+        self.purchasePrice = purchasePrice
+        self.estSellPrice = estSellPrice
+        self.soldPrice = soldPrice
     }
 }
