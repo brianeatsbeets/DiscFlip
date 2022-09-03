@@ -7,8 +7,15 @@
 
 import UIKit
 
+// This protocol allows the inventory to be updated by other views
+protocol InventoryDelegate {
+    func updateInventory(newInventory: [Disc])
+}
+
 // This class/view controller displays running totals and other financial data
 class DashboardViewController: UIViewController {
+    
+    var inventory = [Disc]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,4 +34,11 @@ class DashboardViewController: UIViewController {
     }
     */
 
+}
+
+// This extension of DashboardViewController conforms to the InventoryDelegate protocol
+extension DashboardViewController: InventoryDelegate {
+    func updateInventory(newInventory: [Disc]) {
+        inventory = newInventory
+    }
 }
