@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
+		E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36428C3919800F357B2 /* MainTabBarController.swift */; };
 		E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45628B7B25A0039013E /* AppDelegate.swift */; };
 		E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45828B7B25A0039013E /* SceneDelegate.swift */; };
 		E1F3C45E28B7B25A0039013E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F3C45C28B7B25A0039013E /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
+		E17CA36428C3919800F357B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E1F3C45328B7B25A0039013E /* DiscFlip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscFlip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F3C45628B7B25A0039013E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1F3C45828B7B25A0039013E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */,
 				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
 				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
+				E17CA36428C3919800F357B2 /* MainTabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				E1F3C46F28BCF1C30039013E /* Disc.swift in Sources */,
 				E1F3C47628BCFC840039013E /* InventoryTableViewController.swift in Sources */,
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,
+				E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */,
 				E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */,
 				E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */,
 				E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */,

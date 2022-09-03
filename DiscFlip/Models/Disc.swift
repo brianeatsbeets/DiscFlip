@@ -6,7 +6,7 @@
 //
 
 // This class represents a disc to be sold
-class Disc {
+class Disc: Codable {
     
     var name: String
     var plastic: String

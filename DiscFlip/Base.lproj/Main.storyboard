@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="1774" y="-226"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="Lex-pa-Y0v">
             <objects>
-                <tabBarController id="ER3-uO-Usl" sceneMemberID="viewController">
+                <tabBarController id="ER3-uO-Usl" customClass="MainTabBarController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rn7-LD-L66">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

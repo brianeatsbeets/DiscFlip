@@ -10,11 +10,23 @@ import UIKit
 // This class/table view controller displays the historic inventory of discs that have been bought and sold
 class InventoryTableViewController: UITableViewController {
     
-    var inventory: [Disc] = [Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 17, estSellPrice: 12)]
-
+    var inventory = [Disc]()
+    
+    weak var delegate: InventoryDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadInventory()
         tableView.reloadData()
+    }
+    
+    func loadInventory() {
+        if let initialInventory = delegate?.checkoutInventory() {
+            inventory = initialInventory
+        } else {
+            print("Failed to fetch initial inventory from DashboardViewController")
+        }
     }
 
     // MARK: - Table view data source
@@ -75,6 +87,26 @@ class InventoryTableViewController: UITableViewController {
             inventory.append(disc)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
+        
+        delegate?.updateInventory(newInventory: inventory)
+        
+        saveInventory()
+    }
+    
+    // Save the updated inventory
+    func saveInventory() {
+        // Create path to Documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let archiveURL = documentsDirectory.appendingPathComponent("inventory") . appendingPathExtension("plist")
+        
+        // Encode data
+        let propertyListEncoder = PropertyListEncoder()
+        if let encodedInventory = try? propertyListEncoder.encode(inventory) {
+            // Save inventory
+            try? encodedInventory.write(to: archiveURL, options: .noFileProtection)
+        }
+        
+        print("Saved inventory to data source: \(inventory)")
     }
 
 }
