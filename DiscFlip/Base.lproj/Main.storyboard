@@ -48,7 +48,7 @@
                         <viewLayoutGuide key="safeArea" id="JCf-A8-K4P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Dashboard" id="dcE-SS-RQf"/>
+                    <navigationItem key="navigationItem" title="Dashboard" id="EY2-as-ava"/>
                     <connections>
                         <outlet property="currentNetLabel" destination="yYI-e5-Qtk" id="yeF-S2-sgz"/>
                         <outlet property="estimatedNetLabel" destination="FzF-IN-aR1" id="iP6-6l-sCR"/>
@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dc3-gi-dsb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.913043478261" y="-226.33928571428569"/>
+            <point key="canvasLocation" x="2684.057971014493" y="-226.33928571428569"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="Lex-pa-Y0v">
@@ -70,7 +70,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CAE-vo-wVd" kind="relationship" relationship="viewControllers" id="v6F-cF-QXb"/>
+                        <segue destination="9Yg-1a-Tpv" kind="relationship" relationship="viewControllers" id="v6F-cF-QXb"/>
                         <segue destination="GET-Vn-1Ig" kind="relationship" relationship="viewControllers" id="Dqe-8a-d6t"/>
                     </connections>
                 </tabBarController>
@@ -225,7 +225,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Estimated Selling Price" id="sTp-9Z-yg0">
+                            <tableViewSection headerTitle="Estimated Selling Price (conservative)" id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uwX-Dl-mZL">
                                         <rect key="frame" x="0.0" y="330.5" width="414" height="43.5"/>
@@ -328,6 +328,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVV-nS-ePj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773.913043478261" y="462.72321428571428"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="PQf-l4-rP7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Yg-1a-Tpv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dashboard" id="dcE-SS-RQf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="csX-cm-rxF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CAE-vo-wVd" kind="relationship" relationship="rootViewController" id="JsI-f2-YcB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SO0-CZ-mx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1773.913043478261" y="-226.33928571428569"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

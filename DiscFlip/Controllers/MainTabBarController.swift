@@ -5,6 +5,8 @@
 //  Created by Aguirre, Brian P. on 9/3/22.
 //
 
+// TODO: Validate inventory load before view controllers fetch data
+
 import UIKit
 
 // This protocol allows the inventory to be accessed and updated by other views
@@ -43,7 +45,8 @@ class MainTabBarController: UITabBarController {
     
     // Set the delegate of each child view controller to self
     func setDelegates() {
-        let dashboardViewController = viewControllers?[0] as! DashboardViewController
+        let dashboardNavigationController = viewControllers?[0] as! UINavigationController
+        let dashboardViewController = dashboardNavigationController.viewControllers.first as! DashboardViewController
         dashboardViewController.delegate = self
         
         let inventoryNavigationController = viewControllers?[1] as! UINavigationController

@@ -44,9 +44,9 @@ class DashboardViewController: UIViewController {
         let totalSold = inventory.reduce(0) { $0 + $1.soldPrice }
         totalSoldLabel.text = "Total Sold: $" + String(totalSold)
         
-        currentNetLabel.text = "Current Net: $" + String(-totalPurchased + totalSold)
+        currentNetLabel.text = "Current Net: $" + String(totalSold - totalPurchased)
         
         let estimatedNet = inventory.reduce(0) { $0 + $1.estSellPrice }
-        estimatedNetLabel.text = "Estimated Net: $" + String(-totalPurchased + estimatedNet)
+        estimatedNetLabel.text = "Estimated Net (conservative): $" + String(estimatedNet - totalPurchased)
     }
 }
