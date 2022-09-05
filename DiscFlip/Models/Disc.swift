@@ -6,7 +6,7 @@
 //
 
 // This class represents a disc to be sold
-class Disc: Codable {
+class Disc: Codable, CustomStringConvertible {
     
     var name: String
     var plastic: String
@@ -14,11 +14,16 @@ class Disc: Codable {
     var estSellPrice: Int
     var soldPrice: Int
     
+    // Property required by CustomStringConvertible protocol
+    var description: String
+    
     init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int, soldPrice: Int = 0) {
         self.name = name
         self.plastic = plastic
         self.purchasePrice = purchasePrice
         self.estSellPrice = estSellPrice
         self.soldPrice = soldPrice
+        
+        self.description = plastic + " " + name
     }
 }

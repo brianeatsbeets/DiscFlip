@@ -7,7 +7,7 @@
 
 import UIKit
 
-// This protocol allows the inventory to be updated by other views
+// This protocol allows the inventory to be accessed and updated by other views
 protocol InventoryDelegate: AnyObject {
     func updateInventory(newInventory: [Disc])
     func checkoutInventory() -> [Disc]
@@ -45,24 +45,20 @@ class MainTabBarController: UITabBarController {
     func setDelegates() {
         let dashboardViewController = viewControllers?[0] as! DashboardViewController
         dashboardViewController.delegate = self
-        print("Set dashboardViewController delegate to MainTabBarController")
         
         let inventoryNavigationController = viewControllers?[1] as! UINavigationController
         let inventoryTableViewController = inventoryNavigationController.viewControllers.first as! InventoryTableViewController
         inventoryTableViewController.delegate = self
-        print("Set inventoryTableViewController delegate to MainTabBarController")
     }
 }
 
-// This extension of DashboardViewController conforms to the InventoryDelegate protocol
+// This extension of MainTabBarController conforms to the InventoryDelegate protocol
 extension MainTabBarController: InventoryDelegate {
     func updateInventory(newInventory: [Disc]) {
-        print("Updated inventory")
         inventory = newInventory
     }
     
     func checkoutInventory() -> [Disc] {
-        print("Checked out inventory")
         return inventory
     }
 }
