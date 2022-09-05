@@ -5,6 +5,8 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
+// TODO: Allow for deletion of discs - brainstorm best way to implement (here or on edit screen?)
+
 import UIKit
 
 // This class/table view controller displays the historic inventory of discs that have been bought and sold
@@ -21,6 +23,7 @@ class InventoryTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // Fetch the inventory
     func loadInventory() {
         if let initialInventory = delegate?.checkoutInventory() {
             inventory = initialInventory
