@@ -31,7 +31,15 @@ class AddEditDiscTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         
-        // Fill in existing disc data (if any) and update view title
+        updateUI()
+        
+        updateSaveButtonState()
+        
+        super.viewDidLoad()
+    }
+    
+    // Fill in existing disc data (if any) and update view title
+    func updateUI() {
         if let disc = disc {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
@@ -42,10 +50,6 @@ class AddEditDiscTableViewController: UITableViewController {
         } else {
             title = "Add Disc"
         }
-        
-        updateSaveButtonState()
-        
-        super.viewDidLoad()
     }
     
     // Enable and disable the save button based on text field validation
@@ -72,12 +76,11 @@ class AddEditDiscTableViewController: UITableViewController {
         
         let name = nameTextField.text!
         let plastic = plasticTextField.text!
-        let purchasePrice = purchasePriceTextField.text!
-        let estSellPrice = estSellPriceTextField.text!
-        let soldPrice = soldPriceTextField.text!
+        let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
+        let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
+        let soldPrice = Int(soldPriceTextField.text ?? "0")!
         
-        // TODO: Limit price text fields to 4 digits to avoid Int overflow
-        disc = Disc(name: name, plastic: plastic, purchasePrice: Int(purchasePrice)!, estSellPrice: Int(estSellPrice)!, soldPrice: Int(soldPrice) ?? 0)
+        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice)
     }
 
 }

@@ -24,14 +24,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Sold: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRw-yF-DeJ">
-                                <rect key="frame" x="20" y="267" width="374" height="21"/>
+                                <rect key="frame" x="20" y="243" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Net:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYI-e5-Qtk">
-                                <rect key="frame" x="20" y="387" width="374" height="21"/>
+                                <rect key="frame" x="20" y="403" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -44,6 +44,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Cash: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3D8-5l-6op">
+                                <rect key="frame" x="20" y="321" width="229" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-eF-K7d">
+                                <rect key="frame" x="257" y="316" width="137" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Manage Cash"/>
+                                <connections>
+                                    <segue destination="K3f-t9-bqx" kind="show" id="Gdo-S1-DUU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JCf-A8-K4P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -131,6 +147,154 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjM-gq-pHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3571" y="463"/>
+        </scene>
+        <!--Add/Edit Cash-->
+        <scene sceneID="BUy-wi-Lfv">
+            <objects>
+                <tableViewController id="vbV-4G-lBP" customClass="AddEditCashTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="q1Y-kK-Ukv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="Amount" id="xn3-nZ-WWc">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="epl-jk-tsR">
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="epl-jk-tsR" id="OUW-Ua-qaq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UMf-ke-vOi">
+                                                    <rect key="frame" x="20" y="5" width="374" height="34.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="kTM-G3-ZIP"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UMf-ke-vOi" firstAttribute="top" secondItem="OUW-Ua-qaq" secondAttribute="top" constant="5" id="Gia-FD-eWy"/>
+                                                <constraint firstAttribute="trailing" secondItem="UMf-ke-vOi" secondAttribute="trailing" constant="20" symbolic="YES" id="R8z-D0-ePt"/>
+                                                <constraint firstItem="UMf-ke-vOi" firstAttribute="leading" secondItem="OUW-Ua-qaq" secondAttribute="leading" constant="20" symbolic="YES" id="jGi-YH-woe"/>
+                                                <constraint firstAttribute="bottom" secondItem="UMf-ke-vOi" secondAttribute="bottom" constant="4.5" id="nei-1J-iAt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Memo" id="JIK-Tx-yeK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GWP-fQ-Ufy">
+                                        <rect key="frame" x="0.0" y="143.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GWP-fQ-Ufy" id="TpV-0L-tGN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-hA-u0I">
+                                                    <rect key="frame" x="20" y="4" width="374" height="34.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="kz5-Mt-oOD"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FPE-hA-u0I" firstAttribute="leading" secondItem="TpV-0L-tGN" secondAttribute="leading" constant="20" symbolic="YES" id="Duy-yo-0uP"/>
+                                                <constraint firstAttribute="bottom" secondItem="FPE-hA-u0I" secondAttribute="bottom" constant="5.5" id="LGx-Rr-gfI"/>
+                                                <constraint firstItem="FPE-hA-u0I" firstAttribute="top" secondItem="TpV-0L-tGN" secondAttribute="top" constant="4" id="j8Y-UH-EbK"/>
+                                                <constraint firstAttribute="trailing" secondItem="FPE-hA-u0I" secondAttribute="trailing" constant="20" symbolic="YES" id="kHe-fm-m2y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="vbV-4G-lBP" id="9xD-wl-zyy"/>
+                            <outlet property="delegate" destination="vbV-4G-lBP" id="JAR-vQ-GDu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add/Edit Cash" id="AW7-oR-72w">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="izP-Fc-lCo">
+                            <connections>
+                                <segue destination="XAT-9N-JT7" kind="unwind" unwindAction="unwindToCashTableViewControllerWithSegue:" id="61L-3A-izw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="nEg-hu-Co3">
+                            <connections>
+                                <segue destination="XAT-9N-JT7" kind="unwind" identifier="cashSaveUnwind" unwindAction="unwindToCashTableViewControllerWithSegue:" id="fFQ-of-Znn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="amountTextField" destination="UMf-ke-vOi" id="8iL-xq-oK7"/>
+                        <outlet property="memoTextField" destination="FPE-hA-u0I" id="HsN-DK-JoW"/>
+                        <outlet property="saveButton" destination="nEg-hu-Co3" id="Ft6-aS-cTL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQw-NM-djW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="XAT-9N-JT7" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5337.68115942029" y="-226.33928571428569"/>
+        </scene>
+        <!--Cash-->
+        <scene sceneID="hR4-4M-wKt">
+            <objects>
+                <tableViewController id="K3f-t9-bqx" customClass="CashTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="fto-LD-T5K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cashCell" id="nsh-RO-qJ1">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nsh-RO-qJ1" id="U4d-9l-w32">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="pBD-4Z-BiI" kind="presentation" id="sEO-Gt-iS5"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="K3f-t9-bqx" id="dou-is-Oqp"/>
+                            <outlet property="delegate" destination="K3f-t9-bqx" id="wqF-WZ-GBd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Cash" id="NuT-hK-eAm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wfc-eB-gFF">
+                            <connections>
+                                <segue destination="pBD-4Z-BiI" kind="presentation" id="L1F-FP-pKW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6oo-Zy-LiB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3570" y="-226"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6GE-fK-uYb">
+            <objects>
+                <navigationController id="pBD-4Z-BiI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c46-jp-s8x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vbV-4G-lBP" kind="relationship" relationship="rootViewController" destinationCreationSelector="addEditCash:sender:" id="9qS-xb-YMl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dHm-1V-iKj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4448" y="-226"/>
         </scene>
         <!--Add/Edit Disc-->
         <scene sceneID="hmE-E4-nI2">
@@ -314,7 +478,7 @@
         <scene sceneID="0TX-ZV-x3Q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GET-Vn-1Ig" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inventory" id="oJS-qD-w5V"/>
+                    <tabBarItem key="tabBarItem" title="Inventory" image="list.bullet.rectangle.fill" catalog="system" id="oJS-qD-w5V"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SWy-dw-gac">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -333,7 +497,7 @@
         <scene sceneID="PQf-l4-rP7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Yg-1a-Tpv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" id="dcE-SS-RQf"/>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="rectangle.split.2x2.fill" catalog="system" id="dcE-SS-RQf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="csX-cm-rxF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -350,9 +514,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RdZ-7T-7Vb"/>
+        <segue reference="sEO-Gt-iS5"/>
+        <segue reference="qte-hQ-g0u"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
