@@ -51,6 +51,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E17CA36828C786F700F357B2 /* CashTableViewController.swift */,
+				E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */,
+			);
+			path = "Cash Controllers";
+			sourceTree = "<group>";
+		};
+		E17CA36E28C79DED00F357B2 /* Inventory Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
+				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
+			);
+			path = "Inventory Controllers";
+			sourceTree = "<group>";
+		};
 		E1F3C44A28B7B25A0039013E = {
 			isa = PBXGroup;
 			children = (
@@ -96,10 +114,8 @@
 			children = (
 				E17CA36428C3919800F357B2 /* MainTabBarController.swift */,
 				E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */,
-				E17CA36828C786F700F357B2 /* CashTableViewController.swift */,
-				E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */,
-				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
-				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
+				E17CA36C28C79DDD00F357B2 /* Cash Controllers */,
+				E17CA36E28C79DED00F357B2 /* Inventory Controllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

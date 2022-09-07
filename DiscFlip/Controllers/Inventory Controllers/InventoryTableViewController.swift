@@ -14,7 +14,7 @@ class InventoryTableViewController: UITableViewController {
     
     var inventory = [Disc]()
     
-    weak var delegate: InventoryDelegate?
+    weak var delegate: DataDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,17 +77,25 @@ class InventoryTableViewController: UITableViewController {
         // Check to see if we're coming back from saving a disc. If not, exit with guard
         guard segue.identifier == "saveUnwind",
               let sourceViewController = segue.source as? AddEditDiscTableViewController,
-              let disc = sourceViewController.disc else { return }
+              let disc = sourceViewController.disc
+        else {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndexPath, animated: false)
+            }
+            
+            return
+        }
         
         // Check to see if a disc was selected form editing, and if so, update it
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
             inventory[selectedIndexPath.row] = disc
             tableView.reloadRows(at: [selectedIndexPath], with: .none)
         } else {
             // If not, add a new disc to the inventory and add a new table view row
             let newIndexPath = IndexPath(row: inventory.count, section: 0)
             inventory.append(disc)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            tableView.insertRows(at: [newIndexPath], with: .none)
         }
         
         delegate?.updateInventory(newInventory: inventory)

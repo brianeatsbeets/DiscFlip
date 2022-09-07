@@ -57,7 +57,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Manage Cash"/>
                                 <connections>
-                                    <segue destination="K3f-t9-bqx" kind="show" id="Gdo-S1-DUU"/>
+                                    <segue destination="K3f-t9-bqx" kind="show" destinationCreationSelector="segueToCash:" id="Gdo-S1-DUU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -68,6 +68,7 @@
                     <connections>
                         <outlet property="currentNetLabel" destination="yYI-e5-Qtk" id="yeF-S2-sgz"/>
                         <outlet property="estimatedNetLabel" destination="FzF-IN-aR1" id="iP6-6l-sCR"/>
+                        <outlet property="otherCashLabel" destination="3D8-5l-6op" id="vNt-kr-UlS"/>
                         <outlet property="totalPurchasedLabel" destination="C48-2F-Fwx" id="BeC-ma-9OY"/>
                         <outlet property="totalSoldLabel" destination="iRw-yF-DeJ" id="CbH-hD-i64"/>
                     </connections>
@@ -269,6 +270,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Cash" id="NuT-hK-eAm">
+                        <barButtonItem key="leftBarButtonItem" title="Dashboard" image="chevron.left" catalog="system" id="Ea5-6t-LbS">
+                            <connections>
+                                <segue destination="UQG-bW-J2e" kind="unwind" identifier="dashboardCashUnwind" unwindAction="unwindToDashboardViewControllerWithSegue:" id="Fsi-la-d7G"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wfc-eB-gFF">
                             <connections>
                                 <segue destination="pBD-4Z-BiI" kind="presentation" id="L1F-FP-pKW"/>
@@ -277,6 +283,7 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oo-Zy-LiB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="UQG-bW-J2e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3570" y="-226"/>
         </scene>
@@ -514,10 +521,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sEO-Gt-iS5"/>
+        <segue reference="L1F-FP-pKW"/>
         <segue reference="qte-hQ-g0u"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">

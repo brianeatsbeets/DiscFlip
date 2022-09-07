@@ -78,7 +78,7 @@ class AddEditDiscTableViewController: UITableViewController {
         let plastic = plasticTextField.text!
         let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
         let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
-        let soldPrice = Int(soldPriceTextField.text ?? "0")!
+        let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : Int(soldPriceTextField.text!)!
         
         disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice)
     }

@@ -10,7 +10,17 @@ import UIKit
 // This class/table view controller displays cash funds that have been added
 class CashTableViewController: UITableViewController {
     
-    var cash = [Cash]()
+    var cash: [Cash]
+    
+    // Initialize with cash data
+    init?(coder: NSCoder, cash: [Cash]) {
+        self.cash = cash
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,21 +70,47 @@ class CashTableViewController: UITableViewController {
     // Handle the incoming data being passed back from AddEditCashTableViewController, if any
     @IBAction func unwindToCashTableViewController(segue: UIStoryboardSegue) {
         
-        // Check to see if we're coming back from saving cash. If not, exit with guard
+        // Check to see if we're coming back from saving cash. If not, exit with guard and deselect the row
         guard segue.identifier == "cashSaveUnwind",
               let sourceViewController = segue.source as? AddEditCashTableViewController,
-              let returnedCash = sourceViewController.cash else { return }
+              let returnedCash = sourceViewController.cash
+        else {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndexPath, animated: false)
+            }
+            
+            return
+        }
         
         // Check to see if cash was selected form editing, and if so, update it
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
             cash[selectedIndexPath.row] = returnedCash
             tableView.reloadRows(at: [selectedIndexPath], with: .none)
         } else {
             // If not, add new cash object to the array and add a new table view row
             let newIndexPath = IndexPath(row: cash.count, section: 0)
             cash.append(returnedCash)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            tableView.insertRows(at: [newIndexPath], with: .none)
         }
+        
+        saveCash()
+    }
+    
+    // Save the updated cash
+    func saveCash() {
+        // Create path to Documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let archiveURL = documentsDirectory.appendingPathComponent("cash") . appendingPathExtension("plist")
+        
+        // Encode data
+        let propertyListEncoder = PropertyListEncoder()
+        if let encodedCash = try? propertyListEncoder.encode(cash) {
+            // Save cash
+            try? encodedCash.write(to: archiveURL, options: .noFileProtection)
+        }
+        
+        print("Saved inventory to data source: \(cash)")
     }
 
     /*
