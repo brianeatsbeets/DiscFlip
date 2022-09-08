@@ -6,7 +6,7 @@
 //
 
 // This class represents cash funds added to the overall total
-class Cash: Codable, CustomStringConvertible {
+struct Cash: Codable, CustomStringConvertible {
 
     var amount: Int
     var memo: String
