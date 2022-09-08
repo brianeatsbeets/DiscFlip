@@ -17,6 +17,7 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var purchasePriceTextField: UITextField!
     @IBOutlet var estSellPriceTextField: UITextField!
     @IBOutlet var soldPriceTextField: UITextField!
+    @IBOutlet var soldOnEbaySwitch: UISwitch!
     @IBOutlet var saveButton: UIBarButtonItem!
     
     // Initialize with disc data
@@ -79,8 +80,9 @@ class AddEditDiscTableViewController: UITableViewController {
         let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
         let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
         let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : Int(soldPriceTextField.text!)!
+        let soldOnEbay = soldOnEbaySwitch.isOn
         
-        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice)
+        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
     }
 
 }

@@ -51,7 +51,22 @@ class InventoryTableViewController: UITableViewController {
         
         var content = cell.defaultContentConfiguration()
         content.text = disc.plastic + " " + disc.name
-        content.secondaryText = "Purchase price: $\(disc.purchasePrice)"
+        
+        var secondaryText = ""
+        
+        // Create applicable profit statements
+        if disc.soldPrice == 0 {
+            secondaryText = "Estimated profit: $\(disc.estSellPrice - disc.purchasePrice)"
+        } else {
+            let profit = disc.soldPrice - disc.purchasePrice
+            secondaryText = "Profit: $\(profit)"
+            
+            if !disc.soldOnEbay {
+                secondaryText += " | Not sold on eBay"
+            }
+        }
+        
+        content.secondaryText = secondaryText
         cell.contentConfiguration = content
 
         return cell

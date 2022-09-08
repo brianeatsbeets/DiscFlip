@@ -17,6 +17,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet var otherCashLabel: UILabel!
     @IBOutlet var currentNetLabel: UILabel!
     @IBOutlet var estimatedNetLabel: UILabel!
+    @IBOutlet var eBayNetLabel: UILabel!
     
     var inventory = [Disc]()
     var cash = [Cash]()
@@ -62,6 +63,9 @@ class DashboardViewController: UIViewController {
         
         let estimatedNet = inventory.reduce(0) { $0 + $1.estSellPrice }
         estimatedNetLabel.text = "Estimated Net (conservative): $" + String(estimatedNet - totalPurchased + otherCash)
+        
+        let eBayNet = inventory.reduce(0) { $0 + $1.eBayProfit }
+        eBayNetLabel.text = "eBay Net: $" + String(eBayNet)
     }
     
     // Initialize the cash table view controller with the existing cash array
