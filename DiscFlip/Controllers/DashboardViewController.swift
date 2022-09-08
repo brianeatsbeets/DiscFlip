@@ -22,12 +22,11 @@ class DashboardViewController: UIViewController {
     var cash = [Cash]()
     
     weak var delegate: DataDelegate?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         loadData()
-        
         updateUI()
     }
     
