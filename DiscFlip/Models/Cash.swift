@@ -23,4 +23,20 @@ struct Cash: Codable, CustomStringConvertible, Hashable {
         self.memo = memo
         self.description = "$\(amount): \(memo)"
     }
+    
+    // Save the updated cash
+    static func saveCash(_ cashList: [Cash]) {
+        // Create path to Documents directory
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let archiveURL = documentsDirectory.appendingPathComponent("cash") . appendingPathExtension("plist")
+        
+        // Encode data
+        let propertyListEncoder = PropertyListEncoder()
+        if let encodedCash = try? propertyListEncoder.encode(cashList) {
+            // Save cash
+            try? encodedCash.write(to: archiveURL, options: .noFileProtection)
+        }
+        
+        print("Saved inventory to data source: \(cashList)")
+    }
 }

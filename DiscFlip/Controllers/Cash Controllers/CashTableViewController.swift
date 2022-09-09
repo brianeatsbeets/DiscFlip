@@ -7,13 +7,17 @@
 
 import UIKit
 
+protocol CashDelegate: AnyObject {
+    func remove(cash: Cash)
+}
+
 // This class/table view controller displays cash funds that have been added
 class CashTableViewController: UITableViewController {
     
     var cashList: [Cash]
     
     let cellReuseIdentifier = "cashCell"
-    lazy var dataSource = createDataSource()
+    private lazy var dataSource = createDataSource()
     
     // Initialize with cash data
     init?(coder: NSCoder, cashList: [Cash]) {
@@ -28,6 +32,7 @@ class CashTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource.delegate = self
         tableView.dataSource = dataSource
         
         updateTableView()
@@ -74,23 +79,7 @@ class CashTableViewController: UITableViewController {
             updateTableView()
         }
         
-        saveCash()
-    }
-    
-    // Save the updated cash
-    func saveCash() {
-        // Create path to Documents directory
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let archiveURL = documentsDirectory.appendingPathComponent("cash") . appendingPathExtension("plist")
-        
-        // Encode data
-        let propertyListEncoder = PropertyListEncoder()
-        if let encodedCash = try? propertyListEncoder.encode(cashList) {
-            // Save cash
-            try? encodedCash.write(to: archiveURL, options: .noFileProtection)
-        }
-        
-        print("Saved inventory to data source: \(cashList)")
+        Cash.saveCash(cashList)
     }
 }
 
@@ -99,17 +88,12 @@ class CashTableViewController: UITableViewController {
 // This extention houses table view management functions using the diffable data source API
 extension CashTableViewController {
     
-    // Declare sections
-    enum Section: CaseIterable {
-        case one
-    }
-    
     // Create the the data source and specify what to do with a provided cell
-    func createDataSource() -> UITableViewDiffableDataSource<Section, Cash> {
+    private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
         // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
         let reuseIdentifier = cellReuseIdentifier
         
-        return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, cash in
+        return DeletableRowTableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, cash in
             // Configure the cell
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
             
@@ -129,11 +113,47 @@ extension CashTableViewController {
         snapshot.appendItems(cashList)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+}
+
+// This enum declares table view sections
+private enum Section: CaseIterable {
+    case one
+}
+
+// This class defines a UITableViewDiffableDataSource subclass that enables swipe-to-delete
+private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Cash> {
+    
+    // Delegate to update data model
+    weak var delegate: CashDelegate?
+    
+    // Allow the table view to be edited
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // Allow table view rows to be deleted
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete, let cashToDelete = itemIdentifier(for: indexPath) {
+            delegate?.remove(cash: cashToDelete)
+        }
+    }
+}
+
+// This extension of CashTableViewController conforms to CashDelegate
+extension CashTableViewController: CashDelegate {
     
     // Apply a snapshot with removed data
     func remove(cash: Cash) {
+        
+        // Remove cash from cashList
+        cashList = cashList.filter { $0 != cash }
+        
+        // Remove cash from the snapshot and apply it
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems([cash])
         dataSource.apply(snapshot, animatingDifferences: true)
+        
+        // Save the cash list to file
+        Cash.saveCash(cashList)
     }
 }

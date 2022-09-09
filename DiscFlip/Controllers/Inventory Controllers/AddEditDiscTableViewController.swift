@@ -79,7 +79,7 @@ class AddEditDiscTableViewController: UITableViewController {
         let plastic = plasticTextField.text!
         let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
         let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
-        let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : Int(soldPriceTextField.text!)!
+        let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
         let soldOnEbay = soldOnEbaySwitch.isOn
         
         disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
