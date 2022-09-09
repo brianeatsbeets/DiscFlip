@@ -5,9 +5,12 @@
 //  Created by Aguirre, Brian P. on 9/6/22.
 //
 
-// This class represents cash funds added to the overall total
-struct Cash: Codable, CustomStringConvertible {
+import Foundation
 
+// This class represents cash funds added to the overall total
+struct Cash: Codable, CustomStringConvertible, Hashable {
+
+    let id: UUID
     var amount: Int
     var memo: String
     
@@ -15,6 +18,7 @@ struct Cash: Codable, CustomStringConvertible {
     var description: String
     
     init(amount: Int, memo: String) {
+        self.id = UUID()
         self.amount = amount
         self.memo = memo
         self.description = "$\(amount): \(memo)"
