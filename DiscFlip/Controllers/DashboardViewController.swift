@@ -20,7 +20,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet var eBayNetLabel: UILabel!
     
     var inventory = [Disc]()
-    var cash = [Cash]()
+    var cashList = [Cash]()
     
     weak var delegate: DataDelegate?
     
@@ -42,7 +42,7 @@ class DashboardViewController: UIViewController {
         
         // Cash
         if let initialCash = delegate?.checkoutCash() {
-            cash = initialCash
+            cashList = initialCash
         } else {
             print("Failed to fetch initial Cash from DashboardViewController")
         }
@@ -56,7 +56,7 @@ class DashboardViewController: UIViewController {
         let totalSold = inventory.reduce(0) { $0 + $1.soldPrice }
         totalSoldLabel.text = "Total Sold: $" + String(totalSold)
         
-        let otherCash = cash.reduce(0) { $0 + $1.amount }
+        let otherCash = cashList.reduce(0) { $0 + $1.amount }
         otherCashLabel.text = "Other Cash: $" + String(otherCash)
         
         currentNetLabel.text = "Current Net: $" + String(totalSold - totalPurchased + otherCash)
@@ -70,7 +70,7 @@ class DashboardViewController: UIViewController {
     
     // Initialize the cash table view controller with the existing cash array
     @IBSegueAction func segueToCash(_ coder: NSCoder) -> CashTableViewController? {
-        return CashTableViewController(coder: coder, cash: cash)
+        return CashTableViewController(coder: coder, cashList: cashList)
     }
     
     // Receive cash data from CashViewController and update dashboard
@@ -80,11 +80,11 @@ class DashboardViewController: UIViewController {
         guard segue.identifier == "dashboardCashUnwind",
               let sourceViewController = segue.source as? CashTableViewController else { return }
         
-        let returnedCash = sourceViewController.cash
+        let returnedCash = sourceViewController.cashList
         
         print("Received cash from CashViewController: \(returnedCash)")
         
-        cash = returnedCash
+        cashList = returnedCash
         
         updateUI()
         

@@ -10,14 +10,14 @@ import UIKit
 // This class/table view controller displays cash funds that have been added
 class CashTableViewController: UITableViewController {
     
-    var cash: [Cash]
+    var cashList: [Cash]
     
     let cellReuseIdentifier = "cashCell"
     lazy var dataSource = createDataSource()
     
     // Initialize with cash data
-    init?(coder: NSCoder, cash: [Cash]) {
-        self.cash = cash
+    init?(coder: NSCoder, cashList: [Cash]) {
+        self.cashList = cashList
         super.init(coder: coder)
     }
     
@@ -66,11 +66,11 @@ class CashTableViewController: UITableViewController {
         // Check to see if cash was selected from editing, and if so, update it
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
-            cash[selectedIndexPath.row] = returnedCash
+            cashList[selectedIndexPath.row] = returnedCash
             updateTableView()
         } else {
             // If not, add new cash object to the array and add a new table view row
-            cash.append(returnedCash)
+            cashList.append(returnedCash)
             updateTableView()
         }
         
@@ -85,12 +85,12 @@ class CashTableViewController: UITableViewController {
         
         // Encode data
         let propertyListEncoder = PropertyListEncoder()
-        if let encodedCash = try? propertyListEncoder.encode(cash) {
+        if let encodedCash = try? propertyListEncoder.encode(cashList) {
             // Save cash
             try? encodedCash.write(to: archiveURL, options: .noFileProtection)
         }
         
-        print("Saved inventory to data source: \(cash)")
+        print("Saved inventory to data source: \(cashList)")
     }
 }
 
@@ -126,7 +126,7 @@ extension CashTableViewController {
     func updateTableView() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Cash>()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(cash)
+        snapshot.appendItems(cashList)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
