@@ -47,15 +47,41 @@ class AddEditCashTableViewController: UITableViewController {
     
     // Enable and disable the save button based on text field validation
     func updateSaveButtonState() {
-        let amountText = amountTextField.text ?? ""
-        let memoText = memoTextField.text ?? ""
-        saveButton.isEnabled = !amountText.isEmpty && !memoText.isEmpty
+        
+        // Check that both fields have text
+        // Check that amountTextField can be cast as an Int
+        if let amountText = amountTextField.text,
+           let memoText = memoTextField.text,
+           Int(amountText) != nil && !memoText.isEmpty {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
     }
     
     // Trigger the save button state update when text is edited
     @IBAction func textEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
     }
+    
+    
+    @IBAction func amountTextEditingChanged(_ sender: UITextField) {
+        if let amountText = sender.text,
+           Int(amountText) == nil {
+            sender.backgroundColor = UIColor(red: 1, green: 215/255, blue: 215/255, alpha: 1)
+            
+            if let section = tableView.headerView(forSection: 0) {
+                var content = section.defaultContentConfiguration()
+                content.text = "Text 1"
+                content.secondaryText = "Text 2"
+                section.contentConfiguration = content
+            }
+            
+        } else {
+            sender.backgroundColor = UIColor.systemBackground
+        }
+    }
+    
     
     //MARK: - Navigation
     

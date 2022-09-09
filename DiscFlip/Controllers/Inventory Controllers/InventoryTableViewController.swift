@@ -93,7 +93,7 @@ class InventoryTableViewController: UITableViewController {
     
     // MARK: - Diffable data source
 
-    // This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
+// This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
 extension InventoryTableViewController: InventoryDelegate {
     
     // Create the the data source and specify what to do with a provided cell

@@ -55,12 +55,21 @@ class AddEditDiscTableViewController: UITableViewController {
     
     // Enable and disable the save button based on text field validation
     func updateSaveButtonState() {
-        let nameText = nameTextField.text ?? ""
-        let plasticText = plasticTextField.text ?? ""
-        let purchasePriceText = purchasePriceTextField.text ?? ""
-        let estSellPriceText = estSellPriceTextField.text ?? ""
-        saveButton.isEnabled = !nameText.isEmpty && !plasticText.isEmpty &&
-        !purchasePriceText.isEmpty && !estSellPriceText.isEmpty
+        
+        // Check that all fields (except soldTextField) have text
+        // Check that all numeric fields can be cast as an Int
+        // Check that soldTextField is either empty or can be cast as an Int
+        if let nameText = nameTextField.text,
+           let plasticText = plasticTextField.text,
+           let purchasePriceText = purchasePriceTextField.text,
+           let estSellPriceText = estSellPriceTextField.text,
+           let soldPriceText = soldPriceTextField.text,
+           !nameText.isEmpty && !plasticText.isEmpty && Int(purchasePriceText) != nil && Int(estSellPriceText) != nil && (soldPriceText.isEmpty || (Int(soldPriceText) != nil)) {
+            
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
     }
     
     // Trigger the save button state update when text is edited
