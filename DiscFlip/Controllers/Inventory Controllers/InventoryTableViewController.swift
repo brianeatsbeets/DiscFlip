@@ -5,14 +5,20 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
-// TODO: Allow for deletion of discs - brainstorm best way to implement (here or on edit screen?)
-
 import UIKit
+
+// This protocal allows conformers to remove discs
+protocol InventoryDelegate: AnyObject {
+    func remove(disc: Disc)
+}
 
 // This class/table view controller displays the historic inventory of discs that have been bought and sold
 class InventoryTableViewController: UITableViewController {
     
     var inventory = [Disc]()
+    
+    let cellReuseIdentifier = "inventoryCell"
+    private lazy var dataSource = createDataSource()
     
     weak var delegate: DataDelegate?
     
@@ -20,7 +26,11 @@ class InventoryTableViewController: UITableViewController {
         super.viewDidLoad()
         
         loadInventory()
-        tableView.reloadData()
+        
+        dataSource.delegate = self
+        tableView.dataSource = dataSource
+        
+        updateTableView()
     }
     
     // Fetch the inventory
@@ -31,54 +41,17 @@ class InventoryTableViewController: UITableViewController {
             print("Failed to fetch initial inventory from DashboardViewController")
         }
     }
-
-    // MARK: - Table view data source
     
-    // Define the number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    // Define the number of rows in each section
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return inventory.count
-    }
-
-    // Configure the cell at a given row
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InventoryCell", for: indexPath)
-        let disc = inventory[indexPath.row]
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = disc.plastic + " " + disc.name
-        
-        var secondaryText = ""
-        
-        // Create applicable profit statements
-        if disc.soldPrice == 0 {
-            secondaryText = "Estimated profit: $\(disc.estSellPrice - disc.purchasePrice)"
-        } else {
-            let profit = disc.soldPrice - disc.purchasePrice
-            secondaryText = "Profit: $\(profit)"
-            
-            if !disc.soldOnEbay {
-                secondaryText += " | Not sold on eBay"
-            }
-        }
-        
-        content.secondaryText = secondaryText
-        cell.contentConfiguration = content
-
-        return cell
-    }
+    // MARK: - Segue functions
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
     @IBSegueAction func addEditDisc(_ coder: NSCoder, sender: Any?) -> UITableViewController? {
         
         // Check to see if a cell was tapped
-        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+        if let cell = sender as? UITableViewCell,
+           let indexPath = tableView.indexPath(for: cell),
+           let discToEdit = dataSource.itemIdentifier(for: indexPath) {
             // If so, pass the tapped disc to edit
-            let discToEdit = inventory[indexPath.row]
             return AddEditDiscTableViewController(coder: coder, disc: discToEdit)
         } else {
             // If not, prep for adding a new disc
@@ -89,7 +62,7 @@ class InventoryTableViewController: UITableViewController {
     // Handle the incoming data being passed back from AddEditDiscTableViewController, if any
     @IBAction func unwindToInventoryTableViewController(segue: UIStoryboardSegue) {
         
-        // Check to see if we're coming back from saving a disc. If not, exit with guard
+        // Check to see if we're coming back from saving a disc. If not, exit with guard and deselect the row
         guard segue.identifier == "saveUnwind",
               let sourceViewController = segue.source as? AddEditDiscTableViewController,
               let disc = sourceViewController.disc
@@ -105,78 +78,101 @@ class InventoryTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
             inventory[selectedIndexPath.row] = disc
-            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            updateTableView()
         } else {
             // If not, add a new disc to the inventory and add a new table view row
-            let newIndexPath = IndexPath(row: inventory.count, section: 0)
             inventory.append(disc)
-            tableView.insertRows(at: [newIndexPath], with: .none)
+            updateTableView()
         }
         
         delegate?.updateInventory(newInventory: inventory)
         
-        saveInventory()
+        Disc.saveInventory(inventory)
     }
+}
     
-    // Save the updated inventory
-    func saveInventory() {
-        // Create path to Documents directory
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let archiveURL = documentsDirectory.appendingPathComponent("inventory") . appendingPathExtension("plist")
+    // MARK: - Diffable data source
+
+    // This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
+extension InventoryTableViewController: InventoryDelegate {
+    
+    // Create the the data source and specify what to do with a provided cell
+    private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
+        // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
+        let reuseIdentifier = cellReuseIdentifier
         
-        // Encode data
-        let propertyListEncoder = PropertyListEncoder()
-        if let encodedInventory = try? propertyListEncoder.encode(inventory) {
-            // Save inventory
-            try? encodedInventory.write(to: archiveURL, options: .noFileProtection)
+        return DeletableRowTableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, disc in
+            // Configure the cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+            
+            var content = cell.defaultContentConfiguration()
+            content.text = disc.plastic + " " + disc.name
+    
+            var secondaryText = ""
+    
+            // Create applicable profit statements
+            if disc.soldPrice == 0 {
+                secondaryText = "Estimated profit: $\(disc.estSellPrice - disc.purchasePrice)"
+            } else {
+                let profit = disc.soldPrice - disc.purchasePrice
+                secondaryText = "Profit: $\(profit)"
+    
+                if !disc.soldOnEbay {
+                    secondaryText += " | Not sold on eBay"
+                }
+            }
+    
+            content.secondaryText = secondaryText
+            cell.contentConfiguration = content
+            
+            return cell
         }
-        
-        print("Saved inventory to data source: \(inventory)")
     }
     
-    /*
-    // Override to support conditional editing of the table view.
+    // Apply a snapshot with updated disc data
+    func updateTableView() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Disc>()
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems(inventory)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    // Apply a snapshot with removed disc data
+    func remove(disc: Disc) {
+        
+        // Remove disc from inventory
+        inventory = inventory.filter { $0 != disc }
+        
+        // Remove disc from the snapshot and apply it
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([disc])
+        dataSource.apply(snapshot, animatingDifferences: true)
+        
+        // Save the inventory to file
+        Disc.saveInventory(inventory)
+    }
+}
+
+// This enum declares table view sections
+private enum Section: CaseIterable {
+    case one
+}
+
+// This class defines a UITableViewDiffableDataSource subclass that enables swipe-to-delete
+private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Disc> {
+    
+    // Delegate to update data model
+    weak var delegate: InventoryDelegate?
+    
+    // Allow the table view to be edited
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
+    // Allow table view rows to be deleted
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        if editingStyle == .delete, let discToDelete = itemIdentifier(for: indexPath) {
+            delegate?.remove(disc: discToDelete)
         }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

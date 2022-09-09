@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This protocal allows conformers to remove cash
 protocol CashDelegate: AnyObject {
     func remove(cash: Cash)
 }
@@ -38,6 +39,8 @@ class CashTableViewController: UITableViewController {
         updateTableView()
     }
     
+    // MARK: - Segue functions
+    
     // Configure the incoming AddEditCashTableViewControler for either editing an existing cash object or adding a new one
     @IBSegueAction func addEditCash(_ coder: NSCoder, sender: Any?) -> AddEditCashTableViewController? {
         
@@ -61,7 +64,6 @@ class CashTableViewController: UITableViewController {
               let sourceViewController = segue.source as? AddEditCashTableViewController,
               let returnedCash = sourceViewController.cash
         else {
-            // De-select the selected row, if any
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedIndexPath, animated: false)
             }
