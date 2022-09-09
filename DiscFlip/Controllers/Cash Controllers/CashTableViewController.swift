@@ -85,8 +85,8 @@ class CashTableViewController: UITableViewController {
 
 // MARK: - Diffable data source
 
-// This extention houses table view management functions using the diffable data source API
-extension CashTableViewController {
+// This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
+extension CashTableViewController: CashDelegate {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
@@ -106,12 +106,27 @@ extension CashTableViewController {
         }
     }
     
-    // Apply a snapshot with new data
+    // Apply a snapshot with updated cash data
     func updateTableView() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Cash>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(cashList)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    // Apply a snapshot with removed cash data
+    func remove(cash: Cash) {
+        
+        // Remove cash from cashList
+        cashList = cashList.filter { $0 != cash }
+        
+        // Remove cash from the snapshot and apply it
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([cash])
+        dataSource.apply(snapshot, animatingDifferences: true)
+        
+        // Save the cash list to file
+        Cash.saveCash(cashList)
     }
 }
 
@@ -136,24 +151,5 @@ private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSo
         if editingStyle == .delete, let cashToDelete = itemIdentifier(for: indexPath) {
             delegate?.remove(cash: cashToDelete)
         }
-    }
-}
-
-// This extension of CashTableViewController conforms to CashDelegate
-extension CashTableViewController: CashDelegate {
-    
-    // Apply a snapshot with removed data
-    func remove(cash: Cash) {
-        
-        // Remove cash from cashList
-        cashList = cashList.filter { $0 != cash }
-        
-        // Remove cash from the snapshot and apply it
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteItems([cash])
-        dataSource.apply(snapshot, animatingDifferences: true)
-        
-        // Save the cash list to file
-        Cash.saveCash(cashList)
     }
 }
