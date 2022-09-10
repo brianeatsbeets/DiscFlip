@@ -180,7 +180,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="amountTextEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="YuI-fq-S2I"/>
+                                                        <action selector="textEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="Odf-Ef-3wo"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>

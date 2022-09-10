@@ -64,25 +64,6 @@ class AddEditCashTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
-    
-    @IBAction func amountTextEditingChanged(_ sender: UITextField) {
-        if let amountText = sender.text,
-           Int(amountText) == nil {
-            sender.backgroundColor = UIColor(red: 1, green: 215/255, blue: 215/255, alpha: 1)
-            
-            if let section = tableView.headerView(forSection: 0) {
-                var content = section.defaultContentConfiguration()
-                content.text = "Text 1"
-                content.secondaryText = "Text 2"
-                section.contentConfiguration = content
-            }
-            
-        } else {
-            sender.backgroundColor = UIColor.systemBackground
-        }
-    }
-    
-    
     //MARK: - Navigation
     
     // Compile the cash data for sending back to the cash table view controller
