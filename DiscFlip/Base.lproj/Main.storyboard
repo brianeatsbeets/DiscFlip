@@ -241,7 +241,6 @@
                         <outlet property="currentNetLabel" destination="cDI-Ow-6ce" id="YNQ-wP-HtS"/>
                         <outlet property="eBayNetLabel" destination="P5B-8W-Vyh" id="MRV-ZT-reo"/>
                         <outlet property="estimatedNetLabel" destination="4Ff-55-lcy" id="CUE-2z-wdm"/>
-                        <outlet property="manageCashButton" destination="8Sj-eF-K7d" id="A0f-cl-MET"/>
                         <outlet property="otherCashLabel" destination="8Ej-Aw-Xet" id="S5J-Ja-Jf0"/>
                         <outlet property="totalPurchasedLabel" destination="C48-2F-Fwx" id="BeC-ma-9OY"/>
                         <outlet property="totalSoldLabel" destination="LBU-zP-2K3" id="K7P-qR-kyj"/>
