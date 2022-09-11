@@ -51,21 +51,21 @@ class DashboardViewController: UIViewController {
     // Calculate totals and present to screen
     func updateUI() {
         let totalPurchased = inventory.reduce(0) { $0 + $1.purchasePrice }
-        totalPurchasedLabel.text = "Total Purchased: $" + String(totalPurchased)
+        totalPurchasedLabel.text = "$" + String(totalPurchased)
         
         let totalSold = inventory.reduce(0) { $0 + $1.soldPrice }
-        totalSoldLabel.text = "Total Sold: $" + String(totalSold)
+        totalSoldLabel.text = "$" + String(totalSold)
         
         let otherCash = cashList.reduce(0) { $0 + $1.amount }
-        otherCashLabel.text = "Other Cash: $" + String(otherCash)
+        otherCashLabel.text = "$" + String(otherCash)
         
-        currentNetLabel.text = "Current Net: $" + String(totalSold - totalPurchased + otherCash)
+        currentNetLabel.text = "$" + String(totalSold - totalPurchased + otherCash)
         
         let estimatedNet = inventory.reduce(0) { $0 + $1.estSellPrice }
-        estimatedNetLabel.text = "Estimated Net (conservative): $" + String(estimatedNet - totalPurchased + otherCash)
+        estimatedNetLabel.text = "$" + String(estimatedNet - totalPurchased + otherCash)
         
         let eBayNet = inventory.reduce(0) { $0 + $1.eBayProfit }
-        eBayNetLabel.text = "eBay Net: $" + String(eBayNet)
+        eBayNetLabel.text = "$" + String(eBayNet)
     }
     
     // Initialize the cash table view controller with the existing cash array
