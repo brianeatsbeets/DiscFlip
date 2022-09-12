@@ -53,7 +53,7 @@ class DashboardViewController: UIViewController {
         let totalPurchased = inventory.reduce(0) { $0 + $1.purchasePrice }
         totalPurchasedLabel.text = "$" + String(totalPurchased)
         
-        let totalSold = inventory.reduce(0) { $0 + $1.soldPrice }
+        let totalSold = inventory.reduce(0) { $0 + ($1.wasSold ? $1.soldPrice : 0) }
         totalSoldLabel.text = "$" + String(totalSold)
         
         let otherCash = cashList.reduce(0) { $0 + $1.amount }
@@ -61,10 +61,10 @@ class DashboardViewController: UIViewController {
         
         currentNetLabel.text = "$" + String(totalSold - totalPurchased + otherCash)
         
-        let estimatedNet = inventory.reduce(0) { $0 + $1.estSellPrice }
-        estimatedNetLabel.text = "$" + String(estimatedNet - totalPurchased + otherCash)
+        let estimatedNet = inventory.reduce(0) { $0 + ($1.wasSold ? 0 : $1.estSellPrice) }
+        estimatedNetLabel.text = "$" + String(totalSold - totalPurchased + estimatedNet + otherCash)
         
-        let eBayNet = inventory.reduce(0) { $0 + $1.eBayProfit }
+        let eBayNet = inventory.reduce(0) { $0 + ($1.wasSold && $1.soldOnEbay ? $1.eBayProfit : 0) }
         eBayNetLabel.text = "$" + String(eBayNet)
     }
     
