@@ -19,6 +19,10 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var soldOnEbaySwitch: UISwitch!
     @IBOutlet var estSellPriceTextField: UITextField!
     @IBOutlet var soldPriceTextField: UITextField!
+    
+    @IBOutlet var estSellPriceCell: UITableViewCell!
+    @IBOutlet var soldPriceCell: UITableViewCell!
+    
     @IBOutlet var saveButton: UIBarButtonItem!
     
     // Initialize with disc data
@@ -53,11 +57,30 @@ class AddEditDiscTableViewController: UITableViewController {
             estSellPriceTextField.text = String(disc.estSellPrice)
             soldPriceTextField.isEnabled = soldDiscSwitch.isOn
             soldPriceTextField.text = String(disc.soldPrice)
+            
+            setSellSoldFieldsEnabledState(sold: disc.wasSold)
+            
             title = "Edit Disc"
         } else {
             title = "Add Disc"
             soldOnEbaySwitch.isEnabled = false
             soldPriceTextField.isEnabled = false
+            
+            setSellSoldFieldsEnabledState(sold: false)
+        }
+    }
+    
+    func setSellSoldFieldsEnabledState(sold: Bool) {
+        if sold {
+            estSellPriceCell.backgroundColor = .systemGray6
+            estSellPriceTextField.textColor = .secondaryLabel
+            soldPriceCell.backgroundColor = .systemBackground
+            soldPriceTextField.textColor = .label
+        } else {
+            estSellPriceCell.backgroundColor = .systemBackground
+            estSellPriceTextField.textColor = .label
+            soldPriceCell.backgroundColor = .systemGray6
+            soldPriceTextField.textColor = .secondaryLabel
         }
     }
     
@@ -89,6 +112,8 @@ class AddEditDiscTableViewController: UITableViewController {
         soldOnEbaySwitch.isEnabled = sender.isOn
         estSellPriceTextField.isEnabled = !sender.isOn
         soldPriceTextField.isEnabled = sender.isOn
+        
+        setSellSoldFieldsEnabledState(sold: sender.isOn)
     }
     
     // MARK: - Navigation
@@ -108,4 +133,22 @@ class AddEditDiscTableViewController: UITableViewController {
         disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
     }
 
+}
+
+// MARK: - Utility Classes
+
+// This class/table view cell defines a cell with no separator view/lines
+class NoSeparatorCell: UITableViewCell {
+    
+    // Remove the UITableViewCellSeparatorView
+    // Kind of hacky, but currently no offical way to remove separator lines from only a single cell
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        for view in subviews {
+            let description = String(describing: type(of: view))
+            if description.hasSuffix("SeparatorView") {
+                view.removeFromSuperview()
+            }
+        }
+    }
 }

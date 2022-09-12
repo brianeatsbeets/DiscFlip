@@ -334,14 +334,17 @@
                             <tableViewSection headerTitle="Amount" id="xn3-nZ-WWc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="epl-jk-tsR">
-                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="epl-jk-tsR" id="OUW-Ua-qaq">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UMf-ke-vOi">
-                                                    <rect key="frame" x="20" y="5" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UMf-ke-vOi">
+                                                    <rect key="frame" x="20" y="5" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="Oku-ll-QdM"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -362,14 +365,17 @@
                             <tableViewSection headerTitle="Memo" id="JIK-Tx-yeK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GWP-fQ-Ufy">
-                                        <rect key="frame" x="0.0" y="143.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="144" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GWP-fQ-Ufy" id="TpV-0L-tGN">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-hA-u0I">
-                                                    <rect key="frame" x="20" y="4" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPE-hA-u0I">
+                                                    <rect key="frame" x="20" y="4" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="wr9-Xg-NNe"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -488,14 +494,17 @@
                             <tableViewSection headerTitle="Name" id="IVZ-VI-icG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GQ4-ip-Quk">
-                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GQ4-ip-Quk" id="pQu-5F-ZCz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wuk-Lv-72G">
-                                                    <rect key="frame" x="20" y="5" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wuk-Lv-72G">
+                                                    <rect key="frame" x="20" y="5" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="BYK-ev-ume"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                                                     <connections>
@@ -516,14 +525,17 @@
                             <tableViewSection headerTitle="Plastic" id="iEx-Af-RIe">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BEo-zi-kGJ">
-                                        <rect key="frame" x="0.0" y="143.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="144" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BEo-zi-kGJ" id="6zb-B0-yZo">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v66-3e-AIC">
-                                                    <rect key="frame" x="20" y="5" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v66-3e-AIC">
+                                                    <rect key="frame" x="20" y="5" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="aqt-nI-0Gk"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                                                     <connections>
@@ -544,14 +556,17 @@
                             <tableViewSection headerTitle="Purchase Price" footerTitle="Include extra costs, such as shipping, tax, etc." id="IJV-Es-SOM">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3DC-OC-HEt">
-                                        <rect key="frame" x="0.0" y="244.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="245.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3DC-OC-HEt" id="f6r-f3-NIc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoW-25-1H5">
-                                                    <rect key="frame" x="20" y="4" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoW-25-1H5">
+                                                    <rect key="frame" x="20" y="4" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="cwc-2a-5WE"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -571,8 +586,8 @@
                             </tableViewSection>
                             <tableViewSection id="a3b-Re-c1u">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="74" id="5D6-Xi-l4m">
-                                        <rect key="frame" x="0.0" y="332.5" width="414" height="74"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="74" id="5D6-Xi-l4m" customClass="NoSeparatorCell" customModule="DiscFlip" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="334" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5D6-Xi-l4m" id="akv-sK-xJN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
@@ -622,20 +637,24 @@
                                                 <constraint firstItem="Uuh-kC-1aP" firstAttribute="centerX" secondItem="akv-sK-xJN" secondAttribute="centerX" id="tPD-9L-uE3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Estimated Selling Price (conservative)" id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uwX-Dl-mZL">
-                                        <rect key="frame" x="0.0" y="456.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="458" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uwX-Dl-mZL" id="1Mz-gs-I4X">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-vv-Rfa">
-                                                    <rect key="frame" x="20" y="5" width="374" height="34.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mjc-vv-Rfa">
+                                                    <rect key="frame" x="20" y="5" width="374" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="3hn-Hb-ubt"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -656,14 +675,17 @@
                             <tableViewSection headerTitle="Sold Price (optional)" id="dhT-eb-Fmw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="43" id="bMl-9F-i1D">
-                                        <rect key="frame" x="0.0" y="550" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="552" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bMl-9F-i1D" id="Pgj-fa-hBD">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QaR-ob-dxJ">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QaR-ob-dxJ">
                                                     <rect key="frame" x="20" y="4" width="374" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="nsn-7h-Urn"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -700,6 +722,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="estSellPriceCell" destination="uwX-Dl-mZL" id="oQq-At-uh9"/>
                         <outlet property="estSellPriceTextField" destination="Mjc-vv-Rfa" id="ZWU-24-Muy"/>
                         <outlet property="nameTextField" destination="Wuk-Lv-72G" id="uvf-7G-Gi4"/>
                         <outlet property="plasticTextField" destination="v66-3e-AIC" id="SIb-du-PvT"/>
@@ -707,6 +730,7 @@
                         <outlet property="saveButton" destination="Ko1-Nq-fGs" id="ylp-xy-W9F"/>
                         <outlet property="soldDiscSwitch" destination="bei-V6-sAb" id="vLp-qI-gTT"/>
                         <outlet property="soldOnEbaySwitch" destination="X0z-wI-iSK" id="Ciu-58-SoK"/>
+                        <outlet property="soldPriceCell" destination="bMl-9F-i1D" id="3Kf-av-5J5"/>
                         <outlet property="soldPriceTextField" destination="QaR-ob-dxJ" id="2WI-LR-nC8"/>
                     </connections>
                 </tableViewController>
