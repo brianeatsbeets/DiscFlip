@@ -12,6 +12,7 @@
 		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
 		E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36828C786F700F357B2 /* CashTableViewController.swift */; };
 		E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */; };
+		E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEF23328CF91AA006CE66C /* Utility.swift */; };
 		E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45628B7B25A0039013E /* AppDelegate.swift */; };
 		E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45828B7B25A0039013E /* SceneDelegate.swift */; };
 		E1F3C45E28B7B25A0039013E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F3C45C28B7B25A0039013E /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
 		E17CA36828C786F700F357B2 /* CashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCashTableViewController.swift; sourceTree = "<group>"; };
+		E1AEF23328CF91AA006CE66C /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E1F3C45328B7B25A0039013E /* DiscFlip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscFlip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F3C45628B7B25A0039013E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1F3C45828B7B25A0039013E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				E1F3C46E28BCF1C30039013E /* Disc.swift */,
 				E17CA36628C780AC00F357B2 /* Cash.swift */,
+				E1AEF23328CF91AA006CE66C /* Utility.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				E1F3C46F28BCF1C30039013E /* Disc.swift in Sources */,
 				E1F3C47628BCFC840039013E /* InventoryTableViewController.swift in Sources */,
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,
+				E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */,
 				E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */,
 				E17CA36728C780AC00F357B2 /* Cash.swift in Sources */,
 				E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */,

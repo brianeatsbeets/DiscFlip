@@ -46,6 +46,11 @@ class AddEditDiscTableViewController: UITableViewController {
     
     // Fill in existing disc data (if any) and update view title
     func updateUI() {
+        
+        purchasePriceTextField.setCurrentyPrefix(fontSize: 14)
+        estSellPriceTextField.setCurrentyPrefix(fontSize: 14)
+        soldPriceTextField.setCurrentyPrefix(fontSize: 14)
+        
         if let disc = disc {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
@@ -74,13 +79,27 @@ class AddEditDiscTableViewController: UITableViewController {
         if sold {
             estSellPriceCell.backgroundColor = .systemGray6
             estSellPriceTextField.textColor = .secondaryLabel
+            if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
+                prefixLabel.textColor = .secondaryLabel
+            }
+            
             soldPriceCell.backgroundColor = .systemBackground
             soldPriceTextField.textColor = .label
+            if let prefixLabel = soldPriceTextField.leftView as? UILabel {
+                prefixLabel.textColor = .label
+            }
         } else {
             estSellPriceCell.backgroundColor = .systemBackground
             estSellPriceTextField.textColor = .label
+            if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
+                prefixLabel.textColor = .label
+            }
+            
             soldPriceCell.backgroundColor = .systemGray6
             soldPriceTextField.textColor = .secondaryLabel
+            if let prefixLabel = soldPriceTextField.leftView as? UILabel {
+                prefixLabel.textColor = .secondaryLabel
+            }
         }
     }
     
@@ -131,24 +150,5 @@ class AddEditDiscTableViewController: UITableViewController {
         let soldOnEbay = soldOnEbaySwitch.isOn
         
         disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
-    }
-
-}
-
-// MARK: - Utility Classes
-
-// This class/table view cell defines a cell with no separator view/lines
-class NoSeparatorCell: UITableViewCell {
-    
-    // Remove the UITableViewCellSeparatorView
-    // Kind of hacky, but currently no offical way to remove separator lines from only a single cell
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        for view in subviews {
-            let description = String(describing: type(of: view))
-            if description.hasSuffix("SeparatorView") {
-                view.removeFromSuperview()
-            }
-        }
     }
 }

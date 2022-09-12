@@ -36,6 +36,9 @@ class AddEditCashTableViewController: UITableViewController {
     
     // Fill in existing cash data (if any) and update view title
     func updateUI() {
+        
+        amountTextField.setCurrentyPrefix(fontSize: 14)
+        
         if let cash = cash {
             title = "Update Cash"
             amountTextField.text = String(cash.amount)
