@@ -15,9 +15,10 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var plasticTextField: UITextField!
     @IBOutlet var purchasePriceTextField: UITextField!
+    @IBOutlet var soldDiscSwitch: UISwitch!
+    @IBOutlet var soldOnEbaySwitch: UISwitch!
     @IBOutlet var estSellPriceTextField: UITextField!
     @IBOutlet var soldPriceTextField: UITextField!
-    @IBOutlet var soldOnEbaySwitch: UISwitch!
     @IBOutlet var saveButton: UIBarButtonItem!
     
     // Initialize with disc data
@@ -45,11 +46,18 @@ class AddEditDiscTableViewController: UITableViewController {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
             purchasePriceTextField.text = String(disc.purchasePrice)
+            soldDiscSwitch.isOn = disc.wasSold
+            soldOnEbaySwitch.isEnabled = soldDiscSwitch.isOn
+            soldOnEbaySwitch.isOn = disc.soldOnEbay
+            estSellPriceTextField.isEnabled = !soldDiscSwitch.isOn
             estSellPriceTextField.text = String(disc.estSellPrice)
+            soldPriceTextField.isEnabled = soldDiscSwitch.isOn
             soldPriceTextField.text = String(disc.soldPrice)
             title = "Edit Disc"
         } else {
             title = "Add Disc"
+            soldOnEbaySwitch.isEnabled = false
+            soldPriceTextField.isEnabled = false
         }
     }
     
@@ -77,6 +85,12 @@ class AddEditDiscTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
+    @IBAction func soldDiscSwitchTapped(_ sender: UISwitch) {
+        soldOnEbaySwitch.isEnabled = sender.isOn
+        estSellPriceTextField.isEnabled = !sender.isOn
+        soldPriceTextField.isEnabled = sender.isOn
+    }
+    
     // MARK: - Navigation
     
     // Compile the disc data for sending back to the inventory table view controller
@@ -91,7 +105,7 @@ class AddEditDiscTableViewController: UITableViewController {
         let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
         let soldOnEbay = soldOnEbaySwitch.isOn
         
-        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
+        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
     }
 
 }

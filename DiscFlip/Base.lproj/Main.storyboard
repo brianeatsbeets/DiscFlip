@@ -569,10 +569,66 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="a3b-Re-c1u">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="74" id="5D6-Xi-l4m">
+                                        <rect key="frame" x="0.0" y="332.5" width="414" height="74"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5D6-Xi-l4m" id="akv-sK-xJN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kC-1aP">
+                                                    <rect key="frame" x="116.5" y="9" width="181" height="56"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CkP-4p-4YE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="57" height="56"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Sold Disc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFv-M5-c3Y">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="57" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bei-V6-sAb">
+                                                                    <rect key="frame" x="4" y="25" width="51" height="31"/>
+                                                                    <connections>
+                                                                        <action selector="soldDiscSwitchTapped:" destination="iqI-Yl-9Jj" eventType="valueChanged" id="hv2-jH-4OC"/>
+                                                                    </connections>
+                                                                </switch>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oOo-tO-lQ0">
+                                                            <rect key="frame" x="102" y="0.0" width="79" height="56"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold on eBay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8i-Cq-Bbe">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="79" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="X0z-wI-iSK">
+                                                                    <rect key="frame" x="15" y="25" width="51" height="31"/>
+                                                                </switch>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Uuh-kC-1aP" secondAttribute="bottom" constant="9" id="PeF-zI-bto"/>
+                                                <constraint firstItem="Uuh-kC-1aP" firstAttribute="top" secondItem="akv-sK-xJN" secondAttribute="top" constant="9" id="hW0-hE-2z6"/>
+                                                <constraint firstItem="Uuh-kC-1aP" firstAttribute="centerY" secondItem="akv-sK-xJN" secondAttribute="centerY" id="tND-zw-ISw"/>
+                                                <constraint firstItem="Uuh-kC-1aP" firstAttribute="centerX" secondItem="akv-sK-xJN" secondAttribute="centerX" id="tPD-9L-uE3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Estimated Selling Price (conservative)" id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uwX-Dl-mZL">
-                                        <rect key="frame" x="0.0" y="346.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="456.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uwX-Dl-mZL" id="1Mz-gs-I4X">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -597,43 +653,29 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Sold Price (optional)" id="a3b-Re-c1u">
+                            <tableViewSection headerTitle="Sold Price (optional)" id="dhT-eb-Fmw">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="74" id="5D6-Xi-l4m">
-                                        <rect key="frame" x="0.0" y="440" width="414" height="74"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="43" id="bMl-9F-i1D">
+                                        <rect key="frame" x="0.0" y="550" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5D6-Xi-l4m" id="akv-sK-xJN">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bMl-9F-i1D" id="Pgj-fa-hBD">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ou2-sl-uyc">
-                                                    <rect key="frame" x="20" y="20" width="280" height="34"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QaR-ob-dxJ">
+                                                    <rect key="frame" x="20" y="4" width="374" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="kbg-TI-jfX"/>
+                                                        <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="s1H-UI-qvO"/>
                                                     </connections>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold on eBay?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8i-Cq-Bbe">
-                                                    <rect key="frame" x="308" y="11" width="86" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X0z-wI-iSK">
-                                                    <rect key="frame" x="328" y="32" width="51" height="31"/>
-                                                </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="bottom" secondItem="akv-sK-xJN" secondAttribute="bottomMargin" id="Bd4-6l-VnC"/>
-                                                <constraint firstItem="Ou2-sl-uyc" firstAttribute="leading" secondItem="akv-sK-xJN" secondAttribute="leading" constant="20" symbolic="YES" id="JY6-V7-lqG"/>
-                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="top" secondItem="X8i-Cq-Bbe" secondAttribute="bottom" constant="5" id="KWE-dT-bhp"/>
-                                                <constraint firstItem="X8i-Cq-Bbe" firstAttribute="trailing" secondItem="akv-sK-xJN" secondAttribute="trailingMargin" id="LY8-tC-9rH"/>
-                                                <constraint firstItem="X8i-Cq-Bbe" firstAttribute="top" secondItem="akv-sK-xJN" secondAttribute="topMargin" id="PDu-YP-Xra"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="X0z-wI-iSK" secondAttribute="trailing" constant="17" id="bHc-bG-G1G"/>
-                                                <constraint firstItem="Ou2-sl-uyc" firstAttribute="centerY" secondItem="akv-sK-xJN" secondAttribute="centerY" id="gaJ-wm-hsW"/>
-                                                <constraint firstItem="X8i-Cq-Bbe" firstAttribute="leading" secondItem="Ou2-sl-uyc" secondAttribute="trailing" constant="8" symbolic="YES" id="mkV-RE-WXy"/>
-                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="top" secondItem="X8i-Cq-Bbe" secondAttribute="bottom" constant="5" id="paC-Ge-XXo"/>
+                                                <constraint firstAttribute="trailing" secondItem="QaR-ob-dxJ" secondAttribute="trailing" constant="20" symbolic="YES" id="FZc-r9-3rm"/>
+                                                <constraint firstItem="QaR-ob-dxJ" firstAttribute="top" secondItem="Pgj-fa-hBD" secondAttribute="top" constant="4" id="M7V-s8-gIo"/>
+                                                <constraint firstItem="QaR-ob-dxJ" firstAttribute="leading" secondItem="Pgj-fa-hBD" secondAttribute="leading" constant="20" symbolic="YES" id="ayE-oQ-rtx"/>
+                                                <constraint firstAttribute="bottom" secondItem="QaR-ob-dxJ" secondAttribute="bottom" constant="5" id="i3z-75-Czw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -663,8 +705,9 @@
                         <outlet property="plasticTextField" destination="v66-3e-AIC" id="SIb-du-PvT"/>
                         <outlet property="purchasePriceTextField" destination="qoW-25-1H5" id="KyZ-Ba-C2S"/>
                         <outlet property="saveButton" destination="Ko1-Nq-fGs" id="ylp-xy-W9F"/>
-                        <outlet property="soldOnEbaySwitch" destination="X0z-wI-iSK" id="smV-ZI-eT7"/>
-                        <outlet property="soldPriceTextField" destination="Ou2-sl-uyc" id="1PM-bh-1UO"/>
+                        <outlet property="soldDiscSwitch" destination="bei-V6-sAb" id="vLp-qI-gTT"/>
+                        <outlet property="soldOnEbaySwitch" destination="X0z-wI-iSK" id="Ciu-58-SoK"/>
+                        <outlet property="soldPriceTextField" destination="QaR-ob-dxJ" id="2WI-LR-nC8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofP-Of-gmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
