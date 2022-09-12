@@ -75,6 +75,7 @@ class AddEditDiscTableViewController: UITableViewController {
         }
     }
     
+    // Enable and disable sell/sold price fields based on boolean parameter
     func setSellSoldFieldsEnabledState(sold: Bool) {
         if sold {
             estSellPriceCell.backgroundColor = .systemGray6
@@ -127,6 +128,7 @@ class AddEditDiscTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
+    // Trigger enabled state updates for various UI elements
     @IBAction func soldDiscSwitchTapped(_ sender: UISwitch) {
         soldOnEbaySwitch.isEnabled = sender.isOn
         estSellPriceTextField.isEnabled = !sender.isOn

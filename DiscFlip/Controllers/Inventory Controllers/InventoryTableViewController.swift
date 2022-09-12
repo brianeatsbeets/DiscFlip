@@ -111,11 +111,11 @@ extension InventoryTableViewController: InventoryDelegate {
             var secondaryText = ""
     
             // Create applicable profit statements
-            if disc.soldPrice == 0 {
-                secondaryText = "Estimated profit: $\(disc.estSellPrice - disc.purchasePrice)"
+            if !disc.wasSold {
+                secondaryText = "Estimated profit: " + (disc.estSellPrice - disc.purchasePrice).currencyWithPolarity()
             } else {
                 let profit = disc.soldPrice - disc.purchasePrice
-                secondaryText = "Profit: $\(profit)"
+                secondaryText = "Profit: " + profit.currencyWithPolarity()
     
                 if !disc.soldOnEbay {
                     secondaryText += " | Not sold on eBay"

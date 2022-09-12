@@ -100,7 +100,7 @@ extension CashTableViewController: CashDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
             
             var content = cell.defaultContentConfiguration()
-            content.text = String(cash.amount)
+            content.text = cash.amount.currencyWithPolarity()
             content.secondaryText = cash.memo
             cell.contentConfiguration = content
             

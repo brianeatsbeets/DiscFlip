@@ -36,3 +36,10 @@ extension UITextField {
         leftViewMode = .always
     }
 }
+
+// This Int extension returns the Int as a string with proper currency/polarity formatting, i.e. "-$" instead of "$-"
+extension Int {
+    func currencyWithPolarity() -> String {
+        self >= 0 ? "$\(self)" : "-$\(-self)"
+    }
+}

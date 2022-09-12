@@ -51,21 +51,23 @@ class DashboardViewController: UIViewController {
     // Calculate totals and present to screen
     func updateUI() {
         let totalPurchased = inventory.reduce(0) { $0 + $1.purchasePrice }
-        totalPurchasedLabel.text = "$" + String(totalPurchased)
+        totalPurchasedLabel.text = totalPurchased.currencyWithPolarity()
         
         let totalSold = inventory.reduce(0) { $0 + ($1.wasSold ? $1.soldPrice : 0) }
-        totalSoldLabel.text = "$" + String(totalSold)
+        totalSoldLabel.text = totalSold.currencyWithPolarity()
         
         let otherCash = cashList.reduce(0) { $0 + $1.amount }
-        otherCashLabel.text = "$" + String(otherCash)
+        otherCashLabel.text = otherCash.currencyWithPolarity()
         
-        currentNetLabel.text = "$" + String(totalSold - totalPurchased + otherCash)
+        let currentNet = totalSold - totalPurchased + otherCash
+        currentNetLabel.text = currentNet.currencyWithPolarity()
         
-        let estimatedNet = inventory.reduce(0) { $0 + ($1.wasSold ? 0 : $1.estSellPrice) }
-        estimatedNetLabel.text = "$" + String(totalSold - totalPurchased + estimatedNet + otherCash)
+        let estimatedGross = inventory.reduce(0) { $0 + ($1.wasSold ? 0 : $1.estSellPrice) }
+        let estimatedNet = totalSold - totalPurchased + estimatedGross + otherCash
+        estimatedNetLabel.text = estimatedNet.currencyWithPolarity()
         
         let eBayNet = inventory.reduce(0) { $0 + ($1.wasSold && $1.soldOnEbay ? $1.eBayProfit : 0) }
-        eBayNetLabel.text = "$" + String(eBayNet)
+        eBayNetLabel.text = eBayNet.currencyWithPolarity()
     }
     
     // Initialize the cash table view controller with the existing cash array
