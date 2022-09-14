@@ -16,8 +16,11 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var plasticTextField: UITextField!
     @IBOutlet var purchasePriceTextField: UITextField!
     @IBOutlet var soldDiscSwitch: UISwitch!
+    @IBOutlet var soldOnEbayLabel: UILabel!
     @IBOutlet var soldOnEbaySwitch: UISwitch!
+    @IBOutlet var estSellPriceLabel: UILabel!
     @IBOutlet var estSellPriceTextField: UITextField!
+    @IBOutlet var soldPriceLabel: UILabel!
     @IBOutlet var soldPriceTextField: UITextField!
     
     @IBOutlet var estSellPriceCell: UITableViewCell!
@@ -47,10 +50,6 @@ class AddEditDiscTableViewController: UITableViewController {
     // Fill in existing disc data (if any) and update view title
     func updateUI() {
         
-        purchasePriceTextField.setCurrentyPrefix(fontSize: 14)
-        estSellPriceTextField.setCurrentyPrefix(fontSize: 14)
-        soldPriceTextField.setCurrentyPrefix(fontSize: 14)
-        
         if let disc = disc {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
@@ -68,7 +67,9 @@ class AddEditDiscTableViewController: UITableViewController {
             title = "Edit Disc"
         } else {
             title = "Add Disc"
+            
             soldOnEbaySwitch.isEnabled = false
+            soldPriceLabel.textColor = .secondaryLabel
             soldPriceTextField.isEnabled = false
             
             setSellSoldFieldsEnabledState(sold: false)
@@ -78,25 +79,29 @@ class AddEditDiscTableViewController: UITableViewController {
     // Enable and disable sell/sold price fields based on boolean parameter
     func setSellSoldFieldsEnabledState(sold: Bool) {
         if sold {
-            estSellPriceCell.backgroundColor = .systemGray6
+            soldOnEbayLabel.textColor = .label
+            
+            estSellPriceLabel.textColor = .secondaryLabel
             estSellPriceTextField.textColor = .secondaryLabel
             if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
                 prefixLabel.textColor = .secondaryLabel
             }
             
-            soldPriceCell.backgroundColor = .systemBackground
+            soldPriceLabel.textColor = .label
             soldPriceTextField.textColor = .label
             if let prefixLabel = soldPriceTextField.leftView as? UILabel {
                 prefixLabel.textColor = .label
             }
         } else {
-            estSellPriceCell.backgroundColor = .systemBackground
+            soldOnEbayLabel.textColor = .secondaryLabel
+            
+            estSellPriceLabel.textColor = .label
             estSellPriceTextField.textColor = .label
             if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
                 prefixLabel.textColor = .label
             }
             
-            soldPriceCell.backgroundColor = .systemGray6
+            soldPriceLabel.textColor = .secondaryLabel
             soldPriceTextField.textColor = .secondaryLabel
             if let prefixLabel = soldPriceTextField.leftView as? UILabel {
                 prefixLabel.textColor = .secondaryLabel
