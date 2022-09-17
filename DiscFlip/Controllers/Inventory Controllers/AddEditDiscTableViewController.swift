@@ -24,7 +24,6 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var soldPriceTextField: UITextField!
     
     @IBOutlet var estSellPriceCell: UITableViewCell!
-    @IBOutlet var soldPriceCell: UITableViewCell!
     
     @IBOutlet var saveButton: UIBarButtonItem!
     
@@ -57,55 +56,35 @@ class AddEditDiscTableViewController: UITableViewController {
             soldDiscSwitch.isOn = disc.wasSold
             soldOnEbaySwitch.isEnabled = soldDiscSwitch.isOn
             soldOnEbaySwitch.isOn = disc.soldOnEbay
-            estSellPriceTextField.isEnabled = !soldDiscSwitch.isOn
             estSellPriceTextField.text = String(disc.estSellPrice)
-            soldPriceTextField.isEnabled = soldDiscSwitch.isOn
             soldPriceTextField.text = String(disc.soldPrice)
             
-            setSellSoldFieldsEnabledState(sold: disc.wasSold)
+            setSellSoldFieldsHiddenState(sold: disc.wasSold)
             
             title = "Edit Disc"
         } else {
             title = "Add Disc"
             
             soldOnEbaySwitch.isEnabled = false
-            soldPriceLabel.textColor = .secondaryLabel
-            soldPriceTextField.isEnabled = false
             
-            setSellSoldFieldsEnabledState(sold: false)
+            setSellSoldFieldsHiddenState(sold: false)
         }
     }
     
-    // Enable and disable sell/sold price fields based on boolean parameter
-    func setSellSoldFieldsEnabledState(sold: Bool) {
+    // Hide and unhide sell/sold price fields based on boolean parameter
+    func setSellSoldFieldsHiddenState(sold: Bool) {
         if sold {
-            soldOnEbayLabel.textColor = .label
+            estSellPriceLabel.isHidden = true
+            estSellPriceTextField.isHidden = true
             
-            estSellPriceLabel.textColor = .secondaryLabel
-            estSellPriceTextField.textColor = .secondaryLabel
-            if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
-                prefixLabel.textColor = .secondaryLabel
-            }
-            
-            soldPriceLabel.textColor = .label
-            soldPriceTextField.textColor = .label
-            if let prefixLabel = soldPriceTextField.leftView as? UILabel {
-                prefixLabel.textColor = .label
-            }
+            soldPriceLabel.isHidden = false
+            soldPriceTextField.isHidden = false
         } else {
-            soldOnEbayLabel.textColor = .secondaryLabel
+            estSellPriceLabel.isHidden = false
+            estSellPriceTextField.isHidden = false
             
-            estSellPriceLabel.textColor = .label
-            estSellPriceTextField.textColor = .label
-            if let prefixLabel = estSellPriceTextField.leftView as? UILabel {
-                prefixLabel.textColor = .label
-            }
-            
-            soldPriceLabel.textColor = .secondaryLabel
-            soldPriceTextField.textColor = .secondaryLabel
-            if let prefixLabel = soldPriceTextField.leftView as? UILabel {
-                prefixLabel.textColor = .secondaryLabel
-            }
+            soldPriceLabel.isHidden = true
+            soldPriceTextField.isHidden = true
         }
     }
     
@@ -139,7 +118,27 @@ class AddEditDiscTableViewController: UITableViewController {
         estSellPriceTextField.isEnabled = !sender.isOn
         soldPriceTextField.isEnabled = sender.isOn
         
-        setSellSoldFieldsEnabledState(sold: sender.isOn)
+        setSellSoldFieldsHiddenState(sold: sender.isOn)
+        
+        tableView.beginUpdates()
+        if sender.isOn {
+            tableView.insertRows(at: [IndexPath(row: 1, section: 3)], with: .middle)
+        } else {
+            tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .middle)
+        }
+        tableView.endUpdates()
+    }
+    
+    // MARK: - Table view functions
+
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 3:
+            return soldDiscSwitch.isOn ? 2 : 1
+        default:
+            return 1
+        }
     }
     
     // MARK: - Navigation
