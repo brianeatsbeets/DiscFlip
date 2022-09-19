@@ -33,6 +33,8 @@ class AddEditCashTableViewController: UITableViewController {
         
         updateSaveButtonState()
         
+        setPolarityKeyboardToolbar()
+        
         // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
         let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
@@ -61,6 +63,31 @@ class AddEditCashTableViewController: UITableViewController {
             saveButton.isEnabled = true
         } else {
             saveButton.isEnabled = false
+        }
+    }
+    
+    // Create and add a keyboard toolbar containing a +/- polarity toggle to amountTextField
+    func setPolarityKeyboardToolbar() {
+        let bar = UIToolbar()
+        let polarityButton = UIBarButtonItem(title: "+/-", style: .plain, target: self, action: #selector(polarityButtonTapped))
+        let padding = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        bar.items = [padding, polarityButton, padding]
+        bar.sizeToFit()
+        amountTextField.inputAccessoryView = bar
+    }
+    
+    // Toggle the amountTextField text polarity
+    @objc func polarityButtonTapped() {
+        guard let currentText = amountTextField.text else { return }
+        
+        // If the text is negative, remove the first character
+        if currentText.hasPrefix("-") {
+            let offsetIndex = currentText.index(currentText.startIndex, offsetBy: 1)
+            let substring = currentText[offsetIndex...]
+            amountTextField.text = String(substring)
+        }
+        else { // Else, add a minus sign at the beginning
+            amountTextField.text = "-" + currentText
         }
     }
     
