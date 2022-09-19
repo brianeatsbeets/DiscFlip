@@ -19,6 +19,13 @@ class DashboardViewController: UIViewController {
     @IBOutlet var estimatedNetLabel: UILabel!
     @IBOutlet var eBayNetLabel: UILabel!
     
+    @IBOutlet var totalPurchasedView: UIView!
+    @IBOutlet var totalSoldView: UIView!
+    @IBOutlet var otherCashView: UIView!
+    @IBOutlet var currentNetView: UIView!
+    @IBOutlet var estimatedNetView: UIView!
+    @IBOutlet var eBayNetView: UIView!
+    
     var inventory = [Disc]()
     var cashList = [Cash]()
     
@@ -28,7 +35,18 @@ class DashboardViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadData()
+        
+        initializeDashboardViewsUI()
+        
         updateUI()
+    }
+    
+    func initializeDashboardViewsUI() {
+        let dashboardViews = [totalPurchasedView, totalSoldView, otherCashView, currentNetView, estimatedNetView, eBayNetView]
+        
+        for item in dashboardViews {
+            item?.layer.cornerRadius = 20
+        }
     }
     
     // Load the inventory and cash data
