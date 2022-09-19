@@ -106,13 +106,13 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-eF-K7d">
+                                                    <button opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-eF-K7d">
                                                         <rect key="frame" x="143.5" y="148.5" width="27.5" height="27.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="8Sj-eF-K7d" secondAttribute="height" multiplier="1:1" id="Xzf-Rx-YUb"/>
                                                         </constraints>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="square.and.pencil" catalog="system"/>
+                                                        <state key="normal" image="pencil" catalog="system"/>
                                                         <connections>
                                                             <segue destination="K3f-t9-bqx" kind="show" destinationCreationSelector="segueToCash:" id="Gdo-S1-DUU"/>
                                                         </connections>
@@ -237,7 +237,7 @@
                             <constraint firstItem="F4n-y8-ajR" firstAttribute="height" secondItem="ghc-NQ-Iid" secondAttribute="height" multiplier="0.65" id="AMp-W7-o0v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Dashboard" id="EY2-as-ava"/>
+                    <navigationItem key="navigationItem" title="Dashboard" largeTitleDisplayMode="never" id="EY2-as-ava"/>
                     <connections>
                         <outlet property="currentNetLabel" destination="cDI-Ow-6ce" id="YNQ-wP-HtS"/>
                         <outlet property="eBayNetLabel" destination="P5B-8W-Vyh" id="MRV-ZT-reo"/>
@@ -816,8 +816,8 @@
     <resources>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
