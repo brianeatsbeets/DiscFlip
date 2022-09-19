@@ -43,6 +43,10 @@ class AddEditDiscTableViewController: UITableViewController {
         
         updateSaveButtonState()
         
+        // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
+        let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        
         super.viewDidLoad()
     }
     
@@ -130,6 +134,11 @@ class AddEditDiscTableViewController: UITableViewController {
             tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .middle)
         }
         tableView.endUpdates()
+    }
+    
+    // Dismiss the keyboard when an outside tap is registered
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     // MARK: - Table view functions

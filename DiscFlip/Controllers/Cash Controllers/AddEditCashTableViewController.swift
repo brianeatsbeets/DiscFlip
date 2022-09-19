@@ -32,6 +32,10 @@ class AddEditCashTableViewController: UITableViewController {
         updateUI()
         
         updateSaveButtonState()
+        
+        // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
+        let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
     }
     
     // Fill in existing cash data (if any) and update view title
@@ -63,6 +67,11 @@ class AddEditCashTableViewController: UITableViewController {
     // Trigger the save button state update when text is edited
     @IBAction func textEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
+    }
+    
+    // Dismiss the keyboard when an outside tap is registered
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     //MARK: - Navigation
