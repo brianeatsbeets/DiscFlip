@@ -72,6 +72,13 @@ class AddEditCashTableViewController: UITableViewController {
     func setPolarityKeyboardToolbar() {
         let bar = UIToolbar()
         let polarityButton = UIBarButtonItem(title: "+/-", style: .plain, target: self, action: #selector(polarityButtonTapped))
+        
+        UIBarButtonItem.appearance().tintColor = .black
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
+        
         let padding = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         bar.items = [padding, polarityButton, padding]
         bar.sizeToFit()
