@@ -39,6 +39,8 @@ class DashboardViewController: UIViewController {
         initializeDashboardViewsUI()
         
         updateUI()
+        
+        initializeBarButtonItems()
     }
     
     func initializeDashboardViewsUI() {
@@ -47,6 +49,13 @@ class DashboardViewController: UIViewController {
         for item in dashboardViews {
             item?.layer.cornerRadius = 20
         }
+    }
+    
+    func initializeBarButtonItems() {
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
     }
     
     // Load the inventory and cash data

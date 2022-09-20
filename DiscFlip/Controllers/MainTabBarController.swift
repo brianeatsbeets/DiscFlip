@@ -28,6 +28,15 @@ class MainTabBarController: UITabBarController {
 
         fetchData()
         setDelegates()
+        
+        initializeTabBarItems()
+    }
+    
+    // Set tab bar item UI elements
+    func initializeTabBarItems() {
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 12) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        
+        tabBar.unselectedItemTintColor = UIColor(red: 68/255, green: 168/255, blue: 99/255, alpha: 1)
     }
     
     // Fetch the existing disc inventory and cash

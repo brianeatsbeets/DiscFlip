@@ -100,8 +100,15 @@ extension CashTableViewController: CashDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
             
             var content = cell.defaultContentConfiguration()
+            
             content.text = cash.amount.currencyWithPolarity()
+            content.textProperties.font = UIFont(name: "Arial Rounded MT Bold", size: 22) ?? .preferredFont(forTextStyle: .body)
+            content.textProperties.color = .white
+            
             content.secondaryText = cash.memo
+            content.secondaryTextProperties.font = UIFont(name: "Arial Rounded MT Bold", size: 13) ?? .preferredFont(forTextStyle: .body)
+            content.secondaryTextProperties.color = .white
+            
             cell.contentConfiguration = content
             
             return cell

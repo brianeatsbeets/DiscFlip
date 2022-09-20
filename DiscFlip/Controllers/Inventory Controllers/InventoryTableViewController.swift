@@ -31,6 +31,8 @@ class InventoryTableViewController: UITableViewController {
         tableView.dataSource = dataSource
         
         updateTableView()
+        
+        initializeBarButtonItems()
     }
     
     // Fetch the inventory
@@ -40,6 +42,13 @@ class InventoryTableViewController: UITableViewController {
         } else {
             print("Failed to fetch initial inventory from DashboardViewController")
         }
+    }
+    
+    func initializeBarButtonItems() {
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
     }
     
     // MARK: - Segue functions
@@ -113,6 +122,8 @@ extension InventoryTableViewController: InventoryDelegate {
             
             var content = cell.defaultContentConfiguration()
             content.text = disc.plastic + " " + disc.name
+            content.textProperties.font = UIFont(name: "Arial Rounded MT Bold", size: 22) ?? .preferredFont(forTextStyle: .body)
+            content.textProperties.color = .white
     
             var secondaryText = ""
     
@@ -129,6 +140,9 @@ extension InventoryTableViewController: InventoryDelegate {
             }
     
             content.secondaryText = secondaryText
+            content.secondaryTextProperties.font = UIFont(name: "Arial Rounded MT Bold", size: 13) ?? .preferredFont(forTextStyle: .body)
+            content.secondaryTextProperties.color = .white
+            
             cell.contentConfiguration = content
             
             return cell
