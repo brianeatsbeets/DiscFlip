@@ -59,7 +59,5 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
             // Save inventory
             try? encodedInventory.write(to: archiveURL, options: .noFileProtection)
         }
-        
-        print("Saved inventory to data source: \(inventory)")
     }
 }

@@ -46,7 +46,5 @@ struct Cash: Codable, CustomStringConvertible, Hashable {
             // Save cash
             try? encodedCash.write(to: archiveURL, options: .noFileProtection)
         }
-        
-        print("Saved inventory to data source: \(cashList)")
     }
 }

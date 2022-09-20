@@ -62,7 +62,6 @@ class InventoryTableViewController: UITableViewController {
     
     // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepared for segue!")
         segue.destination.presentationController?.delegate = self
     }
     
