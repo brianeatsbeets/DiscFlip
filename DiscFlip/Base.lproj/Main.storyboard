@@ -110,6 +110,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="8Sj-eF-K7d" secondAttribute="height" multiplier="1:1" id="Xzf-Rx-YUb"/>
                                                         </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="pencil" catalog="system"/>
                                                         <connections>
@@ -264,6 +265,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="9Yg-1a-Tpv" kind="relationship" relationship="viewControllers" id="v6F-cF-QXb"/>
@@ -303,6 +305,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Inventory" id="6vb-9p-irU">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nzY-Iq-li6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="xHW-Id-uw6" kind="presentation" id="RdZ-7T-7Vb"/>
                             </connections>
@@ -428,11 +431,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add/Edit Cash" id="AW7-oR-72w">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="izP-Fc-lCo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="XAT-9N-JT7" kind="unwind" unwindAction="unwindToCashTableViewControllerWithSegue:" id="61L-3A-izw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="nEg-hu-Co3">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="nEg-hu-Co3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="XAT-9N-JT7" kind="unwind" identifier="cashSaveUnwind" unwindAction="unwindToCashTableViewControllerWithSegue:" id="fFQ-of-Znn"/>
                             </connections>
@@ -478,11 +483,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Cash" id="NuT-hK-eAm">
                         <barButtonItem key="leftBarButtonItem" title="Dashboard" image="chevron.left" catalog="system" id="Ea5-6t-LbS">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="UQG-bW-J2e" kind="unwind" identifier="dashboardCashUnwind" unwindAction="unwindToDashboardViewControllerWithSegue:" id="Fsi-la-d7G"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wfc-eB-gFF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="pBD-4Z-BiI" kind="presentation" id="L1F-FP-pKW"/>
                             </connections>
@@ -657,6 +664,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gcG-Kx-jXR">
                                                     <rect key="frame" x="305" y="6" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.63127003032525453" green="1" blue="0.54322656019790061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="soldDiscSwitchTapped:" destination="iqI-Yl-9Jj" eventType="valueChanged" id="bJy-Md-Utt"/>
                                                     </connections>
@@ -688,6 +696,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="X0z-wI-iSK">
                                                     <rect key="frame" x="305" y="6" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.63127003032525453" green="1" blue="0.54322656019790061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -772,11 +781,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add/Edit Disc" id="zAe-Fa-VDh">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gZx-Sf-8oe">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="HHc-1d-kZ2" kind="unwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="qcT-j5-yhe"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ko1-Nq-fGs">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Ko1-Nq-fGs">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="HHc-1d-kZ2" kind="unwind" identifier="saveUnwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="H7E-qt-iLF"/>
                             </connections>
