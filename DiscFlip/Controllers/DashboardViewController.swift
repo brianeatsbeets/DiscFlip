@@ -5,12 +5,23 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
-// TODO: Update UI when switching from Inventory tab to Dashboard tab
+// MARK: - Imported libraries
 
 import UIKit
 
+// MARK: - Main class
+
 // This class/view controller displays running totals and other financial data
 class DashboardViewController: UIViewController {
+    
+    // MARK: - Class properties
+    
+    var inventory = [Disc]()
+    var cashList = [Cash]()
+    
+    weak var delegate: DataDelegate?
+    
+    // IBOutlets
     
     @IBOutlet var totalPurchasedLabel: UILabel!
     @IBOutlet var totalSoldLabel: UILabel!
@@ -26,37 +37,16 @@ class DashboardViewController: UIViewController {
     @IBOutlet var estimatedNetView: UIView!
     @IBOutlet var eBayNetView: UIView!
     
-    var inventory = [Disc]()
-    var cashList = [Cash]()
-    
-    weak var delegate: DataDelegate?
+    // MARK: - View life cycle functions
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         loadData()
-        
-        initializeDashboardViewsUI()
-        
         updateUI()
-        
-        initializeBarButtonItems()
     }
     
-    func initializeDashboardViewsUI() {
-        let dashboardViews = [totalPurchasedView, totalSoldView, otherCashView, currentNetView, estimatedNetView, eBayNetView]
-        
-        for item in dashboardViews {
-            item?.layer.cornerRadius = 20
-        }
-    }
-    
-    func initializeBarButtonItems() {
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
-    }
+    // MARK: - Utility functions
     
     // Load the inventory and cash data
     func loadData() {
@@ -67,16 +57,23 @@ class DashboardViewController: UIViewController {
             print("Failed to fetch initial inventory from DashboardViewController")
         }
         
-        // Cash
-        if let initialCash = delegate?.checkoutCash() {
+        // Cash list
+        if let initialCash = delegate?.checkoutCashList() {
             cashList = initialCash
         } else {
             print("Failed to fetch initial Cash from DashboardViewController")
         }
     }
     
-    // Calculate totals and present to screen
+    // Perform UI initialization
     func updateUI() {
+        initializeFinancialValues()
+        stylizeDashboardViewsUI()
+        stylizeBarButtonItems()
+    }
+    
+    // Calculate totals and present to screen
+    func initializeFinancialValues() {
         let totalPurchased = inventory.reduce(0) { $0 + $1.purchasePrice }
         totalPurchasedLabel.text = totalPurchased.currencyWithPolarity()
         
@@ -97,7 +94,26 @@ class DashboardViewController: UIViewController {
         eBayNetLabel.text = eBayNet.currencyWithPolarity()
     }
     
-    // Initialize the cash table view controller with the existing cash array
+    // Stylize the dashboard view boxes
+    func stylizeDashboardViewsUI() {
+        let dashboardViews = [totalPurchasedView, totalSoldView, otherCashView, currentNetView, estimatedNetView, eBayNetView]
+        
+        for item in dashboardViews {
+            item?.layer.cornerRadius = 20
+        }
+    }
+    
+    // Stylize bar button items for the current navigation stack
+    func stylizeBarButtonItems() {
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
+    }
+    
+    // MARK: - Navigation
+    
+    // Initialize the cash table view controller with the existing cash list
     @IBSegueAction func segueToCash(_ coder: NSCoder) -> CashTableViewController? {
         return CashTableViewController(coder: coder, cashList: cashList)
     }
@@ -110,14 +126,11 @@ class DashboardViewController: UIViewController {
               let sourceViewController = segue.source as? CashTableViewController else { return }
         
         let returnedCash = sourceViewController.cashList
-        
-        print("Received cash from CashViewController: \(returnedCash)")
-        
         cashList = returnedCash
         
-        updateUI()
+        delegate?.updateCashList(newCashList: returnedCash)
         
-        delegate?.updateCash(newCash: returnedCash)
+        updateUI()
     }
     
 }

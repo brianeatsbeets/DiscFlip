@@ -5,10 +5,16 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
+// MARK: - Imported libraries
+
 import Foundation
+
+// MARK: - Main class
 
 // This class represents a disc to be sold
 struct Disc: Codable, CustomStringConvertible, Hashable {
+    
+    // MARK: - Class properties
     
     let id: UUID
     var name: String
@@ -23,6 +29,8 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
     // Property required by CustomStringConvertible protocol
     var description: String
     
+    // MARK: - Initializers
+    
     init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int = 0, wasSold: Bool, soldPrice: Int = 0, soldOnEbay: Bool) {
         self.id = UUID()
         self.name = name
@@ -36,6 +44,8 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
         
         self.description = plastic + " " + name
     }
+    
+    // MARK: - Utility functions
     
     // Save the updated inventory
     static func saveInventory(_ inventory: [Disc]) {

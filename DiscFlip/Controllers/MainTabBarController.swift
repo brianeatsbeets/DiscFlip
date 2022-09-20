@@ -5,39 +5,41 @@
 //  Created by Aguirre, Brian P. on 9/3/22.
 //
 
-// TODO: Validate inventory load before view controllers fetch data
+// MARK: - Imported libraries
 
 import UIKit
+
+// MARK: - Protocols
 
 // This protocol allows the inventory and cash to be accessed and updated by other views
 protocol DataDelegate: AnyObject {
     func updateInventory(newInventory: [Disc])
     func checkoutInventory() -> [Disc]
-    func updateCash(newCash: [Cash])
-    func checkoutCash() -> [Cash]
+    func updateCashList(newCashList: [Cash])
+    func checkoutCashList() -> [Cash]
 }
+
+// MARK: - Main class
 
 // This class acts as the inventory delegate data source and fetches the initial data
 class MainTabBarController: UITabBarController {
     
+    // MARK: - Class properties
+    
     var inventory = [Disc]()
-    var cash = [Cash]()
+    var cashList = [Cash]()
+    
+    // MARK: - View life cycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fetchData()
         setDelegates()
-        
-        initializeTabBarItems()
+        stylizeTabBarItems()
     }
     
-    // Set tab bar item UI elements
-    func initializeTabBarItems() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 12) ?? .preferredFont(forTextStyle: .body)], for: .normal)
-        
-        tabBar.unselectedItemTintColor = UIColor(red: 68/255, green: 168/255, blue: 99/255, alpha: 1)
-    }
+    // MARK: - Utility functions
     
     // Fetch the existing disc inventory and cash
     func fetchData() {
@@ -57,18 +59,14 @@ class MainTabBarController: UITabBarController {
             inventory = decodedInventory
         }
         
-        print("Fetched inventory from data source: \(inventory)")
-        
         // Update archiveURL for cash path
-        archiveURL = documentsDirectory.appendingPathComponent("cash") . appendingPathExtension("plist")
+        archiveURL = documentsDirectory.appendingPathComponent("cashList") . appendingPathExtension("plist")
         
         // Fetch and decode data
         if let cashData = try? Data(contentsOf: archiveURL),
            let decodedCash = try? propertyListDecoder.decode([Cash].self, from: cashData) {
-            cash = decodedCash
+            cashList = decodedCash
         }
-        
-        print("Fetched cash from data source: \(cash)")
     }
     
     // Set the delegate of each child view controller to self
@@ -81,23 +79,36 @@ class MainTabBarController: UITabBarController {
         let inventoryTableViewController = inventoryNavigationController.viewControllers.first as! InventoryTableViewController
         inventoryTableViewController.delegate = self
     }
+    
+    // Set tab bar item UI elements
+    func stylizeTabBarItems() {
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 12) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        tabBar.unselectedItemTintColor = UIColor(red: 68/255, green: 168/255, blue: 99/255, alpha: 1)
+    }
 }
+
+// MARK: - Extensions
 
 // This extension of MainTabBarController conforms to the DataDelegate protocol
 extension MainTabBarController: DataDelegate {
+    
+    // Update the inventory with the provided data
     func updateInventory(newInventory: [Disc]) {
         inventory = newInventory
     }
     
+    // Retrieve the saved inventory
     func checkoutInventory() -> [Disc] {
         return inventory
     }
     
-    func updateCash(newCash: [Cash]) {
-        cash = newCash
+    // Update the cash list with the provided data
+    func updateCashList(newCashList: [Cash]) {
+        cashList = newCashList
     }
     
-    func checkoutCash() -> [Cash] {
-        return cash
+    // Retrieve the saved cash list
+    func checkoutCashList() -> [Cash] {
+        return cashList
     }
 }

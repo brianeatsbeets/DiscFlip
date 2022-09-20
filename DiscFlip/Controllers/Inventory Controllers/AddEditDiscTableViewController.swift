@@ -5,12 +5,20 @@
 //  Created by Aguirre, Brian P. on 8/30/22.
 //
 
+// MARK: - Imported libraries
+
 import UIKit
+
+// MARK: - Main class
 
 // This class/table view controller handles the creating of new discs and editing of existing discs
 class AddEditDiscTableViewController: UITableViewController {
+    
+    // MARK: - Class properties
 
     var disc: Disc?
+    
+    // IBOutlets
     
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var plasticTextField: UITextField!
@@ -27,20 +35,24 @@ class AddEditDiscTableViewController: UITableViewController {
     
     @IBOutlet var saveButton: UIBarButtonItem!
     
+    // MARK: - Initializers
+    
     // Initialize with disc data
     init?(coder: NSCoder, disc: Disc?) {
         self.disc = disc
         super.init(coder: coder)
     }
     
+    // Implement required initializer
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View life cycle methods
+    
     override func viewDidLoad() {
         
         updateUI()
-        
         updateSaveButtonState()
         
         // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
@@ -54,6 +66,8 @@ class AddEditDiscTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         nameTextField.becomeFirstResponder()
     }
+    
+    // MARK: - Utility functions
     
     // Fill in existing disc data (if any) and update view title
     func updateUI() {
@@ -158,8 +172,8 @@ class AddEditDiscTableViewController: UITableViewController {
     }
     
     // MARK: - Table view functions
-
     
+    // Set the number of rows in each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 3:
@@ -169,6 +183,7 @@ class AddEditDiscTableViewController: UITableViewController {
         }
     }
     
+    // Provide a view for each section footer
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         guard section == 2 else { return nil }

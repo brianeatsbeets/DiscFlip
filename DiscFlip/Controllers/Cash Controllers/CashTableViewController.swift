@@ -5,20 +5,29 @@
 //  Created by Aguirre, Brian P. on 9/6/22.
 //
 
+// MARK: - Imported libraries
+
 import UIKit
+
+// MARK: - Protocols
 
 // This protocal allows conformers to remove cash
 protocol CashDelegate: AnyObject {
     func remove(cash: Cash)
 }
 
+// MARK: - Main class
+
 // This class/table view controller displays cash funds that have been added
 class CashTableViewController: UITableViewController {
     
-    var cashList: [Cash]
+    // MARK: - Class properties
     
+    var cashList: [Cash]
     let cellReuseIdentifier = "cashCell"
     private lazy var dataSource = createDataSource()
+    
+    // MARK: - Initializers
     
     // Initialize with cash data
     init?(coder: NSCoder, cashList: [Cash]) {
@@ -26,9 +35,12 @@ class CashTableViewController: UITableViewController {
         super.init(coder: coder)
     }
     
+    // Implement required initializer
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View life cycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +51,7 @@ class CashTableViewController: UITableViewController {
         updateTableView()
     }
     
-    // MARK: - Segue functions
+    // MARK: - Navigation
     
     // Configure the incoming AddEditCashTableViewControler for either editing an existing cash object or adding a new one
     @IBSegueAction func addEditCash(_ coder: NSCoder, sender: Any?) -> AddEditCashTableViewController? {
@@ -67,6 +79,7 @@ class CashTableViewController: UITableViewController {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedIndexPath, animated: false)
             }
+            
             return
         }
         
@@ -85,13 +98,14 @@ class CashTableViewController: UITableViewController {
     }
 }
 
-// MARK: - Diffable data source
+// MARK: - Extensions
 
 // This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
 extension CashTableViewController: CashDelegate {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
+        
         // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
         let reuseIdentifier = cellReuseIdentifier
         
@@ -139,16 +153,24 @@ extension CashTableViewController: CashDelegate {
     }
 }
 
+// MARK: - Enums
+
 // This enum declares table view sections
 private enum Section: CaseIterable {
     case one
 }
 
+// MARK: - Other classes
+
 // This class defines a UITableViewDiffableDataSource subclass that enables swipe-to-delete
 private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Cash> {
     
+    // MARK: - Class properties
+    
     // Delegate to update data model
     weak var delegate: CashDelegate?
+    
+    // MARK: - Utility functions
     
     // Allow the table view to be edited
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

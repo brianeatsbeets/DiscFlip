@@ -71,6 +71,32 @@
 			path = "Inventory Controllers";
 			sourceTree = "<group>";
 		};
+		E1DBEE4628DA592F00FBE91E /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				E1F3C45628B7B25A0039013E /* AppDelegate.swift */,
+				E1F3C45828B7B25A0039013E /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		E1DBEE4728DA593B00FBE91E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E1F3C45C28B7B25A0039013E /* Main.storyboard */,
+				E1F3C46128B7B2600039013E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E1DBEE4828DA594C00FBE91E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				E1AEF23328CF91AA006CE66C /* Utility.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		E1F3C44A28B7B25A0039013E = {
 			isa = PBXGroup;
 			children = (
@@ -92,11 +118,10 @@
 			children = (
 				E1F3C46B28BCEDC70039013E /* Controllers */,
 				E1F3C46A28BCEDBA0039013E /* Models */,
-				E1F3C45628B7B25A0039013E /* AppDelegate.swift */,
-				E1F3C45828B7B25A0039013E /* SceneDelegate.swift */,
-				E1F3C45C28B7B25A0039013E /* Main.storyboard */,
+				E1DBEE4828DA594C00FBE91E /* Other */,
+				E1DBEE4628DA592F00FBE91E /* Delegates */,
+				E1DBEE4728DA593B00FBE91E /* Storyboards */,
 				E1F3C45F28B7B2600039013E /* Assets.xcassets */,
-				E1F3C46128B7B2600039013E /* LaunchScreen.storyboard */,
 				E1F3C46428B7B2600039013E /* Info.plist */,
 			);
 			path = DiscFlip;
@@ -107,7 +132,6 @@
 			children = (
 				E1F3C46E28BCF1C30039013E /* Disc.swift */,
 				E17CA36628C780AC00F357B2 /* Cash.swift */,
-				E1AEF23328CF91AA006CE66C /* Utility.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

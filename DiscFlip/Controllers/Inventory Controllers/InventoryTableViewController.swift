@@ -5,34 +5,40 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
+// MARK: - Imported libraries
+
 import UIKit
+
+// MARK: - Protocols
 
 // This protocol allows conformers to remove discs
 protocol InventoryDelegate: AnyObject {
     func remove(disc: Disc)
 }
 
+// MARK: - Main class
+
 // This class/table view controller displays the historic inventory of discs that have been bought and sold
 class InventoryTableViewController: UITableViewController {
     
-    var inventory = [Disc]()
+    // MARK: - Class properties
     
+    var inventory = [Disc]()
     let cellReuseIdentifier = "inventoryCell"
     private lazy var dataSource = createDataSource()
-    
     weak var delegate: DataDelegate?
+    
+    // MARK: - View life cycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadInventory()
-        
         dataSource.delegate = self
         tableView.dataSource = dataSource
         
+        loadInventory()
+        stylizeBarButtonItems()
         updateTableView()
-        
-        initializeBarButtonItems()
     }
     
     // Fetch the inventory
@@ -44,14 +50,15 @@ class InventoryTableViewController: UITableViewController {
         }
     }
     
-    func initializeBarButtonItems() {
+    // Stylize bar button items for the current navigation stack
+    func stylizeBarButtonItems() {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
     }
     
-    // MARK: - Segue functions
+    // MARK: - Navigation
     
     // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -106,13 +113,24 @@ class InventoryTableViewController: UITableViewController {
     }
 }
     
-    // MARK: - Diffable data source
+// MARK: - Extensions
 
-// This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
+// This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
+extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
+        }
+    }
+}
+
+// This extention houses table view management functions using the diffable data source API and conforms to the InventoryDelegate protocol
 extension InventoryTableViewController: InventoryDelegate {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
+        
         // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
         let reuseIdentifier = cellReuseIdentifier
         
@@ -173,16 +191,24 @@ extension InventoryTableViewController: InventoryDelegate {
     }
 }
 
+// MARK: - Enums
+
 // This enum declares table view sections
 private enum Section: CaseIterable {
     case one
 }
 
+// MARK: - Other classes
+
 // This class defines a UITableViewDiffableDataSource subclass that enables swipe-to-delete
 private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Disc> {
     
+    // MARK: - Class properties
+    
     // Delegate to update data model
     weak var delegate: InventoryDelegate?
+    
+    // MARK: - Utility functions
     
     // Allow the table view to be edited
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -193,18 +219,6 @@ private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSo
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete, let discToDelete = itemIdentifier(for: indexPath) {
             delegate?.remove(disc: discToDelete)
-        }
-    }
-}
-
-// MARK: - UIAdaptivePresentationControllerDelegate extension
-
-// This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
-extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate {
-    
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIndexPath, animated: false)
         }
     }
 }

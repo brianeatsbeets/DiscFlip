@@ -5,16 +5,26 @@
 //  Created by Aguirre, Brian P. on 9/6/22.
 //
 
+// MARK: - Imported libraries
+
 import UIKit
+
+// MARK: - Main class
 
 // This class/table view controller handles the creating of new cash objects and editing of existing cash objects
 class AddEditCashTableViewController: UITableViewController {
     
+    // MARK: - Class properties
+    
     var cash: Cash?
+    
+    // IBOutlets
     
     @IBOutlet var amountTextField: UITextField!
     @IBOutlet var memoTextField: UITextField!
     @IBOutlet var saveButton: UIBarButtonItem!
+    
+    // MARK: - Initializers
     
     // Initialize with cash data
     init?(coder: NSCoder, cash: Cash?) {
@@ -22,17 +32,18 @@ class AddEditCashTableViewController: UITableViewController {
         super.init(coder: coder)
     }
     
+    // Implement required initializer
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View life cycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         updateUI()
-        
         updateSaveButtonState()
-        
         setPolarityKeyboardToolbar()
         
         // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
@@ -45,9 +56,10 @@ class AddEditCashTableViewController: UITableViewController {
         amountTextField.becomeFirstResponder()
     }
     
+    // MARK: - Utility functions
+    
     // Fill in existing cash data (if any) and update view title
     func updateUI() {
-        
         if let cash = cash {
             title = "Update Cash"
             amountTextField.text = String(cash.amount)
@@ -83,8 +95,10 @@ class AddEditCashTableViewController: UITableViewController {
         polarityButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
         
         let padding = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
         bar.items = [padding, polarityButton, padding]
         bar.sizeToFit()
+        
         amountTextField.inputAccessoryView = bar
     }
     
