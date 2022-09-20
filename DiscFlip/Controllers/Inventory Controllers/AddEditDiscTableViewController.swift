@@ -50,6 +50,11 @@ class AddEditDiscTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nameTextField.becomeFirstResponder()
+    }
+    
     // Fill in existing disc data (if any) and update view title
     func updateUI() {
         
@@ -72,8 +77,6 @@ class AddEditDiscTableViewController: UITableViewController {
             soldOnEbaySwitch.isEnabled = false
             
             setSellSoldFieldsHiddenState(sold: false)
-            
-            nameTextField.becomeFirstResponder()
         }
     }
     
