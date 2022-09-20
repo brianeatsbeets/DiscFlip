@@ -106,13 +106,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-eF-K7d">
-                                                        <rect key="frame" x="143.5" y="148.5" width="27.5" height="27.5"/>
+                                                        <rect key="frame" x="127.5" y="139" width="37" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="8Sj-eF-K7d" secondAttribute="height" multiplier="1:1" id="Xzf-Rx-YUb"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="pencil" catalog="system"/>
+                                                        <state key="normal" image="baseline_more_horiz_white_36pt"/>
                                                         <connections>
                                                             <segue destination="K3f-t9-bqx" kind="show" destinationCreationSelector="segueToCash:" id="Gdo-S1-DUU"/>
                                                         </connections>
@@ -120,9 +120,9 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="8Sj-eF-K7d" secondAttribute="trailing" constant="8.5" id="HpU-a1-xyg"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8Sj-eF-K7d" secondAttribute="trailing" constant="15" id="HpU-a1-xyg"/>
                                                     <constraint firstItem="iTe-xw-LBF" firstAttribute="top" secondItem="6FC-yh-H5P" secondAttribute="top" constant="10" id="Kw9-ar-dd7"/>
-                                                    <constraint firstItem="8Sj-eF-K7d" firstAttribute="height" secondItem="6FC-yh-H5P" secondAttribute="height" multiplier="0.15" id="POm-cR-L4e"/>
+                                                    <constraint firstItem="8Sj-eF-K7d" firstAttribute="height" secondItem="6FC-yh-H5P" secondAttribute="height" multiplier="0.2" id="POm-cR-L4e"/>
                                                     <constraint firstAttribute="bottom" secondItem="iTe-xw-LBF" secondAttribute="bottom" constant="10" id="WMB-Oj-gPG"/>
                                                     <constraint firstAttribute="bottom" secondItem="8Sj-eF-K7d" secondAttribute="bottom" constant="8" id="aQW-0w-86I"/>
                                                     <constraint firstItem="iTe-xw-LBF" firstAttribute="leading" secondItem="6FC-yh-H5P" secondAttribute="leading" constant="10" id="t31-So-u6Z"/>
@@ -617,7 +617,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="IJV-Es-SOM">
+                            <tableViewSection footerTitle="Include extra costs, such as shipping, tax, etc." id="IJV-Es-SOM">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="purchasePriceCell" rowHeight="44" id="3DC-OC-HEt">
                                         <rect key="frame" x="20" y="178" width="374" height="44"/>
@@ -660,7 +660,7 @@
                             <tableViewSection id="a3b-Re-c1u">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="soldDiscCell" rowHeight="44" id="5D6-Xi-l4m">
-                                        <rect key="frame" x="20" y="258" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="270" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5D6-Xi-l4m" id="akv-sK-xJN">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -692,7 +692,7 @@
                                         <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="soldOnEbayCell" rowHeight="44" id="KJS-X9-w9Y">
-                                        <rect key="frame" x="20" y="302" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="314" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KJS-X9-w9Y" id="bbu-wg-McJ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -725,7 +725,7 @@
                             <tableViewSection id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="estSellPriceCell" rowHeight="44" id="uwX-Dl-mZL">
-                                        <rect key="frame" x="20" y="382" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="394" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uwX-Dl-mZL" id="1Mz-gs-I4X">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -829,7 +829,7 @@
         <scene sceneID="0TX-ZV-x3Q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GET-Vn-1Ig" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inventory" image="list.bullet.rectangle.fill" catalog="system" id="oJS-qD-w5V"/>
+                    <tabBarItem key="tabBarItem" title="Inventory" image="list.bullet.rectangle.portrait.fill" catalog="system" id="oJS-qD-w5V"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="SWy-dw-gac">
                         <rect key="frame" x="0.0" y="48" width="414" height="96"/>
@@ -881,9 +881,9 @@
         <segue reference="RdZ-7T-7Vb"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="baseline_more_horiz_white_36pt" width="36" height="36"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
-        <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
         <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
     </resources>
 </document>
