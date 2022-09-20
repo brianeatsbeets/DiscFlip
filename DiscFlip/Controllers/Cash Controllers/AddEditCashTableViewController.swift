@@ -38,6 +38,8 @@ class AddEditCashTableViewController: UITableViewController {
         // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
         let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        
+        amountTextField.becomeFirstResponder()
     }
     
     // Fill in existing cash data (if any) and update view title

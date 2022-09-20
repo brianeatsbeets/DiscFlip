@@ -72,6 +72,8 @@ class AddEditDiscTableViewController: UITableViewController {
             soldOnEbaySwitch.isEnabled = false
             
             setSellSoldFieldsHiddenState(sold: false)
+            
+            nameTextField.becomeFirstResponder()
         }
     }
     
@@ -117,6 +119,17 @@ class AddEditDiscTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
+    // Move active text field to the next one, if any
+    @IBAction func returnKeyTapped(_ sender: UITextField) {
+        let nextTag = sender.tag + 1
+
+        if let nextResponder = tableView.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            sender.resignFirstResponder()
+        }
+    }
+    
     // Trigger enabled state updates for various UI elements
     @IBAction func soldDiscSwitchTapped(_ sender: UISwitch) {
         soldOnEbaySwitch.isEnabled = sender.isOn
@@ -151,6 +164,35 @@ class AddEditDiscTableViewController: UITableViewController {
         default:
             return 1
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        guard section == 2 else { return nil }
+        
+        let footerView = UIView()
+        
+        let footerLabel = UILabel()
+        footerLabel.numberOfLines = 2
+        footerLabel.text = "Include extra costs, such as shipping, tax, etc."
+        footerLabel.textColor = .white
+        footerLabel.font = UIFont(name: "Arial Rounded MT Bold", size: 12) ?? .preferredFont(forTextStyle: .body)
+        footerLabel.adjustsFontSizeToFitWidth = true
+        footerLabel.minimumScaleFactor = 0.5
+        
+        footerLabel.translatesAutoresizingMaskIntoConstraints = false
+        footerLabel.layer.masksToBounds = true
+        
+        footerView.addSubview(footerLabel)
+        
+        let constraints = [
+            footerLabel.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 10),
+            footerLabel.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 5)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+        
+        return footerView
     }
     
     // MARK: - Navigation
