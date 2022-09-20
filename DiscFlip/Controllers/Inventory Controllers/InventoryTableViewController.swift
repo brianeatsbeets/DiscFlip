@@ -7,7 +7,7 @@
 
 import UIKit
 
-// This protocal allows conformers to remove discs
+// This protocol allows conformers to remove discs
 protocol InventoryDelegate: AnyObject {
     func remove(disc: Disc)
 }
@@ -43,6 +43,12 @@ class InventoryTableViewController: UITableViewController {
     }
     
     // MARK: - Segue functions
+    
+    // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepared for segue!")
+        segue.destination.presentationController?.delegate = self
+    }
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
     @IBSegueAction func addEditDisc(_ coder: NSCoder, sender: Any?) -> UITableViewController? {
@@ -173,6 +179,18 @@ private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSo
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete, let discToDelete = itemIdentifier(for: indexPath) {
             delegate?.remove(disc: discToDelete)
+        }
+    }
+}
+
+// MARK: - UIAdaptivePresentationControllerDelegate extension
+
+// This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
+extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
         }
     }
 }
