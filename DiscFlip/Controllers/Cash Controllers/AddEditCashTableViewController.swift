@@ -102,6 +102,16 @@ class AddEditCashTableViewController: UITableViewController {
         amountTextField.inputAccessoryView = bar
     }
     
+    // Hide keyboard toolbar to create a less-visually-jittery transition when immediately transitioning to memo text field keyboard
+    @IBAction func amountEditingEnded(_ sender: UITextField) {
+        sender.inputAccessoryView?.isHidden = true
+    }
+    
+    // Show keyboard toolbar when editing amount text field
+    @IBAction func amountEditingBegan(_ sender: UITextField) {
+        sender.inputAccessoryView?.isHidden = false
+    }
+    
     // Toggle the amountTextField text polarity
     @objc func polarityButtonTapped() {
         guard let currentText = amountTextField.text else { return }
@@ -120,6 +130,10 @@ class AddEditCashTableViewController: UITableViewController {
     // Trigger the save button state update when text is edited
     @IBAction func textEditingChanged(_ sender: UITextField) {
         updateSaveButtonState()
+    }
+    
+    @IBAction func doneKeyTapped(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
     // Dismiss the keyboard when an outside tap is registered

@@ -363,6 +363,8 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="amountEditingBegan:" destination="vbV-4G-lBP" eventType="editingDidBegin" id="MEP-EG-pxD"/>
+                                                        <action selector="amountEditingEnded:" destination="vbV-4G-lBP" eventType="editingDidEnd" id="bGB-D1-62K"/>
                                                         <action selector="textEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="Odf-Ef-3wo"/>
                                                     </connections>
                                                 </textField>
@@ -403,6 +405,7 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                     <connections>
+                                                        <action selector="doneKeyTapped:" destination="vbV-4G-lBP" eventType="primaryActionTriggered" id="b2h-lA-cr1"/>
                                                         <action selector="textEditingChanged:" destination="vbV-4G-lBP" eventType="editingChanged" id="kz5-Mt-oOD"/>
                                                     </connections>
                                                 </textField>
