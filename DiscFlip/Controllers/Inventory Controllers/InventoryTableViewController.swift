@@ -95,7 +95,7 @@ class InventoryTableViewController: UITableViewController {
             return
         }
         
-        // Check to see if a disc was selected form editing, and if so, update it
+        // Check to see if a disc was selected for editing, and if so, update it
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
             inventory[selectedIndexPath.row] = disc
@@ -185,7 +185,8 @@ extension InventoryTableViewController: InventoryDelegate {
         snapshot.deleteItems([disc])
         dataSource.apply(snapshot, animatingDifferences: true)
         
-        // Save the inventory to file
+        delegate?.updateInventory(newInventory: inventory)
+        
         Disc.saveInventory(inventory)
     }
 }

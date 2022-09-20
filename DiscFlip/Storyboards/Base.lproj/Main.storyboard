@@ -668,7 +668,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold Disc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFz-ZM-thE">
-                                                    <rect key="frame" x="20" y="11" width="78" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="277" height="21"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -688,6 +688,7 @@
                                                 <constraint firstItem="fFz-ZM-thE" firstAttribute="top" secondItem="akv-sK-xJN" secondAttribute="topMargin" id="UDR-hE-IC1"/>
                                                 <constraint firstAttribute="bottom" secondItem="gcG-Kx-jXR" secondAttribute="bottom" constant="7" id="VIq-iF-2Kb"/>
                                                 <constraint firstItem="gcG-Kx-jXR" firstAttribute="top" secondItem="akv-sK-xJN" secondAttribute="top" constant="6" id="mip-Qb-02k"/>
+                                                <constraint firstItem="gcG-Kx-jXR" firstAttribute="leading" secondItem="fFz-ZM-thE" secondAttribute="trailing" constant="8" id="sIF-Uf-weG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -700,7 +701,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold on eBay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghJ-dB-zrK">
-                                                    <rect key="frame" x="20" y="12" width="107.5" height="21"/>
+                                                    <rect key="frame" x="20" y="12" width="277" height="21"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -715,6 +716,7 @@
                                                 <constraint firstItem="X0z-wI-iSK" firstAttribute="top" secondItem="bbu-wg-McJ" secondAttribute="top" constant="6" id="Hoa-kT-czN"/>
                                                 <constraint firstAttribute="bottom" secondItem="X0z-wI-iSK" secondAttribute="bottom" constant="7" id="N5c-l6-z6r"/>
                                                 <constraint firstItem="ghJ-dB-zrK" firstAttribute="bottom" secondItem="bbu-wg-McJ" secondAttribute="bottomMargin" id="bPr-hK-3pX"/>
+                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="leading" secondItem="ghJ-dB-zrK" secondAttribute="trailing" constant="8" id="bXs-RL-voi"/>
                                                 <constraint firstItem="ghJ-dB-zrK" firstAttribute="top" secondItem="bbu-wg-McJ" secondAttribute="topMargin" constant="1" id="kgD-Ic-wiT"/>
                                                 <constraint firstAttribute="trailing" secondItem="X0z-wI-iSK" secondAttribute="trailing" constant="20" symbolic="YES" id="tHu-Fh-bWP"/>
                                             </constraints>
