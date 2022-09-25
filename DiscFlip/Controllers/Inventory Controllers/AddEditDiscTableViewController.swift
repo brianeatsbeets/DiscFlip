@@ -64,7 +64,10 @@ class AddEditDiscTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        nameTextField.becomeFirstResponder()
+        
+        if disc == nil {
+            nameTextField.becomeFirstResponder()
+        }
     }
     
     // MARK: - Utility functions

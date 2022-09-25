@@ -88,7 +88,7 @@ class AddEditCashTableViewController: UITableViewController {
         let bar = UIToolbar()
         let polarityButton = UIBarButtonItem(title: "+/-", style: .plain, target: self, action: #selector(polarityButtonTapped))
         
-        polarityButton.tintColor = .black
+        polarityButton.tintColor = .label
         polarityButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
         polarityButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .disabled)
         polarityButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .selected)
