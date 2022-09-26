@@ -264,7 +264,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rn7-LD-L66">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.63127003029999995" green="1" blue="0.54322656020000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
@@ -284,9 +284,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="BCK-SU-WoU">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcg-jf-Dji">
+                                    <rect key="frame" x="20" y="7" width="374" height="30"/>
+                                    <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="Filter...">
+                                        <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <segue destination="gP5-r0-XTs" kind="popoverPresentation" identifier="InventoryFilter" popoverAnchorView="fcg-jf-Dji" id="CyS-TF-BD7">
+                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                        </segue>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="7" id="0bN-Zq-ksG"/>
+                                <constraint firstItem="fcg-jf-Dji" firstAttribute="centerX" secondItem="BCK-SU-WoU" secondAttribute="centerX" id="CDO-CE-Fbk"/>
+                                <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
+                                <constraint firstItem="fcg-jf-Dji" firstAttribute="centerY" secondItem="BCK-SU-WoU" secondAttribute="centerY" id="NZF-1D-Sem"/>
+                                <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
+                                <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="inventoryCell" id="mmZ-as-TOq">
-                                <rect key="frame" x="20" y="38" width="374" height="43.5"/>
+                                <rect key="frame" x="20" y="82" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mmZ-as-TOq" id="3tm-Wr-usc">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -311,10 +339,128 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="filterButton" destination="fcg-jf-Dji" id="fej-pl-9s6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAc-hq-kQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2684.057971014493" y="462.72321428571428"/>
+        </scene>
+        <!--Inventory Filter Table View Controller-->
+        <scene sceneID="VUi-4S-BMq">
+            <objects>
+                <tableViewController storyboardIdentifier="InventoryFilterTableViewController" id="aof-Iw-GFy" customClass="InventoryFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="VSG-hr-in5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <sections>
+                            <tableViewSection id="T0Q-cm-Zd2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="x1n-Ax-6zY">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x1n-Ax-6zY" id="8V7-94-I7q">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Pqs-g7-ZFT">
+                                        <rect key="frame" x="0.0" y="94" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pqs-g7-ZFT" id="0NK-o6-PuO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="aof-Iw-GFy" id="gUH-NL-fms"/>
+                            <outlet property="delegate" destination="aof-Iw-GFy" id="38h-KM-w1P"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="180"/>
+                    <connections>
+                        <outlet property="soldButton" destination="PyL-TV-ew4" id="d5p-d1-OGW"/>
+                        <outlet property="soldOnEbayButton" destination="K4M-oP-fkB" id="7gI-bl-kde"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z50-mw-tk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2682.608695652174" y="1181.9196428571429"/>
+        </scene>
+        <!--Inventory Filter View Controller-->
+        <scene sceneID="ibz-YX-ZhV">
+            <objects>
+                <viewController id="gP5-r0-XTs" customClass="InventoryFilterViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f0T-BS-FjB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SK1-SM-hhB">
+                                <rect key="frame" x="95.5" y="68" width="223" height="73"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="L9P-G8-2zl">
+                                        <rect key="frame" x="0.0" y="0.0" width="223" height="34.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sold Disc:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jW-2J-z9p">
+                                                <rect key="frame" x="0.0" y="0.0" width="83" height="34.5"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyL-TV-ew4">
+                                                <rect key="frame" x="148" y="0.0" width="75" height="34.5"/>
+                                                <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-1i-S8R">
+                                        <rect key="frame" x="0.0" y="44.5" width="223" height="28.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sold on eBay:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-HS-DJI">
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="28.5"/>
+                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4M-oP-fkB">
+                                                <rect key="frame" x="148" y="0.0" width="75" height="28.5"/>
+                                                <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="FqK-50-A8d"/>
+                                    <constraint firstAttribute="width" constant="223" id="jdG-kL-b7f"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="IjF-AW-xCo"/>
+                        <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="SK1-SM-hhB" firstAttribute="centerX" secondItem="f0T-BS-FjB" secondAttribute="centerX" id="Mhq-1E-jIP"/>
+                            <constraint firstItem="SK1-SM-hhB" firstAttribute="top" secondItem="IjF-AW-xCo" secondAttribute="top" constant="20" id="VjQ-zz-twA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="soldDiscButton" destination="PyL-TV-ew4" id="0DO-tK-PUL"/>
+                        <outlet property="soldOnEbayButton" destination="K4M-oP-fkB" id="4UN-gg-Dq9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SAy-ur-431" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3570" y="1182"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uDD-kC-JQS">

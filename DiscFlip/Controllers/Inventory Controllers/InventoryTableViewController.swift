@@ -28,6 +28,9 @@ class InventoryTableViewController: UITableViewController {
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
     
+    // IBOutlets
+    @IBOutlet var filterButton: UIButton!
+    
     // MARK: - View life cycle functions
     
     override func viewDidLoad() {
@@ -60,9 +63,15 @@ class InventoryTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
+    // Prep for specific segue cases
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
         segue.destination.presentationController?.delegate = self
+        
+        guard let inventoryFilterTVC = segue.destination as? InventoryFilterViewController,
+              segue.identifier == "InventoryFilter" else { return }
+        inventoryFilterTVC.presentationController?.delegate = self
+        inventoryFilterTVC.preferredContentSize = CGSize(width: 275, height: 115)
     }
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
@@ -121,6 +130,13 @@ extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
         }
+    }
+}
+
+// TODO
+extension InventoryTableViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
 
