@@ -11,9 +11,14 @@ import UIKit
 
 // MARK: - Protocols
 
-// This protocol allows conformers to remove discs
+// This protocol allows conformers to remove discs from the inventory
 protocol InventoryDelegate: AnyObject {
     func remove(disc: Disc)
+}
+
+// This protocol allows conformers to filter the inventory
+protocol InventoryFilterDelegate: AnyObject {
+    func filterInventory(soldDisc: SoldDiscFilter, soldOnEbay: SoldOnEbayFilter)
 }
 
 // MARK: - Main class
@@ -27,9 +32,16 @@ class InventoryTableViewController: UITableViewController {
     let cellReuseIdentifier = "inventoryCell"
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
+    var soldFilter = SoldDiscFilter.all
+    var eBayFilter = SoldOnEbayFilter.all
     
     // IBOutlets
     @IBOutlet var filterButton: UIButton!
+    @IBOutlet var filterView: UIView!
+    @IBOutlet var soldFilterView: UIView!
+    @IBOutlet var eBayFilterView: UIView!
+    @IBOutlet var soldFilterLabel: UILabel!
+    @IBOutlet var eBayFilterLabel: UILabel!
     
     // MARK: - View life cycle functions
     
@@ -42,7 +54,11 @@ class InventoryTableViewController: UITableViewController {
         loadInventory()
         stylizeBarButtonItems()
         updateTableView()
+        
+        initializeFilterViews()
     }
+    
+    // MARK: - Utility functions
     
     // Fetch the inventory
     func loadInventory() {
@@ -61,6 +77,17 @@ class InventoryTableViewController: UITableViewController {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .highlighted)
     }
     
+    // Set initial label text and round the corners
+    func initializeFilterViews() {
+        soldFilterLabel.text = "Sold Disc: All"
+        soldFilterView.layer.masksToBounds = true
+        soldFilterView.layer.cornerRadius = 10
+        
+        eBayFilterLabel.text = "Sold on eBay: All"
+        eBayFilterView.layer.masksToBounds = true
+        eBayFilterView.layer.cornerRadius = 10
+    }
+    
     // MARK: - Navigation
     
     // Prep for specific segue cases
@@ -68,10 +95,15 @@ class InventoryTableViewController: UITableViewController {
         // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
         segue.destination.presentationController?.delegate = self
         
+        // Check if we're segueing to the inventory filter
+        // If so, configure the inventory filter view controller and its presentation
         guard let inventoryFilterTVC = segue.destination as? InventoryFilterViewController,
               segue.identifier == "InventoryFilter" else { return }
         inventoryFilterTVC.presentationController?.delegate = self
-        inventoryFilterTVC.preferredContentSize = CGSize(width: 275, height: 115)
+        inventoryFilterTVC.preferredContentSize = CGSize(width: 275, height: 160)
+        inventoryFilterTVC.delegate = self
+        inventoryFilterTVC.soldFilter = soldFilter
+        inventoryFilterTVC.eBayFilter = eBayFilter
     }
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
@@ -125,7 +157,6 @@ class InventoryTableViewController: UITableViewController {
 
 // This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
 extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate {
-    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
@@ -133,10 +164,51 @@ extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate
     }
 }
 
-// TODO
+// This extension allows the InventoryFilterViewController to have customizable dimensions
 extension InventoryTableViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+// This extension processes filter selections and filters the table view data appropriately
+extension InventoryTableViewController: InventoryFilterDelegate {
+    func filterInventory(soldDisc: SoldDiscFilter, soldOnEbay: SoldOnEbayFilter) {
+        
+        // Update this view controller's filter values to the ones that were selected in the inventory filter view controller
+        soldFilter = soldDisc
+        eBayFilter = soldOnEbay
+        
+        var filteredInventory = inventory
+        
+        // Filter on Sold Disc
+        switch soldDisc {
+        case .sold:
+            filteredInventory = filteredInventory.filter { $0.wasSold }
+        case .notSold:
+            filteredInventory = filteredInventory.filter { !$0.wasSold }
+        default:
+            break
+        }
+        
+        // Filter on Sold on eBay
+        switch soldOnEbay {
+        case .soldOnEbay:
+            filteredInventory = filteredInventory.filter { $0.soldOnEbay }
+        case .notSoldOnEbay:
+            filteredInventory = filteredInventory.filter { !$0.soldOnEbay }
+        default:
+            break
+        }
+        
+        // Update the filter views' text
+        let soldDiscFilterText = "Sold Disc: " + soldDisc.rawValue
+        let soldOnEbayFilterText = "Sold on eBay: " + soldOnEbay.rawValue
+        soldFilterLabel.text = soldDiscFilterText
+        eBayFilterLabel.text = soldOnEbayFilterText
+        
+        // Update the table view with the filtered data
+        updateTableView(newInventory: filteredInventory, animated: false)
     }
 }
 
@@ -183,11 +255,11 @@ extension InventoryTableViewController: InventoryDelegate {
     }
     
     // Apply a snapshot with updated disc data
-    func updateTableView() {
+    func updateTableView(newInventory: [Disc]? = nil, animated: Bool = true) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Disc>()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(inventory)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems(newInventory ?? inventory)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
     // Apply a snapshot with removed disc data
@@ -209,7 +281,7 @@ extension InventoryTableViewController: InventoryDelegate {
 
 // MARK: - Enums
 
-// This enum declares table view sections
+// This enum defines table view sections
 private enum Section: CaseIterable {
     case one
 }
