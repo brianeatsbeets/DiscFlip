@@ -26,6 +26,7 @@ class CashTableViewController: UITableViewController {
     var cashList: [Cash]
     let cellReuseIdentifier = "cashCell"
     private lazy var dataSource = createDataSource()
+    weak var delegate: ReturnFromCash?
     
     // MARK: - Initializers
     
@@ -95,6 +96,8 @@ class CashTableViewController: UITableViewController {
         }
         
         Cash.saveCash(cashList)
+        
+        delegate?.saveData(newCashList: cashList)
     }
 }
 

@@ -9,6 +9,10 @@
 
 import UIKit
 
+protocol ReturnFromCash: AnyObject {
+    func saveData(newCashList: [Cash])
+}
+
 // MARK: - Main class
 
 // This class/view controller displays running totals and other financial data
@@ -67,13 +71,13 @@ class DashboardViewController: UIViewController {
     
     // Perform UI initialization
     func updateUI() {
-        initializeFinancialValues()
+        calculateTotals()
         stylizeDashboardViewsUI()
         stylizeBarButtonItems()
     }
     
     // Calculate totals and present to screen
-    func initializeFinancialValues() {
+    func calculateTotals() {
         let totalPurchased = inventory.reduce(0) { $0 + $1.purchasePrice }
         totalPurchasedLabel.text = totalPurchased.currencyWithPolarity()
         
@@ -115,7 +119,10 @@ class DashboardViewController: UIViewController {
     
     // Initialize the cash table view controller with the existing cash list
     @IBSegueAction func segueToCash(_ coder: NSCoder) -> CashTableViewController? {
-        return CashTableViewController(coder: coder, cashList: cashList)
+        // We're assigning an existing delegate as a delegate for a new view controller - "Delegate chaining?" This works but doesn't seem like it's good practice. Should think about how the data source/layout could be re-structured to allow the CashTableViewController to update the data source, or make it so it doesn't have to.
+        let cashTVC = CashTableViewController(coder: coder, cashList: cashList)
+        cashTVC?.delegate = self
+        return cashTVC
     }
     
     // Receive cash data from CashViewController and update dashboard
@@ -128,9 +135,30 @@ class DashboardViewController: UIViewController {
         let returnedCash = sourceViewController.cashList
         cashList = returnedCash
         
-        delegate?.updateCashList(newCashList: returnedCash)
+        //delegate?.updateCashList(newCashList: returnedCash)
         
         updateUI()
     }
     
+    // Prep for transitioning back to the dashboard from the cash table view controller via tapping the dashboard tab bar item
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
+        segue.destination.presentationController?.delegate = self
+    }
+}
+
+// MARK: - Extensions
+
+// This extension....
+extension DashboardViewController: ReturnFromCash {
+    func saveData(newCashList: [Cash]) {
+        delegate?.updateCashList(newCashList: newCashList)
+    }
+}
+
+// This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
+extension DashboardViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        calculateTotals()
+    }
 }
