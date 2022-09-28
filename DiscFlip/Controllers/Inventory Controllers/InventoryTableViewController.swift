@@ -18,7 +18,7 @@ protocol InventoryDelegate: AnyObject {
 
 // This protocol allows conformers to filter the inventory
 protocol InventoryFilterDelegate: AnyObject {
-    func filterInventory(soldDisc: SoldDiscFilter, soldOnEbay: SoldOnEbayFilter)
+    func filterInventory(filter: InventoryFilter)
 }
 
 // MARK: - Main class
@@ -32,16 +32,12 @@ class InventoryTableViewController: UITableViewController {
     let cellReuseIdentifier = "inventoryCell"
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
-    var soldFilter = SoldDiscFilter.all
-    var eBayFilter = SoldOnEbayFilter.all
+    var currentFilter = InventoryFilter.all
     
     // IBOutlets
     @IBOutlet var filterButton: UIButton!
-    @IBOutlet var filterView: UIView!
-    @IBOutlet var soldFilterView: UIView!
-    @IBOutlet var eBayFilterView: UIView!
-    @IBOutlet var soldFilterLabel: UILabel!
-    @IBOutlet var eBayFilterLabel: UILabel!
+    @IBOutlet var currentFilterView: UIView!
+    @IBOutlet var currentFilterLabel: UILabel!
     
     // MARK: - View life cycle functions
     
@@ -79,13 +75,9 @@ class InventoryTableViewController: UITableViewController {
     
     // Set initial label text and round the corners
     func initializeFilterViews() {
-        soldFilterLabel.text = "Sold Disc: All"
-        soldFilterView.layer.masksToBounds = true
-        soldFilterView.layer.cornerRadius = 10
-        
-        eBayFilterLabel.text = "Sold on eBay: All"
-        eBayFilterView.layer.masksToBounds = true
-        eBayFilterView.layer.cornerRadius = 10
+        currentFilterLabel.text = currentFilter.rawValue
+        currentFilterView.layer.masksToBounds = true
+        currentFilterView.layer.cornerRadius = 10
     }
     
     // MARK: - Navigation
@@ -97,13 +89,12 @@ class InventoryTableViewController: UITableViewController {
         
         // Check if we're segueing to the inventory filter
         // If so, configure the inventory filter view controller and its presentation
-        guard let inventoryFilterTVC = segue.destination as? InventoryFilterViewController,
+        guard let inventoryFilterTVC = segue.destination as? InventoryFilterTableViewController,
               segue.identifier == "InventoryFilter" else { return }
         inventoryFilterTVC.presentationController?.delegate = self
-        inventoryFilterTVC.preferredContentSize = CGSize(width: 275, height: 160)
+        inventoryFilterTVC.preferredContentSize = CGSize(width: 325, height: 240)
         inventoryFilterTVC.delegate = self
-        inventoryFilterTVC.soldFilter = soldFilter
-        inventoryFilterTVC.eBayFilter = eBayFilter
+        inventoryFilterTVC.selectedFilter = currentFilter
     }
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
@@ -173,41 +164,29 @@ extension InventoryTableViewController: UIPopoverPresentationControllerDelegate 
 
 // This extension processes filter selections and filters the table view data appropriately
 extension InventoryTableViewController: InventoryFilterDelegate {
-    func filterInventory(soldDisc: SoldDiscFilter, soldOnEbay: SoldOnEbayFilter) {
+    func filterInventory(filter: InventoryFilter) {
         
-        // Update this view controller's filter values to the ones that were selected in the inventory filter view controller
-        soldFilter = soldDisc
-        eBayFilter = soldOnEbay
+        // Update this view controller's filter value to the one that was selected in the inventory filter view controller
+        currentFilter = filter
         
         var filteredInventory = inventory
         
-        // Filter on Sold Disc
-        switch soldDisc {
-        case .sold:
-            filteredInventory = filteredInventory.filter { $0.wasSold }
-        case .notSold:
+        // Filter inventory
+        switch filter {
+        case .unsold:
             filteredInventory = filteredInventory.filter { !$0.wasSold }
-        default:
-            break
-        }
-        
-        // Filter on Sold on eBay
-        switch soldOnEbay {
+        case .soldAll:
+            filteredInventory = filteredInventory.filter { $0.wasSold }
         case .soldOnEbay:
-            filteredInventory = filteredInventory.filter { $0.soldOnEbay }
-        case .notSoldOnEbay:
-            filteredInventory = filteredInventory.filter { !$0.soldOnEbay }
+            filteredInventory = filteredInventory.filter { $0.wasSold && $0.soldOnEbay }
+        case .soldNotOnEbay:
+            filteredInventory = filteredInventory.filter { $0.wasSold && !$0.soldOnEbay }
         default:
             break
         }
-        
-        // Update the filter views' text
-        let soldDiscFilterText = "Sold Disc: " + soldDisc.rawValue
-        let soldOnEbayFilterText = "Sold on eBay: " + soldOnEbay.rawValue
-        soldFilterLabel.text = soldDiscFilterText
-        eBayFilterLabel.text = soldOnEbayFilterText
         
         // Update the table view with the filtered data
+        currentFilterLabel.text = filter.rawValue
         updateTableView(newInventory: filteredInventory, animated: false)
     }
 }

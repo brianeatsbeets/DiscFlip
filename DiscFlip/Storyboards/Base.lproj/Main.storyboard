@@ -284,8 +284,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="BCK-SU-WoU">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="BCK-SU-WoU" userLabel="Filter Container View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcg-jf-Dji">
@@ -299,16 +299,16 @@
                                         <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                     </buttonConfiguration>
                                     <connections>
-                                        <segue destination="gP5-r0-XTs" kind="popoverPresentation" identifier="InventoryFilter" popoverAnchorView="fcg-jf-Dji" id="CyS-TF-BD7">
+                                        <segue destination="7YD-r9-GEU" kind="popoverPresentation" identifier="InventoryFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                         </segue>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jo-eg-RBJ">
-                                    <rect key="frame" x="30" y="45" width="165.5" height="22"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-yg-NRp">
+                                    <rect key="frame" x="178.5" y="45" width="57.5" height="22"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MH7-Hf-n1K">
-                                            <rect key="frame" x="8" y="3" width="149.5" height="16.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4g3-GF-YES">
+                                            <rect key="frame" x="10" y="3" width="37.5" height="16.5"/>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -316,49 +316,26 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="22" id="DfD-Yk-pVx"/>
-                                        <constraint firstAttribute="bottom" secondItem="MH7-Hf-n1K" secondAttribute="bottom" constant="2.5" id="GWK-J1-0Qu"/>
-                                        <constraint firstAttribute="trailing" secondItem="MH7-Hf-n1K" secondAttribute="trailing" constant="8" id="a4Y-hr-MOn"/>
-                                        <constraint firstItem="MH7-Hf-n1K" firstAttribute="leading" secondItem="1jo-eg-RBJ" secondAttribute="leading" constant="8" id="qPo-Ez-YTf"/>
-                                        <constraint firstItem="MH7-Hf-n1K" firstAttribute="top" secondItem="1jo-eg-RBJ" secondAttribute="top" constant="3" id="tPo-4l-BoW"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opL-1m-mkC">
-                                    <rect key="frame" x="218.5" y="45" width="165.5" height="22"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="83W-x9-sxr">
-                                            <rect key="frame" x="8" y="3" width="149.5" height="16.5"/>
-                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="83W-x9-sxr" firstAttribute="top" secondItem="opL-1m-mkC" secondAttribute="top" constant="3" id="0iB-1X-kId"/>
-                                        <constraint firstAttribute="bottom" secondItem="83W-x9-sxr" secondAttribute="bottom" constant="2.5" id="ON5-6Q-vDA"/>
-                                        <constraint firstItem="83W-x9-sxr" firstAttribute="leading" secondItem="opL-1m-mkC" secondAttribute="leading" constant="8" id="gIf-zv-Zsf"/>
-                                        <constraint firstAttribute="trailing" secondItem="83W-x9-sxr" secondAttribute="trailing" constant="8" id="jGI-sE-y50"/>
-                                        <constraint firstAttribute="height" constant="22" id="qWb-qJ-gPp"/>
+                                        <constraint firstAttribute="height" constant="22" id="3Hs-vO-9tO"/>
+                                        <constraint firstItem="4g3-GF-YES" firstAttribute="leading" secondItem="lW7-yg-NRp" secondAttribute="leading" constant="10" id="V8e-wR-Nvx"/>
+                                        <constraint firstAttribute="bottom" secondItem="4g3-GF-YES" secondAttribute="bottom" constant="2.5" id="cde-wf-cOB"/>
+                                        <constraint firstItem="4g3-GF-YES" firstAttribute="top" secondItem="lW7-yg-NRp" secondAttribute="top" constant="3" id="nF9-ga-ifV"/>
+                                        <constraint firstAttribute="trailing" secondItem="4g3-GF-YES" secondAttribute="trailing" constant="10" id="uwm-BP-Y4E"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="1jo-eg-RBJ" firstAttribute="width" secondItem="BCK-SU-WoU" secondAttribute="width" multiplier="0.4" id="C3t-yG-QcD"/>
-                                <constraint firstItem="opL-1m-mkC" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="IjK-Bm-73X"/>
+                                <constraint firstItem="lW7-yg-NRp" firstAttribute="centerX" secondItem="BCK-SU-WoU" secondAttribute="centerX" id="2Tk-JP-6py"/>
+                                <constraint firstItem="lW7-yg-NRp" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="Ko3-Fu-OJI"/>
                                 <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
-                                <constraint firstItem="opL-1m-mkC" firstAttribute="width" secondItem="BCK-SU-WoU" secondAttribute="width" multiplier="0.4" id="Md4-NW-DJt"/>
-                                <constraint firstItem="1jo-eg-RBJ" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="30" id="N4I-Hh-74U"/>
-                                <constraint firstItem="1jo-eg-RBJ" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="UqV-MH-8Qp"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>
-                                <constraint firstAttribute="trailing" secondItem="opL-1m-mkC" secondAttribute="trailing" constant="30" id="wPb-ua-SlJ"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="inventoryCell" id="mmZ-as-TOq">
-                                <rect key="frame" x="20" y="113" width="374" height="43.5"/>
+                                <rect key="frame" x="20" y="123" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mmZ-as-TOq" id="3tm-Wr-usc">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -384,102 +361,38 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="eBayFilterLabel" destination="83W-x9-sxr" id="SMU-vl-WjM"/>
-                        <outlet property="eBayFilterView" destination="opL-1m-mkC" id="uH3-EF-QLB"/>
+                        <outlet property="currentFilterLabel" destination="4g3-GF-YES" id="UjN-tY-GYw"/>
+                        <outlet property="currentFilterView" destination="lW7-yg-NRp" id="duW-GL-9FE"/>
                         <outlet property="filterButton" destination="fcg-jf-Dji" id="fej-pl-9s6"/>
-                        <outlet property="filterView" destination="BCK-SU-WoU" id="hUQ-KA-0JC"/>
-                        <outlet property="soldFilterLabel" destination="MH7-Hf-n1K" id="EJS-Lj-vo9"/>
-                        <outlet property="soldFilterView" destination="1jo-eg-RBJ" id="4to-Wv-p2P"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAc-hq-kQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2684.057971014493" y="462.72321428571428"/>
         </scene>
-        <!--Inventory Filter View Controller-->
-        <scene sceneID="ibz-YX-ZhV">
+        <!--Inventory Filter Table View Controller-->
+        <scene sceneID="Ku2-LS-0wr">
             <objects>
-                <viewController id="gP5-r0-XTs" customClass="InventoryFilterViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f0T-BS-FjB">
+                <tableViewController id="7YD-r9-GEU" customClass="InventoryFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SK1-SM-hhB">
-                                <rect key="frame" x="95.5" y="68" width="223" height="119"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="L9P-G8-2zl">
-                                        <rect key="frame" x="0.0" y="0.0" width="223" height="33"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold Disc:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jW-2J-z9p">
-                                                <rect key="frame" x="0.0" y="0.0" width="83" height="33"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PyL-TV-ew4">
-                                                <rect key="frame" x="148" y="0.0" width="75" height="33"/>
-                                                <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="All">
-                                                    <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-1i-S8R">
-                                        <rect key="frame" x="0.0" y="43" width="223" height="33"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold on eBay:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-HS-DJI">
-                                                <rect key="frame" x="0.0" y="0.0" width="113" height="33"/>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K4M-oP-fkB">
-                                                <rect key="frame" x="148" y="0.0" width="75" height="33"/>
-                                                <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="All">
-                                                    <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DmB-bT-b9b">
-                                        <rect key="frame" x="0.0" y="86" width="223" height="33"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="15F-7N-YiU"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Apply">
-                                            <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="applyButtonPressed" destination="gP5-r0-XTs" eventType="touchUpInside" id="OzC-tq-x5a"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="223" id="jdG-kL-b7f"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="IjF-AW-xCo"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="SK1-SM-hhB" firstAttribute="centerX" secondItem="f0T-BS-FjB" secondAttribute="centerX" id="Mhq-1E-jIP"/>
-                            <constraint firstItem="SK1-SM-hhB" firstAttribute="top" secondItem="IjF-AW-xCo" secondAttribute="top" constant="20" id="VjQ-zz-twA"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="soldDiscButton" destination="PyL-TV-ew4" id="0DO-tK-PUL"/>
-                        <outlet property="soldOnEbayButton" destination="K4M-oP-fkB" id="4UN-gg-Dq9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SAy-ur-431" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="SGZ-fj-G2R" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="7YD-r9-GEU" id="RZs-xH-DFt"/>
+                            <outlet property="delegate" destination="7YD-r9-GEU" id="C4D-Ul-iIC"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IIh-OS-oac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="1173"/>
+            <point key="canvasLocation" x="2682.608695652174" y="1174.5535714285713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uDD-kC-JQS">

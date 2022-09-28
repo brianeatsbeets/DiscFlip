@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E108F67F28E24A0C00766644 /* InventoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F67D28E24A0C00766644 /* InventoryFilterViewController.swift */; };
+		E108F68228E4807400766644 /* InventoryFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */; };
+		E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */; };
+		E108F68628E49D5C00766644 /* InventoryFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */; };
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
 		E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36428C3919800F357B2 /* MainTabBarController.swift */; };
 		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
@@ -25,7 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E108F67D28E24A0C00766644 /* InventoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterViewController.swift; sourceTree = "<group>"; };
+		E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewController.swift; sourceTree = "<group>"; };
+		E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewCell.swift; sourceTree = "<group>"; };
+		E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InventoryFilterTableViewCell.xib; sourceTree = "<group>"; };
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36428C3919800F357B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E108F68828E4AFB300766644 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +81,8 @@
 			children = (
 				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
 				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
-				E108F67D28E24A0C00766644 /* InventoryFilterViewController.swift */,
+				E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */,
+				E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */,
 			);
 			path = "Inventory Controllers";
 			sourceTree = "<group>";
@@ -119,6 +132,7 @@
 		E1F3C45528B7B25A0039013E /* DiscFlip */ = {
 			isa = PBXGroup;
 			children = (
+				E108F68828E4AFB300766644 /* Views */,
 				E1F3C46B28BCEDC70039013E /* Controllers */,
 				E1F3C46A28BCEDBA0039013E /* Models */,
 				E1DBEE4828DA594C00FBE91E /* Other */,
@@ -208,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E108F68628E49D5C00766644 /* InventoryFilterTableViewCell.xib in Resources */,
 				E1F3C46328B7B2600039013E /* LaunchScreen.storyboard in Resources */,
 				E1F3C46028B7B2600039013E /* Assets.xcassets in Resources */,
 				E1F3C45E28B7B25A0039013E /* Main.storyboard in Resources */,
@@ -226,12 +241,13 @@
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,
 				E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */,
 				E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */,
-				E108F67F28E24A0C00766644 /* InventoryFilterViewController.swift in Sources */,
 				E17CA36728C780AC00F357B2 /* Cash.swift in Sources */,
+				E108F68228E4807400766644 /* InventoryFilterTableViewController.swift in Sources */,
 				E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */,
 				E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */,
 				E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */,
 				E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */,
+				E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */,
 				E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
