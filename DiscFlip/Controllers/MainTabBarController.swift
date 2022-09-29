@@ -105,7 +105,6 @@ extension MainTabBarController: DataDelegate {
     // Update the cash list with the provided data
     func updateCashList(newCashList: [Cash]) {
         cashList = newCashList
-        print("Updated cash")
     }
     
     // Retrieve the saved cash list

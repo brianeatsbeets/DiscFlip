@@ -12,7 +12,7 @@ import UIKit
 // MARK: - Protocols
 
 // This protocal allows conformers to remove cash
-protocol CashDelegate: AnyObject {
+protocol RemoveCashDelegate: AnyObject {
     func remove(cash: Cash)
 }
 
@@ -26,7 +26,7 @@ class CashTableViewController: UITableViewController {
     var cashList: [Cash]
     let cellReuseIdentifier = "cashCell"
     private lazy var dataSource = createDataSource()
-    weak var delegate: ReturnFromCash?
+    weak var delegate: SaveCashDelegate?
     
     // MARK: - Initializers
     
@@ -97,14 +97,14 @@ class CashTableViewController: UITableViewController {
         
         Cash.saveCash(cashList)
         
-        delegate?.saveData(newCashList: cashList)
+        delegate?.saveCash(newCashList: cashList)
     }
 }
 
 // MARK: - Extensions
 
 // This extention houses table view management functions using the diffable data source API and conforms to the CashDelegate protocol
-extension CashTableViewController: CashDelegate {
+extension CashTableViewController: RemoveCashDelegate {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
@@ -171,7 +171,7 @@ private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSo
     // MARK: - Class properties
     
     // Delegate to update data model
-    weak var delegate: CashDelegate?
+    weak var delegate: RemoveCashDelegate?
     
     // MARK: - Utility functions
     
