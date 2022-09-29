@@ -568,7 +568,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Cash" id="NuT-hK-eAm">
-                        <barButtonItem key="leftBarButtonItem" title="Dashboard" image="chevron.left" catalog="system" id="Ea5-6t-LbS">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" style="plain" id="Ea5-6t-LbS">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="UQG-bW-J2e" kind="unwind" identifier="dashboardCashUnwind" unwindAction="unwindToDashboardViewControllerWithSegue:" id="Fsi-la-d7G"/>

@@ -85,7 +85,8 @@ class AddEditCashTableViewController: UITableViewController {
     
     // Create and add a keyboard toolbar containing a +/- polarity toggle to amountTextField
     func setPolarityKeyboardToolbar() {
-        let bar = UIToolbar()
+        //let polarityToolbar = UIToolbar()
+        let polarityToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 35)) // Using initializer with frame silences some constraint warnings; toolbar is sized appropriately further down using .sizeToFit()
         let polarityButton = UIBarButtonItem(title: "+/-", style: .plain, target: self, action: #selector(polarityButtonTapped))
         
         polarityButton.tintColor = .label
@@ -93,10 +94,10 @@ class AddEditCashTableViewController: UITableViewController {
         
         let padding = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         
-        bar.items = [padding, polarityButton, padding]
-        bar.sizeToFit()
+        polarityToolbar.items = [padding, polarityButton, padding]
+        polarityToolbar.sizeToFit()
         
-        amountTextField.inputAccessoryView = bar
+        amountTextField.inputAccessoryView = polarityToolbar
     }
     
     // Hide keyboard toolbar to create a less-visually-jittery transition when immediately transitioning to memo text field keyboard

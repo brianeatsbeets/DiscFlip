@@ -184,7 +184,7 @@ extension InventoryTableViewController: InventoryFilterDelegate {
         
         // Update the table view with the filtered data
         currentFilterLabel.text = filter.rawValue
-        updateTableView(newInventory: filteredInventory, animated: false)
+        updateTableView(newInventory: filteredInventory, animated: true)
     }
 }
 
@@ -197,7 +197,7 @@ extension InventoryTableViewController: InventoryDelegate {
         // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
         let reuseIdentifier = cellReuseIdentifier
         
-        return DeletableRowTableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, disc in
+        let dataSource = DeletableRowTableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, disc in
             // Configure the cell
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
             
@@ -228,6 +228,11 @@ extension InventoryTableViewController: InventoryDelegate {
             
             return cell
         }
+        
+        // Set the animation style for inserting and removing rows
+        dataSource.defaultRowAnimation = .left
+        
+        return dataSource
     }
     
     // Apply a snapshot with updated disc data

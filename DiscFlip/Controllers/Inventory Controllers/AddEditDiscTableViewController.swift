@@ -161,11 +161,17 @@ class AddEditDiscTableViewController: UITableViewController {
         updateSaveButtonState()
         
         tableView.beginUpdates()
+        //tableView.reloadRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         if sender.isOn {
-            tableView.insertRows(at: [IndexPath(row: 1, section: 3)], with: .middle)
+            tableView.insertRows(at: [IndexPath(row: 1, section: 3)], with: .left)
+//            tableView.deleteRows(at: [IndexPath(row: 0, section: 4)], with: .left)
+//            tableView.insertRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         } else {
-            tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .middle)
+            tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .left)
+//            tableView.deleteRows(at: [IndexPath(row: 0, section: 4)], with: .left)
+//            tableView.insertRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         }
+        //tableView.reloadSections([4], with: .middle)
         tableView.endUpdates()
     }
     
