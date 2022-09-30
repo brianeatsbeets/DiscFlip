@@ -74,7 +74,6 @@ class AddEditDiscTableViewController: UITableViewController {
     
     // Fill in existing disc data (if any) and update view title
     func updateUI() {
-        
         if let disc = disc {
             nameTextField.text = disc.name
             plasticTextField.text = disc.plastic
@@ -153,26 +152,39 @@ class AddEditDiscTableViewController: UITableViewController {
     // Trigger enabled state updates for various UI elements
     @IBAction func soldDiscSwitchTapped(_ sender: UISwitch) {
         soldOnEbaySwitch.isEnabled = sender.isOn
+        
+        // Disable/enable text fields to prevent text entry in non-active fields
         estSellPriceTextField.isEnabled = !sender.isOn
         soldPriceTextField.isEnabled = sender.isOn
         
-        setSellSoldFieldsHiddenState(sold: sender.isOn)
-        
+        // Enable/disable save button based on re-appearing selling/sold price text field values
         updateSaveButtonState()
         
+        // Insert or remove sold on eBay row based on whether or not the disc was sold
         tableView.beginUpdates()
-        //tableView.reloadRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         if sender.isOn {
             tableView.insertRows(at: [IndexPath(row: 1, section: 3)], with: .left)
-//            tableView.deleteRows(at: [IndexPath(row: 0, section: 4)], with: .left)
-//            tableView.insertRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         } else {
             tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .left)
-//            tableView.deleteRows(at: [IndexPath(row: 0, section: 4)], with: .left)
-//            tableView.insertRows(at: [IndexPath(row: 0, section: 4)], with: .left)
         }
-        //tableView.reloadSections([4], with: .middle)
         tableView.endUpdates()
+        
+        updateEstSellSoldPriceCell(sender)
+    }
+    
+    // Show/hide the est sell/sold price labels and text fields while animating the cell to draw the user's attention
+    func updateEstSellSoldPriceCell(_ sender: UISwitch) {
+        estSellPriceCell.transform = CGAffineTransform(translationX: -estSellPriceCell.frame.width, y: 0)
+        estSellPriceCell.alpha = 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.estSellPriceCell.transform = .identity
+            
+            // Display selling/sold price fields based on whether or not the disc was sold
+            self.setSellSoldFieldsHiddenState(sold: sender.isOn)
+            
+            self.estSellPriceCell.alpha = 1
+        }
     }
     
     // Dismiss the keyboard when an outside tap is registered
@@ -189,6 +201,13 @@ class AddEditDiscTableViewController: UITableViewController {
             return soldDiscSwitch.isOn ? 2 : 1
         default:
             return 1
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 4 {
+            cell.clipsToBounds = false
+            cell.contentView.clipsToBounds = false
         }
     }
     
