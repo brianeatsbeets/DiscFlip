@@ -18,7 +18,7 @@ protocol InventoryDelegate: AnyObject {
 
 // This protocol allows conformers to filter the inventory
 protocol InventoryFilterDelegate: AnyObject {
-    func filterInventory(filter: InventoryFilter)
+    func filterInventory(filter: InventoryFilter, resetButtonTapped: Bool)
 }
 
 // MARK: - Main class
@@ -36,6 +36,7 @@ class InventoryTableViewController: UITableViewController {
     
     // IBOutlets
     @IBOutlet var filterButton: UIButton!
+    @IBOutlet var resetFilterButton: UIButton!
     @IBOutlet var currentFilterView: UIView!
     @IBOutlet var currentFilterLabel: UILabel!
     
@@ -75,6 +76,28 @@ class InventoryTableViewController: UITableViewController {
         currentFilterLabel.text = currentFilter.rawValue
         currentFilterView.layer.masksToBounds = true
         currentFilterView.layer.cornerRadius = 10
+        
+        resetFilterButton.layer.masksToBounds = true
+        resetFilterButton.layer.cornerRadius = 10
+        resetFilterButton.isHidden = true
+    }
+    
+    func hideResetButtonWithAnimation() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.resetFilterButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }) { (_) in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.resetFilterButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                self.resetFilterButton.isHidden = true
+            }) { (_) in
+                self.resetFilterButton.transform = .identity
+            }
+        }
+    }
+    
+    @IBAction func resetFilterButtonPressed() {
+        currentFilter = InventoryFilter.all
+        filterInventory(filter: currentFilter, resetButtonTapped: true)
     }
     
     // MARK: - Navigation
@@ -161,7 +184,7 @@ extension InventoryTableViewController: UIPopoverPresentationControllerDelegate 
 
 // This extension processes filter selections and filters the table view data appropriately
 extension InventoryTableViewController: InventoryFilterDelegate {
-    func filterInventory(filter: InventoryFilter) {
+    func filterInventory(filter: InventoryFilter, resetButtonTapped: Bool) {
         
         // Update this view controller's filter value to the one that was selected in the inventory filter view controller
         currentFilter = filter
@@ -185,6 +208,33 @@ extension InventoryTableViewController: InventoryFilterDelegate {
         // Update the table view with the filtered data
         currentFilterLabel.text = filter.rawValue
         updateTableView(newInventory: filteredInventory, animated: true)
+        
+//        UIView.animate(withDuration: 0.3) {
+//            self.currentFilterLabel.text = filter.rawValue
+//        }
+        
+//        UIView.transition(with: currentFilterLabel,
+//                          duration: 1.0,
+//                       options: .transitionCrossDissolve,
+//                    animations: { [weak self] in
+//            self?.currentFilterLabel.text = filter.rawValue
+//                 }, completion: nil)
+        
+//        let animation: CATransition = CATransition()
+//        animation.duration = 1.0
+//        animation.type = CATransitionType.fade
+//        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+//        animation.isRemovedOnCompletion = false
+//        currentFilterLabel.layer.add(animation, forKey: "changeTextTransition")
+//        currentFilterLabel.text = filter.rawValue
+        
+        // Animate the reset button disappearing only if the button was tapped
+        if resetButtonTapped {
+            hideResetButtonWithAnimation()
+        } else {
+            resetFilterButton.isHidden = (filter == .all)
+        }
+            
     }
 }
 

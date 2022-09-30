@@ -28,18 +28,41 @@ class MainTabBarController: UITabBarController {
     
     var inventory = [Disc]()
     var cashList = [Cash]()
+    var tags = [String]()
     
     // MARK: - View life cycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchData()
+        //fetchData()
+        loadDummyData()
         setDelegates()
         stylizeTabBarItems()
     }
     
     // MARK: - Utility functions
+    
+    func loadDummyData() {
+        inventory = [
+            Disc(name: "Aviar", plastic: "DX", purchasePrice: 10, estSellPrice: 12, wasSold: false, soldOnEbay: false),
+            Disc(name: "Mako3", plastic: "Champion", purchasePrice: 12, estSellPrice: 15, wasSold: false, soldOnEbay: false),
+            Disc(name: "Teebird", plastic: "Star", purchasePrice: 14, estSellPrice: 18, wasSold: false, soldOnEbay: false),
+            Disc(name: "Leopard3", plastic: "GStar", purchasePrice: 13, estSellPrice: 16, wasSold: false, soldOnEbay: false),
+            Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 16, estSellPrice: 22, wasSold: false, soldOnEbay: false),
+            Disc(name: "Savant", plastic: "Halo", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, soldOnEbay: false),
+            Disc(name: "Valkyrie", plastic: "Champion", purchasePrice: 16, estSellPrice: 20, wasSold: true, soldPrice: 23, soldOnEbay: false),
+            Disc(name: "Wraith", plastic: "Star Color Glow", purchasePrice: 18, estSellPrice: 22, wasSold: true, soldPrice: 25, soldOnEbay: true),
+            Disc(name: "Destroyer", plastic: "Pro", purchasePrice: 14, estSellPrice: 18, wasSold: true, soldPrice: 18, soldOnEbay: true),
+            Disc(name: "Katana", plastic: "GStar", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, soldOnEbay: true)
+        ]
+        
+        cashList = [
+            Cash(amount: 10, memo: "Mowed lawn"),
+            Cash(amount: 5, memo: "Sold game"),
+            Cash(amount: 20, memo: "Birthday cash"),
+        ]
+    }
     
     // Fetch the existing disc inventory and cash
     func fetchData() {
@@ -66,6 +89,15 @@ class MainTabBarController: UITabBarController {
         if let cashData = try? Data(contentsOf: archiveURL),
            let decodedCash = try? propertyListDecoder.decode([Cash].self, from: cashData) {
             cashList = decodedCash
+        }
+        
+        // Update archiveURL for tags path
+        archiveURL = documentsDirectory.appendingPathComponent("tags") . appendingPathExtension("plist")
+        
+        // Fetch and decode data
+        if let tagsData = try? Data(contentsOf: archiveURL),
+           let decodedTags = try? propertyListDecoder.decode([String].self, from: tagsData) {
+            tags = decodedTags
         }
     }
     
@@ -110,5 +142,15 @@ extension MainTabBarController: DataDelegate {
     // Retrieve the saved cash list
     func checkoutCashList() -> [Cash] {
         return cashList
+    }
+    
+    // Update the tags list with the provided data
+    func updateTags(newTags: [String]) {
+        tags = newTags
+    }
+    
+    // Retrieve the saved tags list
+    func checkoutTags() -> [String] {
+        return tags
     }
 }

@@ -98,7 +98,7 @@ class InventoryFilterTableViewController: UITableViewController {
             selectedFilter = .all
         }
         
-        delegate?.filterInventory(filter: selectedFilter)
+        delegate?.filterInventory(filter: selectedFilter, resetButtonTapped: false)
         dismiss(animated: true)
     }
 }
