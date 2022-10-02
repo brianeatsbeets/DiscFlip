@@ -18,12 +18,12 @@ protocol InventoryDelegate: AnyObject {
 
 // This protocol allows conformers to filter the inventory
 protocol InventoryFilterDelegate: AnyObject {
-    func filterInventory(filter: InventoryFilter, resetButtonTapped: Bool)
+    func filterInventory(filter: InventoryFilter)
 }
 
 // This protocol allows conformers to...
 protocol RemoveInventoryFilterDelegate: AnyObject {
-    func removeFilter(filter: InventoryFilter, filterView: UIView)
+    func removeFilter(filter: InventoryFilter)
 }
 
 // MARK: - Main class
@@ -38,13 +38,12 @@ class InventoryTableViewController: UITableViewController {
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
     var currentFilter = InventoryFilter.all
+    var activeFilters = [FilterLabelView]()
     
     // IBOutlets
     @IBOutlet var filterContainerView: UIView!
     @IBOutlet var filterButton: UIButton!
     @IBOutlet var filterLabelsStackView: UIStackView!
-    @IBOutlet var currentFilterView: UIView!
-    @IBOutlet var currentFilterLabel: UILabel!
     
     // MARK: - View life cycle functions
     
@@ -85,19 +84,10 @@ class InventoryTableViewController: UITableViewController {
             y: Int(filterContainerView.frame.origin.y),
             width: Int(filterContainerView.frame.width),
             height: 44)
-        
-        currentFilterLabel.text = currentFilter.rawValue
-        currentFilterView.layer.masksToBounds = true
-        currentFilterView.layer.cornerRadius = 10
     }
     
     func hideResetButtonWithAnimation() {
         
-    }
-    
-    @IBAction func resetFilterButtonPressed() {
-        currentFilter = InventoryFilter.all
-        filterInventory(filter: currentFilter, resetButtonTapped: true)
     }
     
     // MARK: - Navigation
@@ -184,14 +174,14 @@ extension InventoryTableViewController: UIPopoverPresentationControllerDelegate 
 
 // This extension processes filter selections and filters the table view data appropriately
 extension InventoryTableViewController: InventoryFilterDelegate {
-    func filterInventory(filter: InventoryFilter, resetButtonTapped: Bool) {
+    func filterInventory(filter: InventoryFilter) {
         
         // Update this view controller's filter value to the one that was selected in the inventory filter view controller
         currentFilter = filter
         
         var filteredInventory = inventory
         
-        // Filter inventory
+        // Get filtered inventory
         switch filter {
         case .unsold:
             filteredInventory = filteredInventory.filter { !$0.wasSold }
@@ -205,39 +195,63 @@ extension InventoryTableViewController: InventoryFilterDelegate {
             break
         }
         
-        //filterLabelsStackView.transform = CGAffineTransform(translationX: -500, y: 0)
+        //let filterSet = Set<FilterLabelView>()
         
-        // Increase the height of the filter container view to make room for the filter labels
-        // TODO: Decrease height when no filters are enabled
-        UIView.animate(withDuration: 0.3, animations: {
-            self.filterContainerView.frame = CGRect(
-                x: Int(self.filterContainerView.frame.origin.x),
-                y: Int(self.filterContainerView.frame.origin.y),
-                width: Int(self.filterContainerView.frame.width),
-                height: 85)
-        })
+        // Adjust filter container view height based on active filters
+        // Don't do anything if filter is .all and height is default (44)
+        if filter == .all && filterContainerView.frame.height != 44 {
+            // Decrease the height of the filter container view to make room for the filter labels
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterContainerView.frame = CGRect(
+                    x: Int(self.filterContainerView.frame.origin.x),
+                    y: Int(self.filterContainerView.frame.origin.y),
+                    width: Int(self.filterContainerView.frame.width),
+                    height: 44)
+            })
+        } else if filter != .all {
+            // Increase the height of the filter container view to make room for the filter labels
+            UIView.animate(withDuration: 0.3, animations: {
+                self.filterContainerView.frame = CGRect(
+                    x: Int(self.filterContainerView.frame.origin.x),
+                    y: Int(self.filterContainerView.frame.origin.y),
+                    width: Int(self.filterContainerView.frame.width),
+                    height: 85)
+            })
+        }
+        
+        if filter != .all {
+            activeFilters.append(FilterLabelView(filter: filter))
+            if let addedFilterView = activeFilters.last {
+                filterLabelsStackView.addArrangedSubview(addedFilterView)
+                print("Added filterLabelView to stack view!")
+                print(filterLabelsStackView.arrangedSubviews)
+            } else {
+                print("addedFilterView is nil")
+            }
+        }
         
         // Update the table view with the filtered data
         updateTableView(newInventory: filteredInventory, animated: true)
         
-        UIView.animate(withDuration: 0.25, animations: {
-            // TODO: find a more specified value/property than -500
-            self.filterLabelsStackView.transform = CGAffineTransform(translationX: -500, y: 0)
-        }) { (_) in
-            self.currentFilterLabel.text = self.currentFilter.rawValue
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.filterLabelsStackView.transform = .identity
-            })
-        }
+//        UIView.animate(withDuration: 0.25, animations: {
+//            // TODO: find a more specified value/property than -500
+//            self.filterLabelsStackView.transform = CGAffineTransform(translationX: -500, y: 0)
+//        }) { (_) in
+//            self.currentFilterLabel.text = self.currentFilter.rawValue
+//
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.filterLabelsStackView.transform = .identity
+//            })
+//        }
     }
 }
 
 // This extension...
 extension InventoryTableViewController: RemoveInventoryFilterDelegate {
-    func removeFilter(filter: InventoryFilter, filterView: UIView) {
-        // Remove filter and UIView
-        // Need to implement tag removeal eventually as well
+    func removeFilter(filter: InventoryFilter) {
+        // Remove filter
+        // Need to implement tag removal eventually as well
+        filterInventory(filter: .all)
     }
 }
 

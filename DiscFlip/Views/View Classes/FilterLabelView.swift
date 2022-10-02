@@ -26,6 +26,16 @@ class FilterLabelView: UIView {
     }
     
     @IBAction func removeFilterButtonPressed() {
-        delegate?.removeFilter(filter: filter, filterView: self)
+        delegate?.removeFilter(filter: filter)
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }) { (_) in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            }) { (_) in
+                self.removeFromSuperview()
+            }
+        }
     }
 }
