@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FilterLabelView" customModule="DiscFlip" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="63" height="22"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHq-BW-8Ss">
+                    <rect key="frame" x="5" y="1" width="35" height="21"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zu5-eu-vju">
+                    <rect key="frame" x="46" y="6" width="11" height="11"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <imageReference key="image" image="xmark" catalog="system" symbolScale="small"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="removeFilterButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="e6Y-bv-mgP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="kHq-BW-8Ss" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="1" id="AVA-NO-Ev6"/>
+                <constraint firstItem="kHq-BW-8Ss" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="HTa-OX-61B"/>
+                <constraint firstAttribute="bottom" secondItem="kHq-BW-8Ss" secondAttribute="bottom" id="HXa-zR-ldD"/>
+                <constraint firstItem="Zu5-eu-vju" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="Qo9-OF-uWy"/>
+                <constraint firstItem="Zu5-eu-vju" firstAttribute="leading" secondItem="kHq-BW-8Ss" secondAttribute="trailing" constant="6" id="Qzd-eO-KSs"/>
+                <constraint firstAttribute="bottom" secondItem="Zu5-eu-vju" secondAttribute="bottom" constant="5" id="bnm-7a-94s"/>
+                <constraint firstAttribute="trailing" secondItem="Zu5-eu-vju" secondAttribute="trailing" constant="6" id="hrN-6t-5Vx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="filterLabel" destination="kHq-BW-8Ss" id="uHs-Hy-UUs"/>
+                <outlet property="removeFilterButton" destination="Zu5-eu-vju" id="tv3-yd-VoB"/>
+            </connections>
+            <point key="canvasLocation" x="10" y="-11.374407582938389"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

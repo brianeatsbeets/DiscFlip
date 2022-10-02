@@ -10,6 +10,8 @@
 		E108F68228E4807400766644 /* InventoryFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */; };
 		E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */; };
 		E108F68628E49D5C00766644 /* InventoryFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */; };
+		E108F68A28E9ADC900766644 /* FilterLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E108F68928E9ADC800766644 /* FilterLabelView.xib */; };
+		E108F68D28E9B1D400766644 /* FilterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68C28E9B1D400766644 /* FilterLabelView.swift */; };
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
 		E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36428C3919800F357B2 /* MainTabBarController.swift */; };
 		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
@@ -30,6 +32,8 @@
 		E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewController.swift; sourceTree = "<group>"; };
 		E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewCell.swift; sourceTree = "<group>"; };
 		E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InventoryFilterTableViewCell.xib; sourceTree = "<group>"; };
+		E108F68928E9ADC800766644 /* FilterLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterLabelView.xib; sourceTree = "<group>"; };
+		E108F68C28E9B1D400766644 /* FilterLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLabelView.swift; sourceTree = "<group>"; };
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36428C3919800F357B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
@@ -62,9 +66,21 @@
 		E108F68828E4AFB300766644 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E108F68B28E9B18700766644 /* View Classes */,
 				E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */,
+				E108F68928E9ADC800766644 /* FilterLabelView.xib */,
+				E1DBEE4728DA593B00FBE91E /* Storyboards */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E108F68B28E9B18700766644 /* View Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */,
+				E108F68C28E9B1D400766644 /* FilterLabelView.swift */,
+			);
+			path = "View Classes";
 			sourceTree = "<group>";
 		};
 		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
@@ -82,7 +98,6 @@
 				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
 				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
 				E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */,
-				E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */,
 			);
 			path = "Inventory Controllers";
 			sourceTree = "<group>";
@@ -137,7 +152,6 @@
 				E1F3C46A28BCEDBA0039013E /* Models */,
 				E1DBEE4828DA594C00FBE91E /* Other */,
 				E1DBEE4628DA592F00FBE91E /* Delegates */,
-				E1DBEE4728DA593B00FBE91E /* Storyboards */,
 				E1F3C45F28B7B2600039013E /* Assets.xcassets */,
 				E1F3C46428B7B2600039013E /* Info.plist */,
 			);
@@ -223,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E108F68628E49D5C00766644 /* InventoryFilterTableViewCell.xib in Resources */,
+				E108F68A28E9ADC900766644 /* FilterLabelView.xib in Resources */,
 				E1F3C46328B7B2600039013E /* LaunchScreen.storyboard in Resources */,
 				E1F3C46028B7B2600039013E /* Assets.xcassets in Resources */,
 				E1F3C45E28B7B25A0039013E /* Main.storyboard in Resources */,
@@ -249,6 +264,7 @@
 				E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */,
 				E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */,
 				E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */,
+				E108F68D28E9B1D400766644 /* FilterLabelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

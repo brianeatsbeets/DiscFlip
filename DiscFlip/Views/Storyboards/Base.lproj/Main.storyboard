@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -285,7 +284,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="BCK-SU-WoU" userLabel="Filter Container View">
+                        <view key="tableHeaderView" clipsSubviews="YES" contentMode="scaleToFill" id="BCK-SU-WoU" userLabel="Filter Container View">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -305,8 +304,8 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Icons Stack View">
-                                    <rect key="frame" x="163.5" y="45" width="87.5" height="22"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Labels Stack View">
+                                    <rect key="frame" x="336.5" y="45" width="57.5" height="22"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-yg-NRp">
                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="22"/>
@@ -327,31 +326,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="4g3-GF-YES" secondAttribute="trailing" constant="10" id="pbs-HU-k6a"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTH-NK-Wxe">
-                                            <rect key="frame" x="65.5" y="0.0" width="22" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="22" id="Qqc-uh-jc3"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled">
-                                                <imageReference key="image" image="xmark" catalog="system" symbolScale="small"/>
-                                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </buttonConfiguration>
-                                            <connections>
-                                                <action selector="resetFilterButtonPressed" destination="Va6-Ml-tsV" eventType="touchUpInside" id="HPt-O7-KMX"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="S7n-4U-eFQ" secondAttribute="trailing" constant="20" id="6wf-kh-Xan"/>
                                 <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>
                                 <constraint firstItem="S7n-4U-eFQ" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="pG5-2j-5P9"/>
-                                <constraint firstItem="S7n-4U-eFQ" firstAttribute="centerX" secondItem="BCK-SU-WoU" secondAttribute="centerX" id="xUX-O3-rOa"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -385,7 +369,8 @@
                         <outlet property="currentFilterLabel" destination="4g3-GF-YES" id="UjN-tY-GYw"/>
                         <outlet property="currentFilterView" destination="lW7-yg-NRp" id="duW-GL-9FE"/>
                         <outlet property="filterButton" destination="fcg-jf-Dji" id="fej-pl-9s6"/>
-                        <outlet property="resetFilterButton" destination="PTH-NK-Wxe" id="5UO-up-ZMZ"/>
+                        <outlet property="filterContainerView" destination="BCK-SU-WoU" id="Naq-aH-O4o"/>
+                        <outlet property="filterLabelsStackView" destination="S7n-4U-eFQ" id="6ZD-ZI-FC0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAc-hq-kQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -997,6 +982,5 @@
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
         <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

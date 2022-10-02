@@ -21,6 +21,11 @@ protocol InventoryFilterDelegate: AnyObject {
     func filterInventory(filter: InventoryFilter, resetButtonTapped: Bool)
 }
 
+// This protocol allows conformers to...
+protocol RemoveInventoryFilterDelegate: AnyObject {
+    func removeFilter(filter: InventoryFilter, filterView: UIView)
+}
+
 // MARK: - Main class
 
 // This class/table view controller displays the historic inventory of discs that have been bought and sold
@@ -35,8 +40,9 @@ class InventoryTableViewController: UITableViewController {
     var currentFilter = InventoryFilter.all
     
     // IBOutlets
+    @IBOutlet var filterContainerView: UIView!
     @IBOutlet var filterButton: UIButton!
-    @IBOutlet var resetFilterButton: UIButton!
+    @IBOutlet var filterLabelsStackView: UIStackView!
     @IBOutlet var currentFilterView: UIView!
     @IBOutlet var currentFilterLabel: UILabel!
     
@@ -73,26 +79,20 @@ class InventoryTableViewController: UITableViewController {
     
     // Set initial label text and round the corners
     func initializeFilterViews() {
+        
+        filterContainerView.frame = CGRect(
+            x: Int(filterContainerView.frame.origin.x),
+            y: Int(filterContainerView.frame.origin.y),
+            width: Int(filterContainerView.frame.width),
+            height: 44)
+        
         currentFilterLabel.text = currentFilter.rawValue
         currentFilterView.layer.masksToBounds = true
         currentFilterView.layer.cornerRadius = 10
-        
-        resetFilterButton.layer.masksToBounds = true
-        resetFilterButton.layer.cornerRadius = 10
-        resetFilterButton.isHidden = true
     }
     
     func hideResetButtonWithAnimation() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.resetFilterButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        }) { (_) in
-            UIView.animate(withDuration: 0.2, animations: {
-                self.resetFilterButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                self.resetFilterButton.isHidden = true
-            }) { (_) in
-                self.resetFilterButton.transform = .identity
-            }
-        }
+        
     }
     
     @IBAction func resetFilterButtonPressed() {
@@ -205,36 +205,39 @@ extension InventoryTableViewController: InventoryFilterDelegate {
             break
         }
         
+        //filterLabelsStackView.transform = CGAffineTransform(translationX: -500, y: 0)
+        
+        // Increase the height of the filter container view to make room for the filter labels
+        // TODO: Decrease height when no filters are enabled
+        UIView.animate(withDuration: 0.3, animations: {
+            self.filterContainerView.frame = CGRect(
+                x: Int(self.filterContainerView.frame.origin.x),
+                y: Int(self.filterContainerView.frame.origin.y),
+                width: Int(self.filterContainerView.frame.width),
+                height: 85)
+        })
+        
         // Update the table view with the filtered data
-        currentFilterLabel.text = filter.rawValue
         updateTableView(newInventory: filteredInventory, animated: true)
         
-//        UIView.animate(withDuration: 0.3) {
-//            self.currentFilterLabel.text = filter.rawValue
-//        }
-        
-//        UIView.transition(with: currentFilterLabel,
-//                          duration: 1.0,
-//                       options: .transitionCrossDissolve,
-//                    animations: { [weak self] in
-//            self?.currentFilterLabel.text = filter.rawValue
-//                 }, completion: nil)
-        
-//        let animation: CATransition = CATransition()
-//        animation.duration = 1.0
-//        animation.type = CATransitionType.fade
-//        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-//        animation.isRemovedOnCompletion = false
-//        currentFilterLabel.layer.add(animation, forKey: "changeTextTransition")
-//        currentFilterLabel.text = filter.rawValue
-        
-        // Animate the reset button disappearing only if the button was tapped
-        if resetButtonTapped {
-            hideResetButtonWithAnimation()
-        } else {
-            resetFilterButton.isHidden = (filter == .all)
-        }
+        UIView.animate(withDuration: 0.25, animations: {
+            // TODO: find a more specified value/property than -500
+            self.filterLabelsStackView.transform = CGAffineTransform(translationX: -500, y: 0)
+        }) { (_) in
+            self.currentFilterLabel.text = self.currentFilter.rawValue
             
+            UIView.animate(withDuration: 0.2, animations: {
+                self.filterLabelsStackView.transform = .identity
+            })
+        }
+    }
+}
+
+// This extension...
+extension InventoryTableViewController: RemoveInventoryFilterDelegate {
+    func removeFilter(filter: InventoryFilter, filterView: UIView) {
+        // Remove filter and UIView
+        // Need to implement tag removeal eventually as well
     }
 }
 
