@@ -76,7 +76,7 @@ class MainTabBarController: UITabBarController {
         // Ser archive URL to inventory path
         var archiveURL = documentsDirectory.appendingPathComponent("inventory") . appendingPathExtension("plist")
         
-        // Fetch and decode inventorydata
+        // Fetch and decode inventory data
         if let inventoryData = try? Data(contentsOf: archiveURL),
            let decodedInventory = try? propertyListDecoder.decode([Disc].self, from: inventoryData) {
             inventory = decodedInventory
@@ -85,7 +85,7 @@ class MainTabBarController: UITabBarController {
         // Update archiveURL for cash path
         archiveURL = documentsDirectory.appendingPathComponent("cashList") . appendingPathExtension("plist")
         
-        // Fetch and decode data
+        // Fetch and decode cash data
         if let cashData = try? Data(contentsOf: archiveURL),
            let decodedCash = try? propertyListDecoder.decode([Cash].self, from: cashData) {
             cashList = decodedCash
@@ -94,7 +94,7 @@ class MainTabBarController: UITabBarController {
         // Update archiveURL for tags path
         archiveURL = documentsDirectory.appendingPathComponent("tags") . appendingPathExtension("plist")
         
-        // Fetch and decode data
+        // Fetch and decode tag data
         if let tagsData = try? Data(contentsOf: archiveURL),
            let decodedTags = try? propertyListDecoder.decode([String].self, from: tagsData) {
             tags = decodedTags
