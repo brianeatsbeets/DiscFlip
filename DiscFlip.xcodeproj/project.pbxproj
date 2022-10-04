@@ -15,6 +15,7 @@
 		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
 		E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36828C786F700F357B2 /* CashTableViewController.swift */; };
 		E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */; };
+		E1A9F35528EC94C3000E2F90 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A9F35428EC94C3000E2F90 /* FilterView.swift */; };
 		E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEF23328CF91AA006CE66C /* Utility.swift */; };
 		E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45628B7B25A0039013E /* AppDelegate.swift */; };
 		E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F3C45828B7B25A0039013E /* SceneDelegate.swift */; };
@@ -35,6 +36,7 @@
 		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
 		E17CA36828C786F700F357B2 /* CashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCashTableViewController.swift; sourceTree = "<group>"; };
+		E1A9F35428EC94C3000E2F90 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		E1AEF23328CF91AA006CE66C /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E1F3C45328B7B25A0039013E /* DiscFlip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscFlip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F3C45628B7B25A0039013E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,19 +64,20 @@
 		E108F68828E4AFB300766644 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E108F68B28E9B18700766644 /* View Classes */,
+				E108F68B28E9B18700766644 /* View Models */,
 				E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */,
 				E1DBEE4728DA593B00FBE91E /* Storyboards */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E108F68B28E9B18700766644 /* View Classes */ = {
+		E108F68B28E9B18700766644 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
 				E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */,
+				E1A9F35428EC94C3000E2F90 /* FilterView.swift */,
 			);
-			path = "View Classes";
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A9F35528EC94C3000E2F90 /* FilterView.swift in Sources */,
 				E1F3C46F28BCF1C30039013E /* Disc.swift in Sources */,
 				E1F3C47628BCFC840039013E /* InventoryTableViewController.swift in Sources */,
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,

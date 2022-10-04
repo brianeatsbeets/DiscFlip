@@ -5,6 +5,8 @@
 //  Created by Aguirre, Brian P. on 9/28/22.
 //
 
+// TODO: Maybe use prototype cell instead of xib
+
 // MARK: - Imported libraries
 
 import UIKit
@@ -56,15 +58,18 @@ class InventoryFilterTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    
+    // Define the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
+    // Define the number of rows in each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
+    // Create the cell for a given row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InventoryFilterCell", for: indexPath) as! InventoryFilterTableViewCell
         
@@ -84,6 +89,31 @@ class InventoryFilterTableViewController: UITableViewController {
         return cell
     }
     
+    // Determine if the cell should be able to be selected
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        // Only allow cell selection if it isn't already selected
+        if let cell = tableView.cellForRow(at: indexPath), cell.isSelected {
+            return nil
+        }
+        else {
+            return indexPath
+        }
+    }
+    
+    // Determine if the cell should be able to be highlighted
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        
+        // Only allow cell to be highlighted if it isn't already selected
+        if let cell = tableView.cellForRow(at: indexPath), cell.isSelected {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    // Define what to do when a cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 1:

@@ -5,6 +5,8 @@
 //  Created by Aguirre, Brian P. on 8/29/22.
 //
 
+// TODO: Create a flowchart for the filtering workflows
+
 // MARK: - Imported libraries
 
 import UIKit
@@ -19,6 +21,11 @@ protocol InventoryDelegate: AnyObject {
 // This protocol allows conformers to filter the inventory
 protocol InventoryFilterDelegate: AnyObject {
     func filterInventory(filter: InventoryFilter)
+}
+
+// This protocol allows conformers to remove inventory filters
+protocol RemoveInventoryFilterDelegate: AnyObject {
+    func removeFilter(_ filterView: FilterView?)
 }
 
 // MARK: - Main class
@@ -37,8 +44,8 @@ class InventoryTableViewController: UITableViewController {
     
     var activeStandardFilter = InventoryFilter.all
     var activeTagFilters = [String]()
-    var activeStandardFilterView: UIView?
-    var activeTagFilterViews = [UIView]()
+    var activeStandardFilterView: FilterView?
+    var activeTagFilterViews = [FilterView]()
     
     // IBOutlets
     @IBOutlet var filterContainerView: UIView!
@@ -80,8 +87,8 @@ class InventoryTableViewController: UITableViewController {
         print("active standard filter: \(activeStandardFilter.rawValue)")
         print("active tag filters: \(activeTagFilters)")
         
-        // Don't do anything if no filters are in place and height is default (44)
-        if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height != 44 {
+        // Check if there are no active filters (standard or tag) and that the filter container view has the taller height
+        if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height == 85 {
             print("Decreasing filter container view height")
             // Decrease the height of the filter container view to make room for the filter labels
             UIView.animate(withDuration: 0.3, animations: {
@@ -91,7 +98,9 @@ class InventoryTableViewController: UITableViewController {
                     width: Int(self.filterContainerView.frame.width),
                     height: 44)
             })
-        } else if activeStandardFilter != .all || !activeTagFilters.isEmpty {
+            
+            // Check if there are active filters (standard or tag) and that the filter container view has the shorter height
+        } else if (activeStandardFilter != .all || !activeTagFilters.isEmpty) && filterContainerView.frame.height == 44 {
             // Increase the height of the filter container view to make room for the filter labels
             print("Increasing filter container view height")
             UIView.animate(withDuration: 0.3, animations: {
@@ -104,39 +113,46 @@ class InventoryTableViewController: UITableViewController {
         }
     }
     
-    // Remove the selected filter from the view and data structures
-    @objc func removeFilterButtonPressed(_ sender: UIButton) {
+    // Create a filter view for either a standard or tag filter
+    func createFilterLabel(standardFilter: InventoryFilter? = nil, tagFilter: String? = nil) {
         
-        guard let filterView = sender.superview else { print("Nil"); return }
-        
-        // Reset the active standard view to .all if we're removing a standard filter
-        if filterView == self.activeStandardFilterView {
-            self.activeStandardFilter = .all
-        } else if let index = self.activeTagFilterViews.firstIndex(of: filterView) {
-            
-            // Otherwise remove the tag filter and view
-            self.activeTagFilterViews.remove(at: index)
-            self.activeTagFilters.remove(at: index)
+        // Check to make sure we aren't trying to create a filter with invalid paramater combinations (not a concern for the user; moreso a safeguard against incorrect function calls)
+        guard (standardFilter != nil || tagFilter != nil) else {
+            print("Attempted to create a filter with nil parameters")
+            return
+        }
+        guard !(standardFilter != nil && tagFilter != nil) else {
+            print("Attempted to create a filter with both standard and tag parameters")
+            return
         }
         
-        // Animate filter removal
-        UIView.animate(withDuration: 0.15, animations: {
-            filterView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }) { (_) in
+        // Initialize the new filter view as either a standard filter or a tag filter
+        let newFilterView = standardFilter != nil ? FilterView(standardFilter: standardFilter!) : FilterView(tagFilter: tagFilter!)
+        newFilterView.delegate = self
+        
+        // Check if we're creating a tag filter
+        if let tagFilter = tagFilter {
             
-            // Update the table view during the animation
-            self.filterInventory(filter: self.activeStandardFilter)
+            // Add the tag and its view to the respective arrays and add the view to the filter stack view
+            activeTagFilters.append(tagFilter)
+            activeTagFilterViews.append(newFilterView)
+            filterLabelsStackView.addArrangedSubview(newFilterView)
+        } else {
             
-            UIView.animate(withDuration: 0.17, animations: {
-                    filterView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            }) { (_) in
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    filterView.isHidden = true
-                }) { (_) in
-                    filterView.removeFromSuperview()
-                }
+            // Remove existing standard filter view
+            if let filterView = activeStandardFilterView {
+                filterView.removeFromSuperview()
             }
+            
+            // Add the new standard filter view to the filter stack view
+            activeStandardFilterView = newFilterView
+            filterLabelsStackView.insertArrangedSubview(newFilterView, at: 0)
+        }
+        
+        // Animate the new filter addition
+        newFilterView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        UIView.animate(withDuration: 0.2) {
+            newFilterView.transform = .identity
         }
     }
     
@@ -233,6 +249,26 @@ extension InventoryTableViewController: InventoryFilterDelegate {
     func filterInventory(filter: InventoryFilter) {
         
         var filteredInventory = inventory
+        let oldStandardFilter = activeStandardFilter
+        
+        // Set the active standard filter to the new filter
+        activeStandardFilter = filter
+        
+        // Check if the new standard filter is different from the old standard filter in order to assess if we should modify the active standard filter view and filter the data
+        // This if-block will be skipped when calling filterInventory from removeFilter or when creating a tag filter
+        if filter != oldStandardFilter {
+            
+            // If the new active standard filter isn't .all, create a new active standard filter view
+            // Otherwise, remove the active standard filter view
+            if filter != .all {
+                createFilterLabel(standardFilter: filter)
+            } else {
+                removeFilter(activeStandardFilterView)
+                
+                // filterInventory will be called again in removeFilter, so we don't need to continue with this current call
+                return
+            }
+        }
         
         // Get inventory filtered on the standard filter
         switch filter {
@@ -253,14 +289,50 @@ extension InventoryTableViewController: InventoryFilterDelegate {
             filteredInventory = filteredInventory.filter { $0.tags.firstIndex(of: tagFilter) != nil }
         }
         
-        // Create a new filter label if the filter is new and not "All Discs"
-        if filter != .all && filter != activeStandardFilter {
-            createFilterLabel(standardFilter: filter)
-        }
-        
-        activeStandardFilter = filter
         toggleFilterContainerViewHeight()
         updateTableView(newInventory: filteredInventory, animated: true)
+    }
+}
+
+
+extension InventoryTableViewController: RemoveInventoryFilterDelegate {
+    // Remove the selected filter from the view and data structures
+    func removeFilter(_ filterView: FilterView?) {
+        
+        // Make sure we have a view to remove; otherwise, just return
+        guard let filterView = filterView else {
+            print("Attempted to remove nil filter view; continuing without removing anything")
+            return
+        }
+        
+        // Check if the passed filter matches the active standard filter view
+        // If not, check if it matches a tag filter view
+        if filterView == self.activeStandardFilterView {
+            self.activeStandardFilter = .all
+        } else if let index = self.activeTagFilterViews.firstIndex(of: filterView) {
+            
+            // Otherwise remove the tag filter and view
+            self.activeTagFilterViews.remove(at: index)
+            self.activeTagFilters.remove(at: index)
+        }
+        
+        // Animate filter removal
+        UIView.animate(withDuration: 0.15, animations: {
+            filterView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }) { (_) in
+            self.filterInventory(filter: self.activeStandardFilter)
+            
+            UIView.animate(withDuration: 0.17, animations: {
+                filterView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            }) { (_) in
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    filterView.isHidden = true
+                }) { (_) in
+                    filterView.removeFromSuperview()
+                }
+            }
+        }
     }
 }
 
@@ -333,83 +405,6 @@ extension InventoryTableViewController: InventoryDelegate {
         delegate?.updateInventory(newInventory: inventory)
         
         Disc.saveInventory(inventory)
-    }
-}
-
-// This extension is a container for the filter label creation function (to keep the main class cleaner)
-extension InventoryTableViewController {
-    
-    // Create a filter view for either a standard or tag filter
-    func createFilterLabel(standardFilter: InventoryFilter? = nil, tagFilter: String? = nil) {
-        
-        // Check to make sure we aren't trying to create a filter with invalid paramater combinations (not a concern for the user; moreso a safeguard against incorrect function calls)
-        guard (standardFilter != nil || tagFilter != nil) else {
-            print("Attempted to create a filter with nil parameters")
-            return
-        }
-        guard !(standardFilter != nil && tagFilter != nil) else {
-            print("Attempted to create a filter with both standard and tag parameters")
-            return
-        }
-        
-        // Create filter view
-        let newFilter = UIView()
-        newFilter.backgroundColor = (standardFilter != nil ? .white : UIColor(red: 161/255, green: 1, blue: 139/255, alpha: 1))
-        newFilter.layer.cornerRadius = 10
-        newFilter.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Create filter label
-        let newFilterLabel = UILabel()
-        newFilterLabel.translatesAutoresizingMaskIntoConstraints = false
-        newFilterLabel.attributedText = NSAttributedString(string: (standardFilter != nil ? standardFilter?.rawValue : tagFilter)!, attributes: [NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 14) ?? .preferredFont(forTextStyle: .body)])
-        
-        // Create remove filter button
-        let newFilterButton = UIButton(type: .system)
-        newFilterButton.translatesAutoresizingMaskIntoConstraints = false
-        newFilterButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        newFilterButton.tintColor = .black
-        newFilterButton.addTarget(self, action: #selector(removeFilterButtonPressed(_:)), for: .touchUpInside)
-        
-        // Add label and button to filter view
-        newFilter.addSubview(newFilterLabel)
-        newFilter.addSubview(newFilterButton)
-        
-        // Filter label constraints
-        newFilterLabel.topAnchor.constraint(equalTo: newFilter.topAnchor, constant: 2).isActive = true
-        newFilterLabel.bottomAnchor.constraint(equalTo: newFilter.bottomAnchor, constant: -2).isActive = true
-        newFilterLabel.leftAnchor.constraint(equalTo: newFilter.leftAnchor, constant: 10).isActive = true
-        newFilterLabel.rightAnchor.constraint(equalTo: newFilterButton.leftAnchor, constant: -5).isActive = true
-        
-        // Filter button constraints
-        newFilterButton.widthAnchor.constraint(equalToConstant: 11).isActive = true
-        newFilterButton.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        newFilterButton.rightAnchor.constraint(equalTo: newFilter.rightAnchor, constant: -10).isActive = true
-        newFilterButton.centerYAnchor.constraint(equalTo: newFilter.centerYAnchor).isActive = true
-        
-        // Check if we're creating a tag filter
-        if let tagFilter = tagFilter {
-            
-            // Add the tag and its view to the respective arrays and add the view to the filter stack view
-            activeTagFilters.append(tagFilter)
-            activeTagFilterViews.append(newFilter)
-            filterLabelsStackView.addArrangedSubview(newFilter)
-        } else {
-            
-            // Remove existing standard filter view
-            if let filterView = activeStandardFilterView {
-                filterView.removeFromSuperview()
-            }
-            
-            // Add the new standard filter view to the filter stack view
-            activeStandardFilterView = newFilter
-            filterLabelsStackView.insertArrangedSubview(newFilter, at: 0)
-        }
-        
-        // Animate the new filter addition
-        newFilter.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        UIView.animate(withDuration: 0.2) {
-            newFilter.transform = .identity
-        }
     }
 }
 

@@ -304,18 +304,33 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="22" distribution="equalSpacing" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Labels Stack View">
-                                    <rect key="frame" x="20" y="45" width="100" height="22"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </stackView>
+                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="0gD-zn-1gK">
+                                    <rect key="frame" x="20" y="45" width="374" height="30"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" distribution="equalSpacing" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Labels Stack View">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="S7n-4U-eFQ" firstAttribute="leading" secondItem="0gD-zn-1gK" secondAttribute="leading" id="GvQ-LY-o0J"/>
+                                        <constraint firstAttribute="trailing" secondItem="S7n-4U-eFQ" secondAttribute="trailing" id="N9r-go-EOr"/>
+                                        <constraint firstAttribute="height" constant="30" id="VK7-Hb-Fcf"/>
+                                        <constraint firstItem="S7n-4U-eFQ" firstAttribute="top" secondItem="0gD-zn-1gK" secondAttribute="top" id="Z4y-3M-BBk"/>
+                                        <constraint firstAttribute="bottom" secondItem="S7n-4U-eFQ" secondAttribute="bottom" constant="8" id="cbY-6b-urN"/>
+                                    </constraints>
+                                    <viewLayoutGuide key="contentLayoutGuide" id="1rc-kD-XxZ"/>
+                                    <viewLayoutGuide key="frameLayoutGuide" id="1mp-k3-zwV"/>
+                                </scrollView>
                             </subviews>
                             <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="0gD-zn-1gK" secondAttribute="trailing" constant="20" symbolic="YES" id="G4f-a7-NRM"/>
                                 <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
+                                <constraint firstItem="0gD-zn-1gK" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="PH9-Hf-vFD"/>
+                                <constraint firstItem="0gD-zn-1gK" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" symbolic="YES" id="dJj-Rh-PgA"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
-                                <constraint firstItem="S7n-4U-eFQ" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="ofv-ao-KRG"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>
-                                <constraint firstItem="S7n-4U-eFQ" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="pG5-2j-5P9"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -958,7 +973,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="L1F-FP-pKW"/>
-        <segue reference="RdZ-7T-7Vb"/>
+        <segue reference="qte-hQ-g0u"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_more_horiz_white_36pt" width="36" height="36"/>
