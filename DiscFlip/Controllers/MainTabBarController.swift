@@ -17,6 +17,8 @@ protocol DataDelegate: AnyObject {
     func checkoutInventory() -> [Disc]
     func updateCashList(newCashList: [Cash])
     func checkoutCashList() -> [Cash]
+    func updateTags(newTagsList: [String])
+    func checkoutTags() -> [String]
 }
 
 // MARK: - Main class
@@ -35,8 +37,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //fetchData()
-        loadDummyData()
+        //fetchData() // Uncomment to use real data
+        loadDummyData() // Uncomment to use dummy data
         setDelegates()
         stylizeTabBarItems()
     }
@@ -61,6 +63,12 @@ class MainTabBarController: UITabBarController {
             Cash(amount: 10, memo: "Mowed lawn"),
             Cash(amount: 5, memo: "Sold game"),
             Cash(amount: 20, memo: "Birthday cash"),
+        ]
+        
+        tags = [
+            "eBay",
+            "Craigslist",
+            "Unsure about selling"
         ]
     }
     
@@ -110,6 +118,10 @@ class MainTabBarController: UITabBarController {
         let inventoryNavigationController = viewControllers?[1] as! UINavigationController
         let inventoryTableViewController = inventoryNavigationController.viewControllers.first as! InventoryTableViewController
         inventoryTableViewController.delegate = self
+        
+        let tagsNavigationController = viewControllers?[2] as! UINavigationController
+        let tagsTableViewController = tagsNavigationController.viewControllers.first as! TagsTableViewController
+        tagsTableViewController.delegate = self
     }
     
     // Set tab bar item UI elements
@@ -145,8 +157,8 @@ extension MainTabBarController: DataDelegate {
     }
     
     // Update the tags list with the provided data
-    func updateTags(newTags: [String]) {
-        tags = newTags
+    func updateTags(newTagsList: [String]) {
+        tags = newTagsList
     }
     
     // Retrieve the saved tags list

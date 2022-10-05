@@ -10,6 +10,7 @@
 		E108F68228E4807400766644 /* InventoryFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */; };
 		E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */; };
 		E108F68628E49D5C00766644 /* InventoryFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */; };
+		E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168822228EE27D00006F71D /* TagsTableViewController.swift */; };
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
 		E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36428C3919800F357B2 /* MainTabBarController.swift */; };
 		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
@@ -31,6 +32,7 @@
 		E108F68128E4807400766644 /* InventoryFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewController.swift; sourceTree = "<group>"; };
 		E108F68328E49D5C00766644 /* InventoryFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryFilterTableViewCell.swift; sourceTree = "<group>"; };
 		E108F68428E49D5C00766644 /* InventoryFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InventoryFilterTableViewCell.xib; sourceTree = "<group>"; };
+		E168822228EE27D00006F71D /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36428C3919800F357B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 				E1A9F35428EC94C3000E2F90 /* FilterView.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E168822428EE27F10006F71D /* Tag Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E168822228EE27D00006F71D /* TagsTableViewController.swift */,
+			);
+			path = "Tag Controllers";
 			sourceTree = "<group>";
 		};
 		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
@@ -171,6 +181,7 @@
 				E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */,
 				E17CA36C28C79DDD00F357B2 /* Cash Controllers */,
 				E17CA36E28C79DED00F357B2 /* Inventory Controllers */,
+				E168822428EE27F10006F71D /* Tag Controllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +268,7 @@
 				E108F68228E4807400766644 /* InventoryFilterTableViewController.swift in Sources */,
 				E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */,
 				E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */,
+				E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */,
 				E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */,
 				E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */,
 				E108F68528E49D5C00766644 /* InventoryFilterTableViewCell.swift in Sources */,

@@ -160,7 +160,6 @@ class FilterPillView: UIView {
     
     // Notify the filter container view that the remove filter button was pressed
     @objc func removeFilterButtonPressed(_ sender: UIButton) {
-        print("remove filter button pressed")
         delegate?.removeButtonPressed()
     }
     

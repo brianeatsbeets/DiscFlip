@@ -255,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dc3-gi-dsb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684.057971014493" y="-226.33928571428569"/>
+            <point key="canvasLocation" x="2667" y="-226"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="Lex-pa-Y0v">
@@ -270,6 +270,7 @@
                     <connections>
                         <segue destination="9Yg-1a-Tpv" kind="relationship" relationship="viewControllers" id="v6F-cF-QXb"/>
                         <segue destination="GET-Vn-1Ig" kind="relationship" relationship="viewControllers" id="Dqe-8a-d6t"/>
+                        <segue destination="rV0-QD-dBw" kind="relationship" relationship="viewControllers" id="9zT-Dq-AL2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FlR-MF-hEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -372,7 +373,63 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAc-hq-kQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684.057971014493" y="462.72321428571428"/>
+            <point key="canvasLocation" x="2667" y="463"/>
+        </scene>
+        <!--Tags-->
+        <scene sceneID="SzZ-BZ-TVa">
+            <objects>
+                <tableViewController id="CZp-DT-mTt" customClass="TagsTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="aIn-b9-drt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gCc-Ss-2hJ">
+                                <rect key="frame" x="0.0" y="50" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gCc-Ss-2hJ" id="XZr-bn-SIv">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CZp-DT-mTt" id="tCI-1R-NaN"/>
+                            <outlet property="delegate" destination="CZp-DT-mTt" id="Vqg-1r-Wvb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Tags" id="tZY-ht-Xiu"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nh8-t5-mML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2667" y="1871"/>
+        </scene>
+        <!--Tags-->
+        <scene sceneID="8qg-yX-F5k">
+            <objects>
+                <navigationController id="rV0-QD-dBw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tags" image="tag.fill" catalog="system" id="EY9-x3-ecn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ThK-VX-wfw">
+                        <rect key="frame" x="0.0" y="48" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="23"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="33"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CZp-DT-mTt" kind="relationship" relationship="rootViewController" id="nZX-k6-XLN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btE-3J-nx2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1774" y="1871"/>
         </scene>
         <!--Inventory Filter Table View Controller-->
         <scene sceneID="Ku2-LS-0wr">
@@ -396,7 +453,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIh-OS-oac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2682.608695652174" y="1174.5535714285713"/>
+            <point key="canvasLocation" x="2667" y="1171"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uDD-kC-JQS">
@@ -979,5 +1036,6 @@
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
         <image name="rectangle.split.2x2.fill" catalog="system" width="128" height="93"/>
+        <image name="tag.fill" catalog="system" width="128" height="118"/>
     </resources>
 </document>
