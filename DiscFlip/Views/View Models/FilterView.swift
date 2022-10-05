@@ -33,6 +33,7 @@ class FilterContainerView: UIView {
     init(standardFilter: InventoryFilter) {
         super.init(frame: CGRect())
         self.standardFilter = standardFilter
+        self.newFilterPillView = FilterPillView(standardFilter: standardFilter)
         createView()
     }
     
@@ -40,6 +41,7 @@ class FilterContainerView: UIView {
     init(tagFilter: String) {
         super.init(frame: CGRect())
         self.tagFilter = tagFilter
+        self.newFilterPillView = FilterPillView(tagFilter: tagFilter)
         createView()
     }
     

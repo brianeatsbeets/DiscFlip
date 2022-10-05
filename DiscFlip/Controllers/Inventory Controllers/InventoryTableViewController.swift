@@ -114,7 +114,7 @@ class InventoryTableViewController: UITableViewController {
     }
     
     // Create a filter view for either a standard or tag filter
-    func createFilterLabel(standardFilter: InventoryFilter? = nil, tagFilter: String? = nil) {
+    func createFilterView(standardFilter: InventoryFilter? = nil, tagFilter: String? = nil) {
         
         // Check to make sure we aren't trying to create a filter with invalid paramater combinations (not a concern for the user; moreso a safeguard against incorrect function calls)
         guard (standardFilter != nil || tagFilter != nil) else {
@@ -158,7 +158,7 @@ class InventoryTableViewController: UITableViewController {
     
     // This is a temporary function/IBAction to test out filtering with tags
     @IBAction func createTag(_ sender: Any) {
-        createFilterLabel(tagFilter: "Tag")
+        createFilterView(tagFilter: "Tag")
         filterInventory(filter: activeStandardFilter)
     }
     
@@ -261,7 +261,7 @@ extension InventoryTableViewController: InventoryFilterDelegate {
             // If the new active standard filter isn't .all, create a new active standard filter view
             // Otherwise, remove the active standard filter view
             if filter != .all {
-                createFilterLabel(standardFilter: filter)
+                createFilterView(standardFilter: filter)
             } else {
                 removeFilter(activeStandardFilterView)
                 
