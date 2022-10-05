@@ -25,7 +25,7 @@ protocol InventoryFilterDelegate: AnyObject {
 
 // This protocol allows conformers to remove inventory filters
 protocol RemoveInventoryFilterDelegate: AnyObject {
-    func removeFilter(_ filterView: FilterView?)
+    func removeFilter(_ filterView: FilterContainerView?)
 }
 
 // MARK: - Main class
@@ -44,8 +44,8 @@ class InventoryTableViewController: UITableViewController {
     
     var activeStandardFilter = InventoryFilter.all
     var activeTagFilters = [String]()
-    var activeStandardFilterView: FilterView?
-    var activeTagFilterViews = [FilterView]()
+    var activeStandardFilterView: FilterContainerView?
+    var activeTagFilterViews = [FilterContainerView]()
     
     // IBOutlets
     @IBOutlet var filterContainerView: UIView!
@@ -88,7 +88,7 @@ class InventoryTableViewController: UITableViewController {
         print("active tag filters: \(activeTagFilters)")
         
         // Check if there are no active filters (standard or tag) and that the filter container view has the taller height
-        if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height == 85 {
+        if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height == 88 {
             print("Decreasing filter container view height")
             // Decrease the height of the filter container view to make room for the filter labels
             UIView.animate(withDuration: 0.3, animations: {
@@ -108,7 +108,7 @@ class InventoryTableViewController: UITableViewController {
                     x: Int(self.filterContainerView.frame.origin.x),
                     y: Int(self.filterContainerView.frame.origin.y),
                     width: Int(self.filterContainerView.frame.width),
-                    height: 85)
+                    height: 88)
             })
         }
     }
@@ -127,7 +127,7 @@ class InventoryTableViewController: UITableViewController {
         }
         
         // Initialize the new filter view as either a standard filter or a tag filter
-        let newFilterView = standardFilter != nil ? FilterView(standardFilter: standardFilter!) : FilterView(tagFilter: tagFilter!)
+        let newFilterView = standardFilter != nil ? FilterContainerView(standardFilter: standardFilter!) : FilterContainerView(tagFilter: tagFilter!)
         newFilterView.delegate = self
         
         // Check if we're creating a tag filter
@@ -297,7 +297,7 @@ extension InventoryTableViewController: InventoryFilterDelegate {
 
 extension InventoryTableViewController: RemoveInventoryFilterDelegate {
     // Remove the selected filter from the view and data structures
-    func removeFilter(_ filterView: FilterView?) {
+    func removeFilter(_ filterView: FilterContainerView?) {
         
         // Make sure we have a view to remove; otherwise, just return
         guard let filterView = filterView else {

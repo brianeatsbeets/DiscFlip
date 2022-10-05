@@ -304,20 +304,19 @@
                                         </segue>
                                     </connections>
                                 </button>
-                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="0gD-zn-1gK">
-                                    <rect key="frame" x="20" y="45" width="374" height="30"/>
+                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="0gD-zn-1gK">
+                                    <rect key="frame" x="20" y="37" width="374" height="44"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" distribution="equalSpacing" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Labels Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="44" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S7n-4U-eFQ" userLabel="Filter Labels Stack View">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="S7n-4U-eFQ" firstAttribute="leading" secondItem="0gD-zn-1gK" secondAttribute="leading" id="GvQ-LY-o0J"/>
                                         <constraint firstAttribute="trailing" secondItem="S7n-4U-eFQ" secondAttribute="trailing" id="N9r-go-EOr"/>
-                                        <constraint firstAttribute="height" constant="30" id="VK7-Hb-Fcf"/>
-                                        <constraint firstItem="S7n-4U-eFQ" firstAttribute="top" secondItem="0gD-zn-1gK" secondAttribute="top" id="Z4y-3M-BBk"/>
-                                        <constraint firstAttribute="bottom" secondItem="S7n-4U-eFQ" secondAttribute="bottom" constant="8" id="cbY-6b-urN"/>
+                                        <constraint firstItem="S7n-4U-eFQ" firstAttribute="top" secondItem="0gD-zn-1gK" secondAttribute="top" id="TDW-Cq-hCz"/>
+                                        <constraint firstAttribute="height" constant="44" id="VK7-Hb-Fcf"/>
+                                        <constraint firstAttribute="bottom" secondItem="S7n-4U-eFQ" secondAttribute="bottom" id="ekw-kK-w7t"/>
                                     </constraints>
                                     <viewLayoutGuide key="contentLayoutGuide" id="1rc-kD-XxZ"/>
                                     <viewLayoutGuide key="frameLayoutGuide" id="1mp-k3-zwV"/>
@@ -327,7 +326,7 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="0gD-zn-1gK" secondAttribute="trailing" constant="20" symbolic="YES" id="G4f-a7-NRM"/>
                                 <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
-                                <constraint firstItem="0gD-zn-1gK" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" constant="8" symbolic="YES" id="PH9-Hf-vFD"/>
+                                <constraint firstItem="0gD-zn-1gK" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" id="PH9-Hf-vFD"/>
                                 <constraint firstItem="0gD-zn-1gK" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" symbolic="YES" id="dJj-Rh-PgA"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>

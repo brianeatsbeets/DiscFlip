@@ -5,97 +5,167 @@
 //  Created by Aguirre, Brian P. on 10/4/22.
 //
 
+// MARK: - Imported libraries
+
 import UIKit
 
-// This class...
-class FilterView: UIView {
+// MARK: - Protocols
+
+protocol FilterPillViewRemoveButtonDelegate: AnyObject {
+    func removeButtonPressed()
+}
+
+// MARK: - Main class
+
+// This class/view presents a padded container view for an inventory filter view, which is needed to accomodate the UIButton subclass RemoveFilterButton and its increased hitbox size
+class FilterContainerView: UIView {
+    
+    // MARK: - Class properties
     
     var standardFilter: InventoryFilter?
     var tagFilter: String?
+    var newFilterPillView: FilterPillView?
     weak var delegate: RemoveInventoryFilterDelegate?
     
-    let newFilterButtonView = UIView()
-    let newFilterButton = RemoveFilterButton(type: .system)
+    // MARK: - Initializers
     
-    // TODO: Determine if there is a need for this init - research a better way to do what we're trying to do with these inits
-    init() {
+    // Init with standard filter
+    init(standardFilter: InventoryFilter) {
         super.init(frame: CGRect())
-    }
-    
-    convenience init(standardFilter: InventoryFilter) {
-        self.init()
         self.standardFilter = standardFilter
         createView()
     }
     
-    convenience init(tagFilter: String) {
-        self.init()
+    // Init with tag filter
+    init(tagFilter: String) {
+        super.init(frame: CGRect())
         self.tagFilter = tagFilter
         createView()
     }
     
+    // Implement required initializer
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // TODO: Rename variables with more appropriate names
+    // MARK: - Utility functions
+    
+    // Create and customize the filter container view
     func createView() {
         
-        // Create filter view
-        backgroundColor = (standardFilter != nil ? .white : UIColor(red: 161/255, green: 1, blue: 139/255, alpha: 1))
-        layer.cornerRadius = 10
-        clipsToBounds = false
-        translatesAutoresizingMaskIntoConstraints = false
+        // Make sure we're creating a filter view with a provided filter
+        guard let newFilterPillView = newFilterPillView else {
+            print("Attempted to create a filter view with nil parameters")
+            return
+        }
         
-        // Create filter label
-        let newFilterLabel = UILabel()
-        newFilterLabel.attributedText = NSAttributedString(string: (standardFilter != nil ? standardFilter?.rawValue : tagFilter)!, attributes: [NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 14) ?? .preferredFont(forTextStyle: .body)])
-        newFilterLabel.textColor = .black
-        newFilterLabel.translatesAutoresizingMaskIntoConstraints = false
+        // Customize filter container view
+        backgroundColor = .clear
         
-        // Create remove filter button
-        newFilterButton.translatesAutoresizingMaskIntoConstraints = false
-        newFilterButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        newFilterButton.tintColor = .black
-        newFilterButton.addTarget(self, action: #selector(removeFilterButtonPressed(_:)), for: .touchUpInside)
+        // Customize filter pill view
+        newFilterPillView.delegate = self
+        newFilterPillView.backgroundColor = (standardFilter != nil ? .white : UIColor(red: 161/255, green: 1, blue: 139/255, alpha: 1))
+        newFilterPillView.layer.cornerRadius = 10
+        newFilterPillView.clipsToBounds = false
+        newFilterPillView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Create large filter button parent view to contain extended button hitbox
-        newFilterButtonView.backgroundColor = .clear
-        newFilterButtonView.translatesAutoresizingMaskIntoConstraints = false
-        //newFilterButtonView.alpha = 0.5
-        newFilterButtonView.addSubview(newFilterButton)
+        // Add filter pill view to filter container view
+        addSubview(newFilterPillView)
         
-        // Add label and button to filter view
-        addSubview(newFilterLabel)
-        addSubview(newFilterButtonView)
-        
-        // Filter label constraints
-        newFilterLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true
-        newFilterLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
-        newFilterLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
-        newFilterLabel.rightAnchor.constraint(equalTo: newFilterButton.leftAnchor, constant: -5).isActive = true
-        
-        // Filter button view constraints
-        newFilterButtonView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        newFilterButtonView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        newFilterButtonView.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-        newFilterButtonView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        
-        // Filter button view constraints
-        newFilterButton.widthAnchor.constraint(equalToConstant: 11).isActive = true
-        newFilterButton.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        newFilterButton.centerYAnchor.constraint(equalTo: newFilterButtonView.centerYAnchor).isActive = true
-        newFilterButton.centerXAnchor.constraint(equalTo: newFilterButtonView.centerXAnchor).isActive = true
+        // Filter pill view constraints
+        newFilterPillView.topAnchor.constraint(equalTo: self.topAnchor, constant: 11).isActive = true
+        newFilterPillView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -11).isActive = true
+        newFilterPillView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        newFilterPillView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
-    
-    // Remove the pressed filter
-    @objc func removeFilterButtonPressed(_ sender: UIButton) {
-        print("remove filter button pressed")
+}
+
+// MARK: - Extensions
+
+// This extension of FilterContainerView conforms to the FilterPillViewDelegate protocol in order to be notified by the FilterPilView subview when the remove filter button is pressed
+extension FilterContainerView: FilterPillViewRemoveButtonDelegate {
+    func removeButtonPressed() {
         delegate?.removeFilter(self)
     }
+}
+
+// MARK: - Other classes
+
+// This class/view presents an inventory filter view
+class FilterPillView: UIView {
     
-//    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-//        let convertedPoint = newFilterButtonView.convert(point, from: self)
-//        return newFilterButton.point(inside: convertedPoint, with: event)
-//    }
+    // MARK: - Class properties
+    
+    var standardFilter: InventoryFilter?
+    var tagFilter: String?
+    let removeFilterButton = RemoveFilterButton(type: .system)
+    weak var delegate: FilterPillViewRemoveButtonDelegate?
+    
+    // MARK: - Initializers
+    
+    // Init with standard filter
+    init(standardFilter: InventoryFilter) {
+        super.init(frame: CGRect())
+        self.standardFilter = standardFilter
+        createView()
+    }
+    
+    // Init with tag filter
+    init(tagFilter: String) {
+        super.init(frame: CGRect())
+        self.tagFilter = tagFilter
+        createView()
+    }
+    
+    // Implement required initializer
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Utility functions
+    
+    // Create and customize the filter pill view
+    func createView() {
+        
+        // Create and customize filter label
+        let filterLabel = UILabel()
+        filterLabel.attributedText = NSAttributedString(string: (standardFilter != nil ? standardFilter?.rawValue : tagFilter)!, attributes: [NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 14) ?? .preferredFont(forTextStyle: .body)])
+        filterLabel.textColor = .black
+        filterLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Customize remove filter button
+        removeFilterButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        removeFilterButton.tintColor = .black
+        removeFilterButton.addTarget(self, action: #selector(removeFilterButtonPressed(_:)), for: .touchUpInside)
+        removeFilterButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add label and button to filter view
+        addSubview(filterLabel)
+        addSubview(removeFilterButton)
+        
+        // Filter label constraints
+        filterLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true
+        filterLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
+        filterLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        filterLabel.rightAnchor.constraint(equalTo: removeFilterButton.leftAnchor, constant: -5).isActive = true
+        
+        // Filter button constraints
+        removeFilterButton.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        removeFilterButton.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        removeFilterButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        removeFilterButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+    }
+    
+    // Notify the filter container view that the remove filter button was pressed
+    @objc func removeFilterButtonPressed(_ sender: UIButton) {
+        print("remove filter button pressed")
+        delegate?.removeButtonPressed()
+    }
+    
+    // Allow the remove filter button's enlargened hitbox to extend beyond this view's frame
+    // Via Pete Smith from https://zendesk.engineering/ios-how-to-capture-touch-events-outside-uiview-bounds-bc74619707881
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let convertedPoint = removeFilterButton.convert(point, from: self)
+        return removeFilterButton.point(inside: convertedPoint, with: event)
+    }
 }
