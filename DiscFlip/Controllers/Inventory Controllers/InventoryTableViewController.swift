@@ -88,11 +88,11 @@ class InventoryTableViewController: UITableViewController {
         if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height == 88 {
             
             // Decrease the height of the filter container view to make room for the filter labels
-            UIView.animate(withDuration: 0.3, animations: {
-                self.filterContainerView.frame = CGRect(
-                    x: Int(self.filterContainerView.frame.origin.x),
-                    y: Int(self.filterContainerView.frame.origin.y),
-                    width: Int(self.filterContainerView.frame.width),
+            UIView.animate(withDuration: 0.3, animations: { [self] in
+                filterContainerView.frame = CGRect(
+                    x: Int(filterContainerView.frame.origin.x),
+                    y: Int(filterContainerView.frame.origin.y),
+                    width: Int(filterContainerView.frame.width),
                     height: 44)
             })
             
@@ -100,11 +100,11 @@ class InventoryTableViewController: UITableViewController {
         } else if (activeStandardFilter != .all || !activeTagFilters.isEmpty) && filterContainerView.frame.height == 44 {
             
             // Increase the height of the filter container view to make room for the filter labels
-            UIView.animate(withDuration: 0.3, animations: {
-                self.filterContainerView.frame = CGRect(
-                    x: Int(self.filterContainerView.frame.origin.x),
-                    y: Int(self.filterContainerView.frame.origin.y),
-                    width: Int(self.filterContainerView.frame.width),
+            UIView.animate(withDuration: 0.3, animations: { [self] in
+                filterContainerView.frame = CGRect(
+                    x: Int(filterContainerView.frame.origin.x),
+                    y: Int(filterContainerView.frame.origin.y),
+                    width: Int(filterContainerView.frame.width),
                     height: 88)
             })
         }
@@ -316,12 +316,12 @@ extension InventoryTableViewController: RemoveInventoryFilterDelegate {
         // Animate filter removal
         UIView.animate(withDuration: 0.15, animations: {
             filterView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }) { (_) in
-            self.filterInventory(filter: self.activeStandardFilter)
+        }) { [self] _ in
+            filterInventory(filter: self.activeStandardFilter)
             
             UIView.animate(withDuration: 0.17, animations: {
                 filterView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            }) { (_) in
+            }) { _ in
                 
                 UIView.animate(withDuration: 0.2, animations: {
                     filterView.isHidden = true

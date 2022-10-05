@@ -177,13 +177,13 @@ class AddEditDiscTableViewController: UITableViewController {
         estSellPriceCell.transform = CGAffineTransform(translationX: -estSellPriceCell.frame.width, y: 0)
         estSellPriceCell.alpha = 0
         
-        UIView.animate(withDuration: 0.3) {
-            self.estSellPriceCell.transform = .identity
+        UIView.animate(withDuration: 0.3) { [self] in
+            estSellPriceCell.transform = .identity
             
             // Display selling/sold price fields based on whether or not the disc was sold
-            self.setSellSoldFieldsHiddenState(sold: sender.isOn)
+            setSellSoldFieldsHiddenState(sold: sender.isOn)
             
-            self.estSellPriceCell.alpha = 1
+            estSellPriceCell.alpha = 1
         }
     }
     
