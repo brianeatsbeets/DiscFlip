@@ -84,12 +84,9 @@ class InventoryTableViewController: UITableViewController {
     // Adjust filter container view height based on active filters
     func toggleFilterContainerViewHeight() {
         
-        print("active standard filter: \(activeStandardFilter.rawValue)")
-        print("active tag filters: \(activeTagFilters)")
-        
         // Check if there are no active filters (standard or tag) and that the filter container view has the taller height
         if activeStandardFilter == .all && activeTagFilters.isEmpty && filterContainerView.frame.height == 88 {
-            print("Decreasing filter container view height")
+            
             // Decrease the height of the filter container view to make room for the filter labels
             UIView.animate(withDuration: 0.3, animations: {
                 self.filterContainerView.frame = CGRect(
@@ -101,8 +98,8 @@ class InventoryTableViewController: UITableViewController {
             
             // Check if there are active filters (standard or tag) and that the filter container view has the shorter height
         } else if (activeStandardFilter != .all || !activeTagFilters.isEmpty) && filterContainerView.frame.height == 44 {
+            
             // Increase the height of the filter container view to make room for the filter labels
-            print("Increasing filter container view height")
             UIView.animate(withDuration: 0.3, animations: {
                 self.filterContainerView.frame = CGRect(
                     x: Int(self.filterContainerView.frame.origin.x),
