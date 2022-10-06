@@ -14,7 +14,7 @@ import UIKit
 // MARK: - Protocols
 
 // This protocol allows conformers to remove discs from the inventory
-protocol InventoryDelegate: AnyObject {
+protocol RemoveInventoryDelegate: AnyObject {
     func remove(disc: Disc)
 }
 
@@ -291,7 +291,7 @@ extension InventoryTableViewController: InventoryFilterDelegate {
     }
 }
 
-
+// This extension handles the removal of tags
 extension InventoryTableViewController: RemoveInventoryFilterDelegate {
     // Remove the selected filter from the view and data structures
     func removeFilter(_ filterView: FilterContainerView?) {
@@ -334,7 +334,7 @@ extension InventoryTableViewController: RemoveInventoryFilterDelegate {
 }
 
 // This extention houses table view management functions using the diffable data source API and conforms to the InventoryDelegate protocol
-extension InventoryTableViewController: InventoryDelegate {
+extension InventoryTableViewController: RemoveInventoryDelegate {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> DeletableRowTableViewDiffableDataSource {
@@ -420,7 +420,7 @@ private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSo
     // MARK: - Class properties
     
     // Delegate to update data model
-    weak var delegate: InventoryDelegate?
+    weak var delegate: RemoveInventoryDelegate?
     
     // MARK: - Utility functions
     
