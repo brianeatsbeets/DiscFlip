@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -290,14 +291,15 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcg-jf-Dji">
-                                    <rect key="frame" x="20" y="7" width="374" height="30"/>
+                                    <rect key="frame" x="352" y="7" width="42" height="30"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="42" id="JaR-uL-cov"/>
                                         <constraint firstAttribute="height" constant="30" id="h1R-jQ-bVW"/>
                                     </constraints>
                                     <color key="tintColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="Filter...">
-                                        <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                    <buttonConfiguration key="configuration" style="filled">
+                                        <imageReference key="image" image="tag.fill" catalog="system" symbolScale="medium"/>
                                     </buttonConfiguration>
                                     <connections>
                                         <segue destination="7YD-r9-GEU" kind="popoverPresentation" identifier="InventoryFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
@@ -329,7 +331,6 @@
                                 <constraint firstAttribute="trailing" secondItem="fcg-jf-Dji" secondAttribute="trailing" constant="20" id="MDt-uT-ETe"/>
                                 <constraint firstItem="0gD-zn-1gK" firstAttribute="top" secondItem="fcg-jf-Dji" secondAttribute="bottom" id="PH9-Hf-vFD"/>
                                 <constraint firstItem="0gD-zn-1gK" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" symbolic="YES" id="dJj-Rh-PgA"/>
-                                <constraint firstItem="fcg-jf-Dji" firstAttribute="leading" secondItem="BCK-SU-WoU" secondAttribute="leading" constant="20" id="mhF-5b-8Z2"/>
                                 <constraint firstItem="fcg-jf-Dji" firstAttribute="top" secondItem="BCK-SU-WoU" secondAttribute="top" constant="7" id="ozQ-H1-dGo"/>
                             </constraints>
                         </view>
@@ -373,7 +374,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAc-hq-kQT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2667" y="463"/>
+            <point key="canvasLocation" x="2666.666666666667" y="462.72321428571428"/>
         </scene>
         <!--Tags-->
         <scene sceneID="SzZ-BZ-TVa">
@@ -431,11 +432,11 @@
             </objects>
             <point key="canvasLocation" x="1774" y="1871"/>
         </scene>
-        <!--Inventory Filter Table View Controller-->
+        <!--Tag Filter Table View Controller-->
         <scene sceneID="Ku2-LS-0wr">
             <objects>
-                <tableViewController id="7YD-r9-GEU" customClass="InventoryFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
+                <tableViewController id="7YD-r9-GEU" customClass="TagFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

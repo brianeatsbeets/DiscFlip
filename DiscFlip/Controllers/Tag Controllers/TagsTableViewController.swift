@@ -12,7 +12,7 @@ import UIKit
 // MARK: - Protocols
 // This protocol allows conformers to remove tags
 protocol RemoveTagDelegate: AnyObject {
-    func remove(tag: String)
+    func remove(tag: Tag)
 }
 
 // MARK: - Main class
@@ -22,7 +22,7 @@ class TagsTableViewController: UITableViewController {
     
     // MARK: - Class properties
     
-    var tags = [String]()
+    var tags = [Tag]()
     let cellReuseIdentifier = "tagCell"
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
@@ -83,7 +83,7 @@ extension TagsTableViewController: RemoveTagDelegate {
             tagTitleTextField.autocapitalizationType = .words
             tagTitleTextField.translatesAutoresizingMaskIntoConstraints = false
             
-            tagTitleTextField.text = tag
+            tagTitleTextField.text = tag.title
             
             cell.addSubview(tagTitleTextField)
             
@@ -100,7 +100,7 @@ extension TagsTableViewController: RemoveTagDelegate {
     
     // Apply a snapshot with updated tag data
     func updateTableView() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Tag>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(tags)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -108,7 +108,7 @@ extension TagsTableViewController: RemoveTagDelegate {
     }
     
     // Apply a snapshot with removed tag data
-    func remove(tag: String) {
+    func remove(tag: Tag) {
         
         // Remove tag from tags array
         tags = tags.filter { $0 != tag }
@@ -133,7 +133,7 @@ private enum Section: CaseIterable {
 // MARK: - Other classes
 
 // This class defines a UITableViewDiffableDataSource subclass that enables swipe-to-delete
-private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, String> {
+private class DeletableRowTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Tag> {
     
     // MARK: - Class properties
     

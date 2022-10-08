@@ -19,8 +19,8 @@ protocol RemoveInventoryDelegate: AnyObject {
 }
 
 // This protocol allows conformers to filter the inventory
-protocol InventoryFilterDelegate: AnyObject {
-    func filterInventory(filter: InventoryFilter)
+protocol TagFilterDelegate: AnyObject {
+    func filterInventory(standardFilter: InventoryFilter, tagFilters: [Tag])
 }
 
 // This protocol allows conformers to remove inventory filters
@@ -36,14 +36,14 @@ class InventoryTableViewController: UITableViewController {
     // MARK: - Class properties
     
     var inventory = [Disc]()
-    var tags = [String]()
+    var tags = [Tag]()
     
     let cellReuseIdentifier = "inventoryCell"
     private lazy var dataSource = createDataSource()
     weak var delegate: DataDelegate?
     
     var activeStandardFilter = InventoryFilter.all
-    var activeTagFilters = [String]()
+    var activeTagFilters = [Tag]()
     var activeStandardFilterView: FilterContainerView?
     var activeTagFilterViews = [FilterContainerView]()
     
@@ -60,7 +60,7 @@ class InventoryTableViewController: UITableViewController {
         dataSource.delegate = self
         tableView.dataSource = dataSource
         
-        loadInventory()
+        loadData()
         stylizeBarButtonItems()
         updateTableView()
     }
@@ -68,11 +68,17 @@ class InventoryTableViewController: UITableViewController {
     // MARK: - Utility functions
     
     // Fetch the inventory
-    func loadInventory() {
+    func loadData() {
         if let initialInventory = delegate?.checkoutInventory() {
             inventory = initialInventory
         } else {
             print("Failed to fetch initial inventory from DashboardViewController")
+        }
+        
+        if let initialTags = delegate?.checkoutTags() {
+            tags = initialTags
+        } else {
+            print("Failed to fetch initial tags from DashboardViewController")
         }
     }
     
@@ -111,7 +117,7 @@ class InventoryTableViewController: UITableViewController {
     }
     
     // Create a filter view for either a standard or tag filter
-    func createFilterView(standardFilter: InventoryFilter? = nil, tagFilter: String? = nil) {
+    func createFilterView(standardFilter: InventoryFilter? = nil, tagFilter: Tag? = nil) {
         
         // Check to make sure we aren't trying to create a filter with invalid paramater combinations (not a concern for the user; moreso a safeguard against incorrect function calls)
         guard (standardFilter != nil || tagFilter != nil) else {
@@ -124,7 +130,7 @@ class InventoryTableViewController: UITableViewController {
         }
         
         // Initialize the new filter view as either a standard filter or a tag filter
-        let newFilterView = standardFilter != nil ? FilterContainerView(standardFilter: standardFilter!) : FilterContainerView(tagFilter: tagFilter!)
+        let newFilterView = standardFilter != nil ? FilterContainerView(standardFilter: standardFilter!) : FilterContainerView(tagFilter: tagFilter!.title)
         newFilterView.delegate = self
         
         // Check if we're creating a tag filter
@@ -155,8 +161,8 @@ class InventoryTableViewController: UITableViewController {
     
     // This is a temporary function/IBAction to test out filtering with tags
     @IBAction func createTag(_ sender: Any) {
-        createFilterView(tagFilter: "Tag")
-        filterInventory(filter: activeStandardFilter)
+        createFilterView(tagFilter: Tag(title: "Tag"))
+        filterInventory(standardFilter: activeStandardFilter, tagFilters: activeTagFilters)
     }
     
     // MARK: - Navigation
@@ -168,12 +174,14 @@ class InventoryTableViewController: UITableViewController {
         
         // Check if we're segueing to the inventory filter
         // If so, configure the inventory filter view controller and its presentation
-        guard let inventoryFilterTVC = segue.destination as? InventoryFilterTableViewController,
+        guard let tagFilterTVC = segue.destination as? TagFilterTableViewController,
               segue.identifier == "InventoryFilter" else { return }
-        inventoryFilterTVC.presentationController?.delegate = self
-        inventoryFilterTVC.preferredContentSize = CGSize(width: 325, height: 240)
-        inventoryFilterTVC.delegate = self
-        inventoryFilterTVC.selectedFilter = activeStandardFilter
+        tagFilterTVC.presentationController?.delegate = self
+        tagFilterTVC.preferredContentSize = CGSize(width: 325, height: 44 * (tags.count + 1))
+        tagFilterTVC.delegate = self
+        tagFilterTVC.allTags = tags
+        tagFilterTVC.activeStandardFilter = activeStandardFilter
+        tagFilterTVC.activeTagFilters = activeTagFilters
     }
     
     // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
@@ -242,23 +250,23 @@ extension InventoryTableViewController: UIPopoverPresentationControllerDelegate 
 }
     
 // This extension processes filter selections and filters the table view data appropriately
-extension InventoryTableViewController: InventoryFilterDelegate {
-    func filterInventory(filter: InventoryFilter) {
+extension InventoryTableViewController: TagFilterDelegate {
+    func filterInventory(standardFilter: InventoryFilter, tagFilters: [Tag]) {
         
         var filteredInventory = inventory
         let oldStandardFilter = activeStandardFilter
         
         // Set the active standard filter to the new filter
-        activeStandardFilter = filter
+        activeStandardFilter = standardFilter
         
         // Check if the new standard filter is different from the old standard filter in order to assess if we should modify the active standard filter view and filter the data
         // This if-block will be skipped when calling filterInventory from removeFilter or when creating a tag filter
-        if filter != oldStandardFilter {
+        if standardFilter != oldStandardFilter {
             
             // If the new active standard filter isn't .all, create a new active standard filter view
             // Otherwise, remove the active standard filter view
-            if filter != .all {
-                createFilterView(standardFilter: filter)
+            if standardFilter != .all {
+                createFilterView(standardFilter: standardFilter)
             } else {
                 removeFilter(activeStandardFilterView)
                 
@@ -267,8 +275,19 @@ extension InventoryTableViewController: InventoryFilterDelegate {
             }
         }
         
+        // Remove tag filter views
+        for (index, activeTagFilter) in activeTagFilters.enumerated() {
+            if tagFilters.firstIndex(of: activeTagFilter) == nil {
+                removeFilter(activeTagFilterViews[index])
+                print("Removed tag")
+                
+                // filterInventory will be called again in removeFilter, so we don't need to continue with this current call
+                return
+            }
+        }
+        
         // Get inventory filtered on the standard filter
-        switch filter {
+        switch standardFilter {
         case .unsold:
             filteredInventory = filteredInventory.filter { !$0.wasSold }
         case .soldAll:
@@ -282,16 +301,24 @@ extension InventoryTableViewController: InventoryFilterDelegate {
         }
         
         // Get inventory filtered on the tag filters
-        for tagFilter in activeTagFilters {
+        for tagFilter in tagFilters {
             filteredInventory = filteredInventory.filter { $0.tags.firstIndex(of: tagFilter) != nil }
+            
+            // Create tag filter views for new tag filters
+            if activeTagFilters.firstIndex(of: tagFilter) == nil {
+                createFilterView(tagFilter: tagFilter)
+                print("Added tag")
+            }
         }
+        
+        print("Current tag filters: \(activeTagFilters)")
         
         toggleFilterContainerViewHeight()
         updateTableView(newInventory: filteredInventory, animated: true)
     }
 }
 
-// This extension handles the removal of tags
+// This extension handles the removal of filters
 extension InventoryTableViewController: RemoveInventoryFilterDelegate {
     // Remove the selected filter from the view and data structures
     func removeFilter(_ filterView: FilterContainerView?) {
@@ -308,7 +335,7 @@ extension InventoryTableViewController: RemoveInventoryFilterDelegate {
             self.activeStandardFilter = .all
         } else if let index = self.activeTagFilterViews.firstIndex(of: filterView) {
             
-            // Otherwise remove the tag filter and view
+            // Remove the tag filter and view
             self.activeTagFilterViews.remove(at: index)
             self.activeTagFilters.remove(at: index)
         }
@@ -317,7 +344,7 @@ extension InventoryTableViewController: RemoveInventoryFilterDelegate {
         UIView.animate(withDuration: 0.15, animations: {
             filterView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         }) { [self] _ in
-            filterInventory(filter: self.activeStandardFilter)
+            filterInventory(standardFilter: activeStandardFilter, tagFilters: activeTagFilters)
             
             UIView.animate(withDuration: 0.17, animations: {
                 filterView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
