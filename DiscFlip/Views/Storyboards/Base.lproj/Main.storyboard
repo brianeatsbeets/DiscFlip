@@ -302,7 +302,7 @@
                                         <imageReference key="image" image="tag.fill" catalog="system" symbolScale="medium"/>
                                     </buttonConfiguration>
                                     <connections>
-                                        <segue destination="7YD-r9-GEU" kind="popoverPresentation" identifier="InventoryFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
+                                        <segue destination="7YD-r9-GEU" kind="popoverPresentation" identifier="TagFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                         </segue>
                                     </connections>

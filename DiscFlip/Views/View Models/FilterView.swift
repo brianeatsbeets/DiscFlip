@@ -22,26 +22,17 @@ class FilterContainerView: UIView {
     
     // MARK: - Class properties
     
-    var standardFilter: InventoryFilter?
-    var tagFilter: String?
-    var newFilterPillView: FilterPillView?
-    weak var delegate: RemoveInventoryFilterDelegate?
+    var tagFilter: Tag
+    var pillView: FilterPillView
+    weak var delegate: RemoveTagFilterDelegate?
     
     // MARK: - Initializers
     
-    // Init with standard filter
-    init(standardFilter: InventoryFilter) {
-        super.init(frame: CGRect())
-        self.standardFilter = standardFilter
-        self.newFilterPillView = FilterPillView(standardFilter: standardFilter)
-        createView()
-    }
-    
     // Init with tag filter
-    init(tagFilter: String) {
-        super.init(frame: CGRect())
+    init(tagFilter: Tag) {
         self.tagFilter = tagFilter
-        self.newFilterPillView = FilterPillView(tagFilter: tagFilter)
+        self.pillView = FilterPillView(tagFilter: tagFilter)
+        super.init(frame: CGRect())
         createView()
     }
     
@@ -55,30 +46,24 @@ class FilterContainerView: UIView {
     // Create and customize the filter container view
     func createView() {
         
-        // Make sure we're creating a filter view with a provided filter
-        guard let newFilterPillView = newFilterPillView else {
-            print("Attempted to create a filter view with nil parameters")
-            return
-        }
-        
         // Customize filter container view
         backgroundColor = .clear
         
         // Customize filter pill view
-        newFilterPillView.delegate = self
-        newFilterPillView.backgroundColor = (standardFilter != nil ? .white : UIColor(red: 161/255, green: 1, blue: 139/255, alpha: 1))
-        newFilterPillView.layer.cornerRadius = 10
-        newFilterPillView.clipsToBounds = false
-        newFilterPillView.translatesAutoresizingMaskIntoConstraints = false
+        pillView.delegate = self
+        pillView.backgroundColor = .white
+        pillView.layer.cornerRadius = 10
+        pillView.clipsToBounds = false
+        pillView.translatesAutoresizingMaskIntoConstraints = false
         
         // Add filter pill view to filter container view
-        addSubview(newFilterPillView)
+        addSubview(pillView)
         
         // Filter pill view constraints
-        newFilterPillView.topAnchor.constraint(equalTo: self.topAnchor, constant: 11).isActive = true
-        newFilterPillView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -11).isActive = true
-        newFilterPillView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        newFilterPillView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        pillView.topAnchor.constraint(equalTo: self.topAnchor, constant: 11).isActive = true
+        pillView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -11).isActive = true
+        pillView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        pillView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
 }
 
@@ -98,24 +83,16 @@ class FilterPillView: UIView {
     
     // MARK: - Class properties
     
-    var standardFilter: InventoryFilter?
-    var tagFilter: String?
+    var tagFilter: Tag
     let removeFilterButton = RemoveFilterButton(type: .system)
     weak var delegate: FilterPillViewRemoveButtonDelegate?
     
     // MARK: - Initializers
     
-    // Init with standard filter
-    init(standardFilter: InventoryFilter) {
-        super.init(frame: CGRect())
-        self.standardFilter = standardFilter
-        createView()
-    }
-    
     // Init with tag filter
-    init(tagFilter: String) {
-        super.init(frame: CGRect())
+    init(tagFilter: Tag) {
         self.tagFilter = tagFilter
+        super.init(frame: CGRect())
         createView()
     }
     
@@ -131,7 +108,7 @@ class FilterPillView: UIView {
         
         // Create and customize filter label
         let filterLabel = UILabel()
-        filterLabel.attributedText = NSAttributedString(string: (standardFilter != nil ? standardFilter?.rawValue : tagFilter)!, attributes: [NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 14) ?? .preferredFont(forTextStyle: .body)])
+        filterLabel.attributedText = NSAttributedString(string: tagFilter.title, attributes: [NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 14) ?? .preferredFont(forTextStyle: .body)])
         filterLabel.textColor = .black
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
         

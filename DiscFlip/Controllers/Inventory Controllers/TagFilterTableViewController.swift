@@ -6,7 +6,7 @@
 //
 
 // TODO: Maybe use prototype cell instead of xib
-// TODO: Use initializer
+// TODO: Use initializer?
 
 // MARK: - Imported libraries
 
@@ -14,14 +14,13 @@ import UIKit
 
 // MARK: - Main class
 
-// This class/table view controller displays the inventory filter options
+// This class/table view controller displays the tag filter options
 class TagFilterTableViewController: UITableViewController {
     
     // MARK: - Class properties
     
     weak var delegate: TagFilterDelegate?
     var allTags = [Tag]()
-    var activeStandardFilter = InventoryFilter.all
     var activeTagFilters = [Tag]()
     private lazy var dataSource = createDataSource()
     
@@ -30,7 +29,7 @@ class TagFilterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "InventoryFilterTableViewCell", bundle: nil), forCellReuseIdentifier: "TagFilterCell")
+        tableView.register(UINib(nibName: "TagFilterTableViewCell", bundle: nil), forCellReuseIdentifier: "TagFilterCell")
         tableView.dataSource = dataSource
         
         updateTableView()
@@ -46,17 +45,12 @@ class TagFilterTableViewController: UITableViewController {
     
     // Pre-select the row for the current filter setting
     func setSelectedFilterRow() {
-//        for (index, _) in activeTagFilters.enumerated() {
-//            tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
-//        }
-        
         var i = 0
         
         while i < tableView.numberOfRows(inSection: 0) {
             guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
             if activeTagFilters.firstIndex(of: tagForRow) != nil {
                 tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
-                print("Pre-selected row \(i)")
             }
             i += 1
         }
@@ -64,50 +58,27 @@ class TagFilterTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    // Determine if the cell should be able to be selected
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//
-//        // Only allow cell selection if it isn't already selected
-//        if let cell = tableView.cellForRow(at: indexPath), cell.isSelected {
-//            return nil
-//        }
-//        else {
-//            return indexPath
-//        }
-//    }
-    
-    // Determine if the cell should be able to be highlighted
-//    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-//
-//        // Only allow cell to be highlighted if it isn't already selected
-//        if let cell = tableView.cellForRow(at: indexPath), cell.isSelected {
-//            return false
-//        }
-//        else {
-//            return true
-//        }
-//    }
-    
     // Define what to do when a cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        // Add the selected tag to the list of tags to filter on
         guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
         activeTagFilters.append(tagForRow)
-
-        delegate?.filterInventory(standardFilter: activeStandardFilter, tagFilters: activeTagFilters)
+        
+        delegate?.filterInventory(tagFilters: activeTagFilters)
         dismiss(animated: true)
     }
     
     // Define what to do when a cell is deselected
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-
+        
+        // Remove the selected tag from the list of tags to filter on
         guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
         if let index = activeTagFilters.firstIndex(of: tagForRow) {
             activeTagFilters.remove(at: index)
-            print("Deselected row")
         }
-
-        delegate?.filterInventory(standardFilter: activeStandardFilter, tagFilters: activeTagFilters)
+        
+        delegate?.filterInventory(tagFilters: activeTagFilters)
         dismiss(animated: true)
     }
 }
@@ -125,9 +96,9 @@ extension TagFilterTableViewController {
         
         return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, tag in
             // Configure the cell
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! InventoryFilterTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! TagFilterTableViewCell
             
-            cell.inventoryFilterCellLabel.text = tag.title
+            cell.tagFilterCellLabel.text = tag.title
             
             return cell
         }
@@ -147,13 +118,4 @@ extension TagFilterTableViewController {
 // This enum declares table view sections
 private enum Section: CaseIterable {
     case one
-}
-
-// This enum defines the inventory filter options
-enum InventoryFilter: String {
-    case all = "All Discs"
-    case unsold = "Unsold Discs"
-    case soldAll = "Sold Discs (all)"
-    case soldOnEbay = "Sold Discs (on eBay)"
-    case soldNotOnEbay = "Sold Discs (outside eBay)"
 }

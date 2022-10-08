@@ -45,6 +45,7 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Utility functions
     
+    // Create and load placeholder data for testing purposes
     func loadDummyData() {
         
         tags = [
