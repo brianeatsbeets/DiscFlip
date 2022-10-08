@@ -30,6 +30,7 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var soldPriceTextField: UITextField!
     
     @IBOutlet var estSellPriceCell: UITableViewCell!
+    @IBOutlet var tagsCell: UITableViewCell!
     
     @IBOutlet var saveButton: UIBarButtonItem!
     
@@ -56,6 +57,8 @@ class AddEditDiscTableViewController: UITableViewController {
         // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
         let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        
+        tagsCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right"))
         
         super.viewDidLoad()
     }
@@ -183,6 +186,11 @@ class AddEditDiscTableViewController: UITableViewController {
             cell.clipsToBounds = false
             cell.contentView.clipsToBounds = false
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
     }
     
     // Provide a view for each section footer

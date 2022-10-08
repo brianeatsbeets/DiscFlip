@@ -916,6 +916,33 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="3ih-Tg-q5K">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tagsCell" rowHeight="44" id="M0y-rC-Shp">
+                                        <rect key="frame" x="20" y="430" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M0y-rC-Shp" id="IJi-bV-u3c">
+                                            <rect key="frame" x="0.0" y="0.0" width="343.5" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwL-C7-wcq">
+                                                    <rect key="frame" x="20" y="11" width="39.5" height="22"/>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BwL-C7-wcq" secondAttribute="bottom" id="HyJ-g2-BNQ"/>
+                                                <constraint firstItem="BwL-C7-wcq" firstAttribute="top" secondItem="IJi-bV-u3c" secondAttribute="topMargin" id="XvD-re-nyN"/>
+                                                <constraint firstItem="BwL-C7-wcq" firstAttribute="leading" secondItem="IJi-bV-u3c" secondAttribute="leadingMargin" id="fBA-3y-fBH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="iqI-Yl-9Jj" id="tuT-hu-lem"/>
@@ -947,6 +974,7 @@
                         <outlet property="soldDiscSwitch" destination="gcG-Kx-jXR" id="vdC-QZ-z86"/>
                         <outlet property="soldPriceLabel" destination="vbv-fk-Fn6" id="mLr-W0-pet"/>
                         <outlet property="soldPriceTextField" destination="QaR-ob-dxJ" id="2WI-LR-nC8"/>
+                        <outlet property="tagsCell" destination="M0y-rC-Shp" id="IIL-Zd-WCd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofP-Of-gmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1013,7 +1041,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="L1F-FP-pKW"/>
-        <segue reference="qte-hQ-g0u"/>
+        <segue reference="RdZ-7T-7Vb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_more_horiz_white_36pt" width="36" height="36"/>
