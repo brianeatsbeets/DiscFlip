@@ -32,10 +32,10 @@ extension Int {
 // MARK: - Enums
 
 // This enum defines the inventory filter options
-enum InventoryFilter: String {
-    case all = "All Discs"
-    case unsold = "Unsold Discs"
-    case soldAll = "Sold Discs (all)"
-    case soldOnEbay = "Sold Discs (on eBay)"
-    case soldNotOnEbay = "Sold Discs (outside eBay)"
+enum InventoryFilter: String, CaseIterable {
+    case all = "All"
+    case sold = "Sold"
+    case unsold = "Unsold"
+//    case soldOnEbay = "Sold Discs (on eBay)"
+//    case soldNotOnEbay = "Sold Discs (outside eBay)"
 }

@@ -20,7 +20,7 @@ protocol RemoveInventoryDelegate: AnyObject {
 
 // This protocol allows conformers to filter the inventory
 protocol TagFilterDelegate: AnyObject {
-    func filterInventory(tagFilters: [Tag])
+    func filterInventory(tagFilters: [Tag]?)
 }
 
 // This protocol allows conformers to remove tag filters
@@ -44,12 +44,12 @@ class InventoryTableViewController: UITableViewController {
     
     var activeStandardFilter = InventoryFilter.all
     var activeTagFilters = [Tag]()
-    var activeStandardFilterView: FilterContainerView?
     var activeTagFilterViews = [FilterContainerView]()
     
     // IBOutlets
     @IBOutlet var filterContainerView: UIView!
-    @IBOutlet var filterButton: UIButton!
+    @IBOutlet var tagFilterButton: UIButton!
+    @IBOutlet var standardFilterSegmentedControl: UISegmentedControl!
     @IBOutlet var filterLabelsStackView: UIStackView!
     
     // MARK: - View life cycle functions
@@ -62,6 +62,7 @@ class InventoryTableViewController: UITableViewController {
         
         loadData()
         stylizeBarButtonItems()
+        initializeSegmentedControl()
         updateTableView()
     }
     
@@ -85,6 +86,15 @@ class InventoryTableViewController: UITableViewController {
     // Stylize bar button items for the current navigation stack
     func stylizeBarButtonItems() {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+    }
+    
+    func initializeSegmentedControl() {
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 13) ?? .preferredFont(forTextStyle: .body)], for: .normal)
+        standardFilterSegmentedControl.removeAllSegments()
+        InventoryFilter.allCases.forEach {
+            standardFilterSegmentedControl.insertSegment(withTitle: $0.rawValue, at: standardFilterSegmentedControl.numberOfSegments, animated: false)
+            standardFilterSegmentedControl.selectedSegmentIndex = 0
+        }
     }
     
     // Adjust filter container view height based on active filters
@@ -133,6 +143,11 @@ class InventoryTableViewController: UITableViewController {
         UIView.animate(withDuration: 0.2) {
             newFilterView.transform = .identity
         }
+    }
+    
+    @IBAction func standardFilterSelected(_ sender: UISegmentedControl) {
+        activeStandardFilter = InventoryFilter.allCases[sender.selectedSegmentIndex]
+        filterInventory()
     }
     
     // This is a temporary function/IBAction to test out filtering with tags
@@ -226,28 +241,35 @@ extension InventoryTableViewController: UIPopoverPresentationControllerDelegate 
     
 // This extension processes filter selections and filters the table view data appropriately
 extension InventoryTableViewController: TagFilterDelegate {
-    func filterInventory(tagFilters: [Tag]) {
+    func filterInventory(tagFilters: [Tag]? = nil) {
         
         var filteredInventory = inventory
         
-        // Compare new tag filters to existing tag filters and remove as necessary
-        for (index, activeTagFilter) in activeTagFilters.enumerated() {
-            if tagFilters.firstIndex(of: activeTagFilter) == nil {
-                removeFilter(activeTagFilterViews[index])
+        // Check to see if we have tags to filter on
+        if let tagFilters = tagFilters {
+            
+            // Compare new tag filters to existing tag filters and remove as necessary
+            for (index, activeTagFilter) in activeTagFilters.enumerated() {
+                if tagFilters.firstIndex(of: activeTagFilter) == nil {
+                    removeFilter(activeTagFilterViews[index])
+                    
+                    // filterInventory will be called again in removeFilter, so we don't need to continue with this current call
+                    return
+                }
+            }
+            
+            // Add new tag filters and views
+            for tagFilter in tagFilters {
                 
-                // filterInventory will be called again in removeFilter, so we don't need to continue with this current call
-                return
+                // Create tag filter views for new tag filters
+                if activeTagFilters.firstIndex(of: tagFilter) == nil {
+                    createFilterView(tagFilter: tagFilter)
+                }
             }
         }
         
-        // Add new tag filters and filter the inventory on the new tag filters
-        for tagFilter in tagFilters {
-            
-            // Create tag filter views for new tag filters
-            if activeTagFilters.firstIndex(of: tagFilter) == nil {
-                createFilterView(tagFilter: tagFilter)
-            }
-            
+        // Filter the inventory on the active tag filters
+        for tagFilter in activeTagFilters {
             filteredInventory = filteredInventory.filter { $0.tags.firstIndex(of: tagFilter) != nil }
         }
         
@@ -255,12 +277,8 @@ extension InventoryTableViewController: TagFilterDelegate {
         switch activeStandardFilter {
         case .unsold:
             filteredInventory = filteredInventory.filter { !$0.wasSold }
-        case .soldAll:
+        case .sold:
             filteredInventory = filteredInventory.filter { $0.wasSold }
-        case .soldOnEbay:
-            filteredInventory = filteredInventory.filter { $0.wasSold && $0.soldOnEbay }
-        case .soldNotOnEbay:
-            filteredInventory = filteredInventory.filter { $0.wasSold && !$0.soldOnEbay }
         default:
             break
         }
