@@ -56,16 +56,16 @@ class MainTabBarController: UITabBarController {
         ]
         
         inventory = [
-            Disc(name: "Aviar", plastic: "DX", purchasePrice: 10, estSellPrice: 12, wasSold: false, soldOnEbay: false, tags: [tags[2], tags[1]]),
-            Disc(name: "Mako3", plastic: "Champion", purchasePrice: 12, estSellPrice: 15, wasSold: false, soldOnEbay: false, tags: [tags[2]]),
-            Disc(name: "Teebird", plastic: "Star", purchasePrice: 14, estSellPrice: 18, wasSold: false, soldOnEbay: false, tags: [tags[2]]),
-            Disc(name: "Leopard3", plastic: "GStar", purchasePrice: 13, estSellPrice: 16, wasSold: false, soldOnEbay: false, tags: [tags[1]]),
-            Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 16, estSellPrice: 22, wasSold: false, soldOnEbay: false),
-            Disc(name: "Savant", plastic: "Halo", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, soldOnEbay: false, tags: [tags[1]]),
-            Disc(name: "Valkyrie", plastic: "Champion", purchasePrice: 16, estSellPrice: 20, wasSold: true, soldPrice: 23, soldOnEbay: false),
-            Disc(name: "Wraith", plastic: "Star Color Glow", purchasePrice: 18, estSellPrice: 22, wasSold: true, soldPrice: 25, soldOnEbay: true, tags: [tags[0]]),
-            Disc(name: "Destroyer", plastic: "Pro", purchasePrice: 14, estSellPrice: 18, wasSold: true, soldPrice: 18, soldOnEbay: true, tags: [tags[0]]),
-            Disc(name: "Katana", plastic: "GStar", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, soldOnEbay: true, tags: [tags[0]])
+            Disc(name: "Aviar", plastic: "DX", purchasePrice: 10, estSellPrice: 12, wasSold: false, tags: [tags[2], tags[1]]),
+            Disc(name: "Mako3", plastic: "Champion", purchasePrice: 12, estSellPrice: 15, wasSold: false, tags: [tags[2]]),
+            Disc(name: "Teebird", plastic: "Star", purchasePrice: 14, estSellPrice: 18, wasSold: false, tags: [tags[2]]),
+            Disc(name: "Leopard3", plastic: "GStar", purchasePrice: 13, estSellPrice: 16, wasSold: false, tags: [tags[1]]),
+            Disc(name: "Thunderbird", plastic: "Champion", purchasePrice: 16, estSellPrice: 22, wasSold: false),
+            Disc(name: "Savant", plastic: "Halo", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, tags: [tags[1]]),
+            Disc(name: "Valkyrie", plastic: "Champion", purchasePrice: 16, estSellPrice: 20, wasSold: true, soldPrice: 23),
+            Disc(name: "Wraith", plastic: "Star Color Glow", purchasePrice: 18, estSellPrice: 22, wasSold: true, soldPrice: 25, tags: [tags[0]]),
+            Disc(name: "Destroyer", plastic: "Pro", purchasePrice: 14, estSellPrice: 18, wasSold: true, soldPrice: 18, tags: [tags[0]]),
+            Disc(name: "Katana", plastic: "GStar", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, tags: [tags[0]])
         ]
         
         cashList = [

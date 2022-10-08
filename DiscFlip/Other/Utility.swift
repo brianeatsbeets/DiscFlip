@@ -36,6 +36,4 @@ enum InventoryFilter: String, CaseIterable {
     case all = "All"
     case sold = "Sold"
     case unsold = "Unsold"
-//    case soldOnEbay = "Sold Discs (on eBay)"
-//    case soldNotOnEbay = "Sold Discs (outside eBay)"
 }

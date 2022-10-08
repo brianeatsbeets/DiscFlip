@@ -88,6 +88,7 @@ class InventoryTableViewController: UITableViewController {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 17) ?? .preferredFont(forTextStyle: .body)], for: .normal)
     }
     
+    // Stylize segmented control text and add filter segments
     func initializeSegmentedControl() {
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Arial Rounded MT Bold", size: 13) ?? .preferredFont(forTextStyle: .body)], for: .normal)
         standardFilterSegmentedControl.removeAllSegments()
@@ -345,10 +346,6 @@ extension InventoryTableViewController: RemoveInventoryDelegate {
             } else {
                 let profit = disc.soldPrice - disc.purchasePrice
                 secondaryText = "Profit: " + profit.currencyWithPolarity()
-    
-                if !disc.soldOnEbay {
-                    secondaryText += " | Not sold on eBay"
-                }
             }
     
             content.secondaryText = secondaryText

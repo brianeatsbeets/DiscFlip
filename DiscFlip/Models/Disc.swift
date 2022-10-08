@@ -23,8 +23,6 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
     var estSellPrice: Int
     var wasSold: Bool
     var soldPrice: Int
-    var soldOnEbay: Bool
-    var eBayProfit: Int
     var tags: [Tag]
     
     // Property required by CustomStringConvertible protocol
@@ -32,7 +30,7 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
     
     // MARK: - Initializers
     
-    init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int = 0, wasSold: Bool, soldPrice: Int = 0, soldOnEbay: Bool, tags: [Tag] = [Tag]()) {
+    init(name: String, plastic: String, purchasePrice: Int, estSellPrice: Int = 0, wasSold: Bool, soldPrice: Int = 0, tags: [Tag] = [Tag]()) {
         self.id = UUID()
         self.name = name
         self.plastic = plastic
@@ -40,8 +38,6 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
         self.estSellPrice = estSellPrice
         self.wasSold = wasSold
         self.soldPrice = soldPrice
-        self.soldOnEbay = soldOnEbay
-        self.eBayProfit = soldPrice - purchasePrice > 0 ? soldPrice - purchasePrice : 0
         self.tags = tags
         
         self.description = plastic + " " + name

@@ -96,9 +96,6 @@ class DashboardViewController: UIViewController {
         let estimatedGross = inventory.reduce(0) { $0 + ($1.wasSold ? 0 : $1.estSellPrice) }
         let estimatedNet = totalSold - totalPurchased + estimatedGross + otherCash
         estimatedNetLabel.text = estimatedNet.currencyWithPolarity()
-        
-        let eBayNet = inventory.reduce(0) { $0 + ($1.wasSold && $1.soldOnEbay ? $1.eBayProfit : 0) }
-        eBayNetLabel.text = eBayNet.currencyWithPolarity()
     }
     
     // Stylize the dashboard view boxes

@@ -24,8 +24,6 @@ class AddEditDiscTableViewController: UITableViewController {
     @IBOutlet var plasticTextField: UITextField!
     @IBOutlet var purchasePriceTextField: UITextField!
     @IBOutlet var soldDiscSwitch: UISwitch!
-    @IBOutlet var soldOnEbayLabel: UILabel!
-    @IBOutlet var soldOnEbaySwitch: UISwitch!
     @IBOutlet var estSellPriceLabel: UILabel!
     @IBOutlet var estSellPriceTextField: UITextField!
     @IBOutlet var soldPriceLabel: UILabel!
@@ -79,8 +77,6 @@ class AddEditDiscTableViewController: UITableViewController {
             plasticTextField.text = disc.plastic
             purchasePriceTextField.text = String(disc.purchasePrice)
             soldDiscSwitch.isOn = disc.wasSold
-            soldOnEbaySwitch.isEnabled = soldDiscSwitch.isOn
-            soldOnEbaySwitch.isOn = disc.soldOnEbay
             estSellPriceTextField.text = String(disc.estSellPrice)
             soldPriceTextField.text = String(disc.soldPrice)
             
@@ -89,8 +85,6 @@ class AddEditDiscTableViewController: UITableViewController {
             title = "Edit Disc"
         } else {
             title = "Add Disc"
-            
-            soldOnEbaySwitch.isEnabled = false
             
             setSellSoldFieldsHiddenState(sold: false)
         }
@@ -151,7 +145,6 @@ class AddEditDiscTableViewController: UITableViewController {
     
     // Trigger enabled state updates for various UI elements
     @IBAction func soldDiscSwitchTapped(_ sender: UISwitch) {
-        soldOnEbaySwitch.isEnabled = sender.isOn
         
         // Disable/enable text fields to prevent text entry in non-active fields
         estSellPriceTextField.isEnabled = !sender.isOn
@@ -159,15 +152,6 @@ class AddEditDiscTableViewController: UITableViewController {
         
         // Enable/disable save button based on re-appearing selling/sold price text field values
         updateSaveButtonState()
-        
-        // Insert or remove sold on eBay row based on whether or not the disc was sold
-        tableView.beginUpdates()
-        if sender.isOn {
-            tableView.insertRows(at: [IndexPath(row: 1, section: 3)], with: .left)
-        } else {
-            tableView.deleteRows(at: [IndexPath(row: 1, section: 3)], with: .left)
-        }
-        tableView.endUpdates()
         
         updateEstSellSoldPriceCell(sender)
     }
@@ -193,16 +177,6 @@ class AddEditDiscTableViewController: UITableViewController {
     }
     
     // MARK: - Table view functions
-    
-    // Set the number of rows in each section
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 3:
-            return soldDiscSwitch.isOn ? 2 : 1
-        default:
-            return 1
-        }
-    }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
@@ -254,8 +228,7 @@ class AddEditDiscTableViewController: UITableViewController {
         let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
         let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
         let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
-        let soldOnEbay = soldOnEbaySwitch.isOn
         
-        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice, soldOnEbay: soldOnEbay)
+        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice)
     }
 }

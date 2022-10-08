@@ -851,42 +851,12 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="soldOnEbayCell" rowHeight="44" id="KJS-X9-w9Y">
-                                        <rect key="frame" x="20" y="314" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KJS-X9-w9Y" id="bbu-wg-McJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sold on eBay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghJ-dB-zrK">
-                                                    <rect key="frame" x="20" y="12" width="277" height="21"/>
-                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="X0z-wI-iSK">
-                                                    <rect key="frame" x="305" y="6" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.63127003032525453" green="1" blue="0.54322656019790061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ghJ-dB-zrK" firstAttribute="leading" secondItem="bbu-wg-McJ" secondAttribute="leadingMargin" id="2T5-P5-24V"/>
-                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="top" secondItem="bbu-wg-McJ" secondAttribute="top" constant="6" id="Hoa-kT-czN"/>
-                                                <constraint firstAttribute="bottom" secondItem="X0z-wI-iSK" secondAttribute="bottom" constant="7" id="N5c-l6-z6r"/>
-                                                <constraint firstItem="ghJ-dB-zrK" firstAttribute="bottom" secondItem="bbu-wg-McJ" secondAttribute="bottomMargin" id="bPr-hK-3pX"/>
-                                                <constraint firstItem="X0z-wI-iSK" firstAttribute="leading" secondItem="ghJ-dB-zrK" secondAttribute="trailing" constant="8" id="bXs-RL-voi"/>
-                                                <constraint firstItem="ghJ-dB-zrK" firstAttribute="top" secondItem="bbu-wg-McJ" secondAttribute="topMargin" constant="1" id="kgD-Ic-wiT"/>
-                                                <constraint firstAttribute="trailing" secondItem="X0z-wI-iSK" secondAttribute="trailing" constant="20" symbolic="YES" id="tHu-Fh-bWP"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="sTp-9Z-yg0">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="estSellPriceCell" rowHeight="44" id="uwX-Dl-mZL">
-                                        <rect key="frame" x="20" y="394" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="350" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uwX-Dl-mZL" id="1Mz-gs-I4X">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -975,8 +945,6 @@
                         <outlet property="purchasePriceTextField" destination="qoW-25-1H5" id="KyZ-Ba-C2S"/>
                         <outlet property="saveButton" destination="Ko1-Nq-fGs" id="ylp-xy-W9F"/>
                         <outlet property="soldDiscSwitch" destination="gcG-Kx-jXR" id="vdC-QZ-z86"/>
-                        <outlet property="soldOnEbayLabel" destination="ghJ-dB-zrK" id="U9K-T2-APk"/>
-                        <outlet property="soldOnEbaySwitch" destination="X0z-wI-iSK" id="Ciu-58-SoK"/>
                         <outlet property="soldPriceLabel" destination="vbv-fk-Fn6" id="mLr-W0-pet"/>
                         <outlet property="soldPriceTextField" destination="QaR-ob-dxJ" id="2WI-LR-nC8"/>
                     </connections>
