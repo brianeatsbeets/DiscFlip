@@ -37,3 +37,9 @@ enum InventoryFilter: String, CaseIterable {
     case sold = "Sold"
     case unsold = "Unsold"
 }
+
+// This enum defines the context in which the TagFilterTableViewController is instantiated
+enum TagSelectNavigationContext {
+    case inventoryFilter
+    case addEditDisc
+}

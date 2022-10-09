@@ -6,7 +6,7 @@
 //
 
 // TODO: Maybe use prototype cell instead of xib
-// TODO: Use initializer?
+// TODO: Rename this class via Refactor
 
 // MARK: - Imported libraries
 
@@ -19,10 +19,34 @@ class TagFilterTableViewController: UITableViewController {
     
     // MARK: - Class properties
     
-    weak var delegate: TagFilterDelegate?
-    var allTags = [Tag]()
-    var activeTagFilters = [Tag]()
+    var context: TagSelectNavigationContext
+    weak var delegate: TagFilterDelegate? // Not needed once instantiated via IBSegueAction
+    var allTags: [Tag]
+    var selectedTags: [Tag]
     private lazy var dataSource = createDataSource()
+    
+    // MARK: - Initializers
+    
+    // Initialize from AddEditDiscTableViewController
+    init?(coder: NSCoder, allTags: [Tag], currentTags: [Tag]) {
+        self.allTags = allTags
+        self.selectedTags = currentTags
+        self.context = .addEditDisc
+        super.init(coder: coder)
+    }
+    
+    // Initialize from InventoryFilterTableViewController
+    init?(coder: NSCoder, allTags: [Tag], activeTagFilters: [Tag]) {
+        self.allTags = allTags
+        self.selectedTags = activeTagFilters
+        self.context = .inventoryFilter
+        super.init(coder: coder)
+    }
+    
+    // Implement required initializer
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View life cycle functions
 
@@ -45,14 +69,27 @@ class TagFilterTableViewController: UITableViewController {
     
     // Pre-select the row for the current filter setting
     func setSelectedFilterRow() {
-        var i = 0
         
-        while i < tableView.numberOfRows(inSection: 0) {
-            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
-            if activeTagFilters.firstIndex(of: tagForRow) != nil {
-                tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
+        // Select rows for inventory tag filters
+        if context == .inventoryFilter {
+            var i = 0
+            while i < tableView.numberOfRows(inSection: 0) {
+                guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
+                if selectedTags.firstIndex(of: tagForRow) != nil {
+                    tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
+                }
+                i += 1
             }
-            i += 1
+        } else {
+            // Select rows for assigning tags to disc
+            var i = 0
+            while i < tableView.numberOfRows(inSection: 0) {
+                guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
+                if selectedTags.firstIndex(of: tagForRow) != nil {
+                    tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
+                }
+                i += 1
+            }
         }
     }
 
@@ -61,25 +98,47 @@ class TagFilterTableViewController: UITableViewController {
     // Define what to do when a cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Add the selected tag to the list of tags to filter on
-        guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-        activeTagFilters.append(tagForRow)
-        
-        delegate?.filterInventory(tagFilters: activeTagFilters)
-        dismiss(animated: true)
+        // Action for inventory tag filters
+        if context == .inventoryFilter {
+            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+            
+            // Add the selected tag to the list of tags to filter on
+            selectedTags.append(tagForRow)
+            
+            delegate?.filterInventory(tagFilters: selectedTags)
+            dismiss(animated: true)
+        } else {
+            // Action for assigning tags to disc
+            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+            
+            // Add the selected tag to the list of tags associated with the disc
+            selectedTags.append(tagForRow)
+        }
     }
     
     // Define what to do when a cell is deselected
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        // Remove the selected tag from the list of tags to filter on
-        guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-        if let index = activeTagFilters.firstIndex(of: tagForRow) {
-            activeTagFilters.remove(at: index)
+        // Action for inventory tag filters
+        if context == .inventoryFilter {
+            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+            
+            // Remove the selected tag from the list of tags to filter on
+            if let index = selectedTags.firstIndex(of: tagForRow) {
+                selectedTags.remove(at: index)
+            }
+            
+            delegate?.filterInventory(tagFilters: selectedTags)
+            dismiss(animated: true)
+        } else {
+            // Action for assigning tags to disc
+            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+            
+            // Remove the selected tag from the list of tags associated with the disc
+            if let index = selectedTags.firstIndex(of: tagForRow) {
+                selectedTags.remove(at: index)
+            }
         }
-        
-        delegate?.filterInventory(tagFilters: activeTagFilters)
-        dismiss(animated: true)
     }
 }
 

@@ -17,6 +17,9 @@ class AddEditDiscTableViewController: UITableViewController {
     // MARK: - Class properties
 
     var disc: Disc?
+    var allTags: [Tag]
+    var tagsToAssign = [Tag]()
+    var dismissKeyboardGestureRecognizer = UITapGestureRecognizer()
     
     // IBOutlets
     
@@ -37,8 +40,9 @@ class AddEditDiscTableViewController: UITableViewController {
     // MARK: - Initializers
     
     // Initialize with disc data
-    init?(coder: NSCoder, disc: Disc?) {
+    init?(coder: NSCoder, disc: Disc?, tags: [Tag]) {
         self.disc = disc
+        self.allTags = tags
         super.init(coder: coder)
     }
     
@@ -54,11 +58,10 @@ class AddEditDiscTableViewController: UITableViewController {
         updateUI()
         updateSaveButtonState()
         
-        // Create a gesture recognizer to dismiss the keyboard when an outside tap is registered
-        let dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
-        
         tagsCell.accessoryView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        
+        // Initialize a gesture recognizer to dismiss the keyboard when an outside tap is registered
+        dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
         super.viewDidLoad()
     }
@@ -135,6 +138,11 @@ class AddEditDiscTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
+    // Add the gesture recognizer to dismiss the keyboard when an outside tap is registered
+    @IBAction func textEditingBegan(_ sender: UITextField) {
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+    }
+    
     // Move active text field to the next one, if any
     @IBAction func returnKeyTapped(_ sender: UITextField) {
         let nextTag = sender.tag + 1
@@ -174,9 +182,10 @@ class AddEditDiscTableViewController: UITableViewController {
         }
     }
     
-    // Dismiss the keyboard when an outside tap is registered
+    // Dismiss the keyboard when an outside tap is registered and remove the gesture recognizer
     @objc func dismissKeyboard() {
         view.endEditing(true)
+        view.removeGestureRecognizer(dismissKeyboardGestureRecognizer)
     }
     
     // MARK: - Table view functions
@@ -186,11 +195,6 @@ class AddEditDiscTableViewController: UITableViewController {
             cell.clipsToBounds = false
             cell.contentView.clipsToBounds = false
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
     }
     
     // Provide a view for each section footer
@@ -228,15 +232,30 @@ class AddEditDiscTableViewController: UITableViewController {
     // Compile the disc data for sending back to the inventory table view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // Make sure we're saving and not cancelling
-        guard segue.identifier == "saveUnwind" else { return }
+        // Save disc
+        if segue.identifier == "saveUnwind" {
+            let name = nameTextField.text!
+            let plastic = plasticTextField.text!
+            let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
+            let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
+            let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
+            
+            disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice)
+        }
+    }
+    
+    // Configure the incoming TagFilterTableViewController for updating the current disc's tags
+    @IBSegueAction func selectTagsToAssign(_ coder: NSCoder, sender: Any?) -> TagFilterTableViewController? {
+        return TagFilterTableViewController(coder: coder, allTags: allTags, currentTags: disc?.tags ?? [Tag]())
+    }
+    
+    // Handle the incoming data being passed back from TagFilterDiscTableViewController
+    @IBAction func unwindToAddEditDiscTableViewController(segue: UIStoryboardSegue) {
         
-        let name = nameTextField.text!
-        let plastic = plasticTextField.text!
-        let purchasePrice = Int(purchasePriceTextField.text!) ?? 0
-        let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
-        let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
+        // Check to see if we're coming back from saving tags. If not, exit with guard
+        guard segue.identifier == "saveTagsUnwind",
+              let sourceViewController = segue.source as? TagFilterTableViewController else { return }
         
-        disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice)
+        disc?.tags = sourceViewController.selectedTags
     }
 }

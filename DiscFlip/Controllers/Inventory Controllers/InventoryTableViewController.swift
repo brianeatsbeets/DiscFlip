@@ -164,6 +164,8 @@ class InventoryTableViewController: UITableViewController {
         // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
         segue.destination.presentationController?.delegate = self
         
+        
+        // TODO: Instantiate via @IBSegueAction instead
         // Check if we're segueing to the inventory filter
         // If so, configure the inventory filter view controller and its presentation
         guard let tagFilterTVC = segue.destination as? TagFilterTableViewController,
@@ -172,10 +174,11 @@ class InventoryTableViewController: UITableViewController {
         tagFilterTVC.preferredContentSize = CGSize(width: 325, height: 44 * (tags.count + 1))
         tagFilterTVC.delegate = self
         tagFilterTVC.allTags = tags
-        tagFilterTVC.activeTagFilters = activeTagFilters
+        tagFilterTVC.selectedTags = activeTagFilters
+        tagFilterTVC.context = .inventoryFilter
     }
     
-    // Configure the incoming AddEditDiscTableViewControler for either editing an existing disc or adding a new one
+    // Configure the incoming AddEditDiscTableViewController for either editing an existing disc or adding a new one
     @IBSegueAction func addEditDisc(_ coder: NSCoder, sender: Any?) -> UITableViewController? {
         
         // Check to see if a cell was tapped
@@ -183,10 +186,10 @@ class InventoryTableViewController: UITableViewController {
            let indexPath = tableView.indexPath(for: cell),
            let discToEdit = dataSource.itemIdentifier(for: indexPath) {
             // If so, pass the tapped disc to edit
-            return AddEditDiscTableViewController(coder: coder, disc: discToEdit)
+            return AddEditDiscTableViewController(coder: coder, disc: discToEdit, tags: tags)
         } else {
             // If not, prep for adding a new disc
-            return AddEditDiscTableViewController(coder: coder, disc: nil)
+            return AddEditDiscTableViewController(coder: coder, disc: nil, tags: tags)
         }
     }
     

@@ -329,7 +329,7 @@
                                         <imageReference key="image" image="tag.fill" catalog="system" symbolScale="medium"/>
                                     </buttonConfiguration>
                                     <connections>
-                                        <segue destination="7YD-r9-GEU" kind="popoverPresentation" identifier="TagFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
+                                        <segue destination="6Bf-ey-vaJ" kind="popoverPresentation" identifier="TagFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                         </segue>
                                     </connections>
@@ -447,7 +447,7 @@
             </objects>
             <point key="canvasLocation" x="1774" y="1871"/>
         </scene>
-        <!--Tag Filter Table View Controller-->
+        <!--Select Tags-->
         <scene sceneID="Ku2-LS-0wr">
             <objects>
                 <tableViewController id="7YD-r9-GEU" customClass="TagFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
@@ -466,10 +466,22 @@
                             <outlet property="delegate" destination="7YD-r9-GEU" id="C4D-Ul-iIC"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Select Tags" id="Ne9-ef-cXv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gDx-ds-MbH">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="YBZ-mw-qBK">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="CLx-La-qs9" kind="unwind" identifier="saveTagsUnwind" unwindAction="unwindToAddEditDiscTableViewControllerWithSegue:" id="HaM-OI-Iwi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIh-OS-oac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="CLx-La-qs9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2667" y="1171"/>
+            <point key="canvasLocation" x="3576.811594202899" y="1170.5357142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uDD-kC-JQS">
@@ -689,14 +701,14 @@
         <scene sceneID="hmE-E4-nI2">
             <objects>
                 <tableViewController id="iqI-Yl-9Jj" customClass="AddEditDiscTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="2Xg-T0-t9K">
+                    <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="2Xg-T0-t9K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="IVZ-VI-icG">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="nameCell" rowHeight="44" id="GQ4-ip-Quk">
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="nameCell" rowHeight="44" id="GQ4-ip-Quk">
                                         <rect key="frame" x="20" y="18" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GQ4-ip-Quk" id="pQu-5F-ZCz">
@@ -711,6 +723,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="returnKeyTapped:" destination="iqI-Yl-9Jj" eventType="primaryActionTriggered" id="MSn-jb-lD7"/>
+                                                        <action selector="textEditingBegan:" destination="iqI-Yl-9Jj" eventType="editingDidBegin" id="U8O-3W-M9v"/>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="tEx-DK-06a"/>
                                                     </connections>
                                                 </textField>
@@ -737,7 +750,7 @@
                             </tableViewSection>
                             <tableViewSection id="iEx-Af-RIe">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="plasticCell" rowHeight="44" id="BEo-zi-kGJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="plasticCell" rowHeight="44" id="BEo-zi-kGJ">
                                         <rect key="frame" x="20" y="98" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BEo-zi-kGJ" id="6zb-B0-yZo">
@@ -752,6 +765,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="returnKeyTapped:" destination="iqI-Yl-9Jj" eventType="primaryActionTriggered" id="Jot-xA-kNb"/>
+                                                        <action selector="textEditingBegan:" destination="iqI-Yl-9Jj" eventType="editingDidBegin" id="PbL-Sq-HER"/>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="Uo3-88-1tn"/>
                                                     </connections>
                                                 </textField>
@@ -778,7 +792,7 @@
                             </tableViewSection>
                             <tableViewSection footerTitle="Include extra costs, such as shipping, tax, etc." id="IJV-Es-SOM">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="purchasePriceCell" rowHeight="44" id="3DC-OC-HEt">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="purchasePriceCell" rowHeight="44" id="3DC-OC-HEt">
                                         <rect key="frame" x="20" y="178" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3DC-OC-HEt" id="f6r-f3-NIc">
@@ -792,6 +806,7 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="textEditingBegan:" destination="iqI-Yl-9Jj" eventType="editingDidBegin" id="N9q-bQ-1gi"/>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="WFh-dI-d8m"/>
                                                     </connections>
                                                 </textField>
@@ -818,7 +833,7 @@
                             </tableViewSection>
                             <tableViewSection id="a3b-Re-c1u">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="soldDiscCell" rowHeight="44" id="5D6-Xi-l4m">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="soldDiscCell" rowHeight="44" id="5D6-Xi-l4m">
                                         <rect key="frame" x="20" y="270" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5D6-Xi-l4m" id="akv-sK-xJN">
@@ -855,7 +870,7 @@
                             </tableViewSection>
                             <tableViewSection id="sTp-9Z-yg0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="estSellPriceCell" rowHeight="44" id="uwX-Dl-mZL">
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="estSellPriceCell" rowHeight="44" id="uwX-Dl-mZL">
                                         <rect key="frame" x="20" y="350" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uwX-Dl-mZL" id="1Mz-gs-I4X">
@@ -869,6 +884,7 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="textEditingBegan:" destination="iqI-Yl-9Jj" eventType="editingDidBegin" id="aUu-uk-veR"/>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="moy-K1-D4z"/>
                                                     </connections>
                                                 </textField>
@@ -891,6 +907,7 @@
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="textEditingBegan:" destination="iqI-Yl-9Jj" eventType="editingDidBegin" id="pGo-1l-pky"/>
                                                         <action selector="textEditingChanged:" destination="iqI-Yl-9Jj" eventType="editingChanged" id="s1H-UI-qvO"/>
                                                     </connections>
                                                 </textField>
@@ -918,7 +935,7 @@
                             </tableViewSection>
                             <tableViewSection id="3ih-Tg-q5K">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tagsCell" rowHeight="44" id="M0y-rC-Shp">
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tagsCell" rowHeight="44" id="M0y-rC-Shp">
                                         <rect key="frame" x="20" y="430" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M0y-rC-Shp" id="IJi-bV-u3c">
@@ -940,6 +957,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="6Bf-ey-vaJ" kind="presentation" identifier="AssignTags" destinationCreationSelector="selectTagsToAssign:" id="nHe-2u-f7f"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1038,8 +1058,27 @@
             </objects>
             <point key="canvasLocation" x="1773.913043478261" y="-226.33928571428569"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xKI-zH-Izl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Bf-ey-vaJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fUN-80-EcE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7YD-r9-GEU" kind="relationship" relationship="rootViewController" destinationCreationSelector="selectTagsToAssign:sender:" id="KVy-8z-dJh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FIU-rf-hjo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2666.666666666667" y="1170.5357142857142"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="nHe-2u-f7f"/>
         <segue reference="L1F-FP-pKW"/>
         <segue reference="RdZ-7T-7Vb"/>
     </inferredMetricsTieBreakers>
