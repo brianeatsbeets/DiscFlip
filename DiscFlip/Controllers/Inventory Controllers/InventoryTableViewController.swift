@@ -151,32 +151,7 @@ class InventoryTableViewController: UITableViewController {
         filterInventory()
     }
     
-    // This is a temporary function/IBAction to test out filtering with tags
-    @IBAction func createTag(_ sender: Any) {
-        createFilterView(tagFilter: Tag(title: "Tag"))
-        filterInventory(tagFilters: activeTagFilters)
-    }
-    
     // MARK: - Navigation
-    
-    // Prep for specific segue cases
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Set the destination presentation controller delegate to self in order to be notified of manual view dismissals (see UIAdaptivePresentationControllerDelegate extension below)
-        segue.destination.presentationController?.delegate = self
-        
-        
-        // TODO: Instantiate via @IBSegueAction instead
-        // Check if we're segueing to the inventory filter
-        // If so, configure the inventory filter view controller and its presentation
-        guard let tagFilterTVC = segue.destination as? TagFilterTableViewController,
-              segue.identifier == "TagFilter" else { return }
-        tagFilterTVC.presentationController?.delegate = self
-        tagFilterTVC.preferredContentSize = CGSize(width: 325, height: 44 * (tags.count + 1))
-        tagFilterTVC.delegate = self
-        tagFilterTVC.allTags = tags
-        tagFilterTVC.selectedTags = activeTagFilters
-        tagFilterTVC.context = .inventoryFilter
-    }
     
     // Configure the incoming AddEditDiscTableViewController for either editing an existing disc or adding a new one
     @IBSegueAction func addEditDisc(_ coder: NSCoder, sender: Any?) -> UITableViewController? {
@@ -223,25 +198,25 @@ class InventoryTableViewController: UITableViewController {
         
         Disc.saveInventory(inventory)
     }
+    
+    // Configure the incoming SelectTagsTableViewController for selecting tags to filter on
+    @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> TagFilterTableViewController? {
+        return TagFilterTableViewController(coder: coder, allTags: tags, activeTagFilters: activeTagFilters)
+    }
+    
+    // Handle the incoming data being passed back from TagFilterDiscTableViewController
+    @IBAction func unwindToInventoryFromTagFilters(segue: UIStoryboardSegue) {
+        
+        // Check to see if we're coming back from saving tags. If not, exit with guard
+        guard segue.identifier == "saveUnwindToInventoryFromTagFilters",
+              let sourceViewController = segue.source as? TagFilterTableViewController else { return }
+        
+        activeTagFilters = sourceViewController.selectedTags
+        filterInventory()
+    }
 }
     
 // MARK: - Extensions
-
-// This extension handles deselecting the selected row when the user manually swipes away the modally presented view controller (AddEditDiscTableViewController)
-extension InventoryTableViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIndexPath, animated: false)
-        }
-    }
-}
-
-// This extension allows the InventoryFilterViewController to have customizable dimensions
-extension InventoryTableViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-}
     
 // This extension processes filter selections and filters the table view data appropriately
 extension InventoryTableViewController: TagFilterDelegate {

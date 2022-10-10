@@ -244,16 +244,16 @@ class AddEditDiscTableViewController: UITableViewController {
         }
     }
     
-    // Configure the incoming TagFilterTableViewController for updating the current disc's tags
-    @IBSegueAction func selectTagsToAssign(_ coder: NSCoder, sender: Any?) -> TagFilterTableViewController? {
-        return TagFilterTableViewController(coder: coder, allTags: allTags, currentTags: disc?.tags ?? [Tag]())
+    // Configure the incoming SelectTagsTableViewController for selecting tags to assign
+    @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> TagFilterTableViewController? {
+            return TagFilterTableViewController(coder: coder, allTags: allTags, currentTags: disc?.tags ?? [Tag]())
     }
     
     // Handle the incoming data being passed back from TagFilterDiscTableViewController
     @IBAction func unwindToAddEditDiscTableViewController(segue: UIStoryboardSegue) {
         
         // Check to see if we're coming back from saving tags. If not, exit with guard
-        guard segue.identifier == "saveTagsUnwind",
+        guard segue.identifier == "saveUnwindToAddEditDisc",
               let sourceViewController = segue.source as? TagFilterTableViewController else { return }
         
         disc?.tags = sourceViewController.selectedTags

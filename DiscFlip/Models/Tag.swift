@@ -16,7 +16,6 @@ struct Tag: Codable, CustomStringConvertible, Hashable {
 
     let id: UUID
     var title: String
-    //var isActiveFilter: Bool
     
     // Property required by CustomStringConvertible protocol
     var description: String
@@ -26,8 +25,6 @@ struct Tag: Codable, CustomStringConvertible, Hashable {
     init(title: String) {
         self.id = UUID()
         self.title = title
-        //self.isActiveFilter = false
-        //self.description = "\(title) is active: \(isActiveFilter)"
         self.description = "Tag: \(title)"
     }
     

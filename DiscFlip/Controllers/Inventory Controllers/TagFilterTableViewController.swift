@@ -53,92 +53,101 @@ class TagFilterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "TagFilterTableViewCell", bundle: nil), forCellReuseIdentifier: "TagFilterCell")
         tableView.dataSource = dataSource
         
         updateTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setSelectedFilterRow()
+    // MARK: - Navigation
+    
+    // Unwind to the appropriate view controller with the save segue
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        if context == .inventoryFilter {
+            performSegue(withIdentifier: "saveUnwindToInventoryFromTagFilters", sender: self)
+        } else {
+            performSegue(withIdentifier: "saveUnwindToAddEditDisc", sender: self)
+        }
     }
     
-    // MARK: - Utility functions
-    
-    // Pre-select the row for the current filter setting
-    func setSelectedFilterRow() {
-        
-        // Select rows for inventory tag filters
+    // Unwind to the appropriate view controller with the cancel segue
+    @IBAction func cancelButtonPressed(_ sender: Any) {
         if context == .inventoryFilter {
-            var i = 0
-            while i < tableView.numberOfRows(inSection: 0) {
-                guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
-                if selectedTags.firstIndex(of: tagForRow) != nil {
-                    tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
-                }
-                i += 1
-            }
+            performSegue(withIdentifier: "cancelUnwindToInventoryFromTagFilters", sender: self)
         } else {
-            // Select rows for assigning tags to disc
-            var i = 0
-            while i < tableView.numberOfRows(inSection: 0) {
-                guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: i, section: 0)) else { return }
-                if selectedTags.firstIndex(of: tagForRow) != nil {
-                    tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .none)
-                }
-                i += 1
-            }
+            performSegue(withIdentifier: "cancelUnwindToAddEditDisc", sender: self)
         }
     }
 
     // MARK: - Table view data source
     
+    // Define what to do when a cell is will be displayed
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        guard let cell = cell as? SelectTagTableViewCell,
+              let tagForRow = dataSource.itemIdentifier(for: indexPath) else { return }
+
+        // Pre-select the row for the current tag filters/assigned tags
+        if selectedTags.firstIndex(of: tagForRow) != nil {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+
+            let cellBackgroundView = UIView()
+            cellBackgroundView.backgroundColor = cell.isSelected ? .white : cell.backgroundColor!
+            cell.selectedBackgroundView = cellBackgroundView
+
+            cell.tagTitleLabel.textColor = cell.isSelected ? .black : .white
+        }
+    }
+    
     // Define what to do when a cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Action for inventory tag filters
-        if context == .inventoryFilter {
-            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-            
-            // Add the selected tag to the list of tags to filter on
-            selectedTags.append(tagForRow)
-            
-            delegate?.filterInventory(tagFilters: selectedTags)
-            dismiss(animated: true)
-        } else {
-            // Action for assigning tags to disc
-            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-            
-            // Add the selected tag to the list of tags associated with the disc
-            selectedTags.append(tagForRow)
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) as? SelectTagTableViewCell,
+              let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+        
+        // Add the selected tag to the list of tags to filter on/the list of tags associated with the disc
+        selectedTags.append(tagForRow)
+        
+        // Stylize cell
+        cell.selectedBackgroundView!.backgroundColor = cell.isSelected ? .white : cell.backgroundColor!
+        cell.tagTitleLabel.textColor = cell.isSelected ? .black : .white
     }
     
     // Define what to do when a cell is deselected
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        // Action for inventory tag filters
-        if context == .inventoryFilter {
-            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-            
-            // Remove the selected tag from the list of tags to filter on
-            if let index = selectedTags.firstIndex(of: tagForRow) {
-                selectedTags.remove(at: index)
-            }
-            
-            delegate?.filterInventory(tagFilters: selectedTags)
-            dismiss(animated: true)
-        } else {
-            // Action for assigning tags to disc
-            guard let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
-            
-            // Remove the selected tag from the list of tags associated with the disc
-            if let index = selectedTags.firstIndex(of: tagForRow) {
-                selectedTags.remove(at: index)
-            }
+        guard let cell = tableView.cellForRow(at: indexPath) as? SelectTagTableViewCell,
+              let tagForRow = dataSource.itemIdentifier(for: IndexPath(row: indexPath.row, section: 0)) else { return }
+        
+        // Remove the selected tag from the list of tags to filter on/the list of tags associated with the disc
+        if let index = selectedTags.firstIndex(of: tagForRow) {
+            selectedTags.remove(at: index)
         }
+        
+        // Stylize cell
+        cell.selectedBackgroundView!.backgroundColor = cell.isSelected ? cell.backgroundColor! : .white
+        cell.tagTitleLabel.textColor = cell.isSelected ? .black : .white
+    }
+    
+    // Define what to do when a cell is highlighted
+    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SelectTagTableViewCell else { return }
+        
+        let cellHighlightColor = UIColor(red: 161/255, green: 1, blue: 139/255, alpha: 1)
+        
+        // Set the background and text colors
+        cell.selectedBackgroundView!.backgroundColor = cellHighlightColor
+        cell.tagTitleLabel.textColor = .black
+    }
+    
+    // Define what to do when a cell is unhighlighted
+    override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SelectTagTableViewCell else { return }
+        
+        let cellBackgroundColor = UIColor(red: 68/255, green: 186/255, blue: 99/255, alpha: 1)
+        
+        // Set the background and text colors
+        cell.selectedBackgroundView!.backgroundColor = cell.isSelected ? .white : cellBackgroundColor
+        cell.tagTitleLabel.textColor = cell.isSelected ? .black : .white
     }
 }
 
@@ -151,13 +160,13 @@ extension TagFilterTableViewController {
     private func createDataSource() -> UITableViewDiffableDataSource<Section, Tag> {
         
         // Create a locally-scoped copy of cellReuseIdentifier to avoid referencing self in closure below
-        let reuseIdentifier = "TagFilterCell"
+        let reuseIdentifier = "tagCell"
         
         return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, tag in
             // Configure the cell
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! TagFilterTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SelectTagTableViewCell
             
-            cell.tagFilterCellLabel.text = tag.title
+            cell.tagTitleLabel.text = tag.title
             
             return cell
         }

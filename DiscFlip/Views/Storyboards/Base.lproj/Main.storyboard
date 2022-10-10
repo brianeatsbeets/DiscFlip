@@ -329,9 +329,7 @@
                                         <imageReference key="image" image="tag.fill" catalog="system" symbolScale="medium"/>
                                     </buttonConfiguration>
                                     <connections>
-                                        <segue destination="6Bf-ey-vaJ" kind="popoverPresentation" identifier="TagFilter" popoverAnchorView="fcg-jf-Dji" id="ica-Xh-x3i">
-                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                        </segue>
+                                        <segue destination="6Bf-ey-vaJ" kind="presentation" identifier="TagFilter" modalPresentationStyle="fullScreen" id="ica-Xh-x3i"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -368,11 +366,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Inventory" id="6vb-9p-irU">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="fSX-QQ-TS0">
-                            <connections>
-                                <action selector="createTag:" destination="Va6-Ml-tsV" id="uc4-3X-WRU"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nzY-Iq-li6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -451,15 +444,33 @@
         <scene sceneID="Ku2-LS-0wr">
             <objects>
                 <tableViewController id="7YD-r9-GEU" customClass="TagFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="SGZ-fj-G2R" userLabel="Header View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tagCell" id="n5z-eC-Qu9" customClass="SelectTagTableViewCell" customModule="DiscFlip" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n5z-eC-Qu9" id="Uba-YD-6x0">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bH0-Xe-nro">
+                                            <rect key="frame" x="20" y="11" width="334" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="tagTitleLabel" destination="bH0-Xe-nro" id="wK4-Pv-9In"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="7YD-r9-GEU" id="RZs-xH-DFt"/>
@@ -469,14 +480,23 @@
                     <navigationItem key="navigationItem" title="Select Tags" id="Ne9-ef-cXv">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gDx-ds-MbH">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="7YD-r9-GEU" id="byI-JR-hBx"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="YBZ-mw-qBK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="CLx-La-qs9" kind="unwind" identifier="saveTagsUnwind" unwindAction="unwindToAddEditDiscTableViewControllerWithSegue:" id="HaM-OI-Iwi"/>
+                                <action selector="saveButtonPressed:" destination="7YD-r9-GEU" id="k2m-QI-14b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="CLx-La-qs9" kind="unwind" identifier="saveUnwindToAddEditDisc" unwindAction="unwindToAddEditDiscTableViewControllerWithSegue:" id="V96-yu-Hx6"/>
+                        <segue destination="CLx-La-qs9" kind="unwind" identifier="cancelUnwindToAddEditDisc" unwindAction="unwindToAddEditDiscTableViewControllerWithSegue:" id="RUQ-JJ-JsJ"/>
+                        <segue destination="CLx-La-qs9" kind="unwind" identifier="saveUnwindToInventoryFromTagFilters" unwindAction="unwindToInventoryFromTagFiltersWithSegue:" id="AJC-Cl-If0"/>
+                        <segue destination="CLx-La-qs9" kind="unwind" identifier="cancelUnwindToInventoryFromTagFilters" unwindAction="unwindToInventoryFromTagFiltersWithSegue:" id="WUN-QH-ivc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIh-OS-oac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="CLx-La-qs9" userLabel="Exit" sceneMemberID="exit"/>
@@ -958,7 +978,7 @@
                                         <color key="backgroundColor" red="0.26660104969999998" green="0.73033188329999998" blue="0.3888628576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <segue destination="6Bf-ey-vaJ" kind="presentation" identifier="AssignTags" destinationCreationSelector="selectTagsToAssign:" id="nHe-2u-f7f"/>
+                                            <segue destination="6Bf-ey-vaJ" kind="presentation" identifier="AssignTags" modalPresentationStyle="fullScreen" id="nHe-2u-f7f"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1064,12 +1084,21 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Bf-ey-vaJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fUN-80-EcE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.51798269649999995" green="0.82054061119999999" blue="0.44573945370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="33"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="7YD-r9-GEU" kind="relationship" relationship="rootViewController" destinationCreationSelector="selectTagsToAssign:sender:" id="KVy-8z-dJh"/>
+                        <segue destination="7YD-r9-GEU" kind="relationship" relationship="rootViewController" destinationCreationSelector="selectTags:sender:" id="KVy-8z-dJh"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIU-rf-hjo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1078,9 +1107,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nHe-2u-f7f"/>
+        <segue reference="ica-Xh-x3i"/>
         <segue reference="L1F-FP-pKW"/>
-        <segue reference="RdZ-7T-7Vb"/>
+        <segue reference="qte-hQ-g0u"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_more_horiz_white_36pt" width="36" height="36"/>
