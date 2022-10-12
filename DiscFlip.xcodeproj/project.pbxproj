@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E108F68228E4807400766644 /* TagFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68128E4807400766644 /* TagFilterTableViewController.swift */; };
+		E108F68228E4807400766644 /* SelectTagTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68128E4807400766644 /* SelectTagTableViewController.swift */; };
 		E108F68528E49D5C00766644 /* SelectTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108F68328E49D5C00766644 /* SelectTagTableViewCell.swift */; };
 		E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168822228EE27D00006F71D /* TagsTableViewController.swift */; };
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E108F68128E4807400766644 /* TagFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFilterTableViewController.swift; sourceTree = "<group>"; };
+		E108F68128E4807400766644 /* SelectTagTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagTableViewController.swift; sourceTree = "<group>"; };
 		E108F68328E49D5C00766644 /* SelectTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagTableViewCell.swift; sourceTree = "<group>"; };
 		E168822228EE27D00006F71D /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			children = (
 				E1F3C47528BCFC840039013E /* InventoryTableViewController.swift */,
 				E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */,
-				E108F68128E4807400766644 /* TagFilterTableViewController.swift */,
+				E108F68128E4807400766644 /* SelectTagTableViewController.swift */,
 			);
 			path = "Inventory Controllers";
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 				E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */,
 				E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */,
 				E17CA36728C780AC00F357B2 /* Cash.swift in Sources */,
-				E108F68228E4807400766644 /* TagFilterTableViewController.swift in Sources */,
+				E108F68228E4807400766644 /* SelectTagTableViewController.swift in Sources */,
 				E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */,
 				E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */,
 				E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */,

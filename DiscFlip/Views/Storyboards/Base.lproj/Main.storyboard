@@ -443,7 +443,7 @@
         <!--Select Tags-->
         <scene sceneID="Ku2-LS-0wr">
             <objects>
-                <tableViewController id="7YD-r9-GEU" customClass="TagFilterTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="7YD-r9-GEU" customClass="SelectTagTableViewController" customModule="DiscFlip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="BnN-VB-cxo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -993,13 +993,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gZx-Sf-8oe">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="HHc-1d-kZ2" kind="unwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="qcT-j5-yhe"/>
+                                <segue destination="HHc-1d-kZ2" kind="unwind" unwindAction="unwindToInventoryFromAddEditDiscWithSegue:" id="qcT-j5-yhe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Ko1-Nq-fGs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="HHc-1d-kZ2" kind="unwind" identifier="saveUnwind" unwindAction="unwindToInventoryTableViewControllerWithSegue:" id="H7E-qt-iLF"/>
+                                <segue destination="HHc-1d-kZ2" kind="unwind" identifier="saveUnwind" unwindAction="unwindToInventoryFromAddEditDiscWithSegue:" id="H7E-qt-iLF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1107,9 +1107,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ica-Xh-x3i"/>
+        <segue reference="nHe-2u-f7f"/>
         <segue reference="L1F-FP-pKW"/>
-        <segue reference="qte-hQ-g0u"/>
+        <segue reference="RdZ-7T-7Vb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="baseline_more_horiz_white_36pt" width="36" height="36"/>

@@ -169,7 +169,7 @@ class InventoryTableViewController: UITableViewController {
     }
     
     // Handle the incoming data being passed back from AddEditDiscTableViewController, if any
-    @IBAction func unwindToInventoryTableViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindToInventoryFromAddEditDisc(segue: UIStoryboardSegue) {
         
         // Check to see if we're coming back from saving a disc. If not, exit with guard and deselect the row
         guard segue.identifier == "saveUnwind",
@@ -200,8 +200,8 @@ class InventoryTableViewController: UITableViewController {
     }
     
     // Configure the incoming SelectTagsTableViewController for selecting tags to filter on
-    @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> TagFilterTableViewController? {
-        return TagFilterTableViewController(coder: coder, allTags: tags, activeTagFilters: activeTagFilters)
+    @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> SelectTagTableViewController? {
+        return SelectTagTableViewController(coder: coder, allTags: tags, activeTagFilters: activeTagFilters)
     }
     
     // Handle the incoming data being passed back from TagFilterDiscTableViewController
@@ -209,7 +209,7 @@ class InventoryTableViewController: UITableViewController {
         
         // Check to see if we're coming back from saving tags. If not, exit with guard
         guard segue.identifier == "saveUnwindToInventoryFromTagFilters",
-              let sourceViewController = segue.source as? TagFilterTableViewController else { return }
+              let sourceViewController = segue.source as? SelectTagTableViewController else { return }
         
         activeTagFilters = sourceViewController.selectedTags
         filterInventory()

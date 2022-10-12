@@ -1,5 +1,5 @@
 //
-//  TagFilterTableViewController.swift
+//  SelectTagTableViewController.swift
 //  DiscFlip
 //
 //  Created by Aguirre, Brian P. on 9/28/22.
@@ -15,7 +15,7 @@ import UIKit
 // MARK: - Main class
 
 // This class/table view controller displays the tag filter options
-class TagFilterTableViewController: UITableViewController {
+class SelectTagTableViewController: UITableViewController {
     
     // MARK: - Class properties
     
@@ -154,7 +154,7 @@ class TagFilterTableViewController: UITableViewController {
 // MARK: - Extensions
 
 // This extention houses table view management functions using the diffable data source API and conforms to the RemoveCashDelegate protocol
-extension TagFilterTableViewController {
+extension SelectTagTableViewController {
     
     // Create the the data source and specify what to do with a provided cell
     private func createDataSource() -> UITableViewDiffableDataSource<Section, Tag> {
