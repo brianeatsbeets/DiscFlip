@@ -6,6 +6,7 @@
 //
 
 // TODO: Create a flowchart for the filtering workflows
+// TODO: Fix bug where having 1 filter enabled, tapping the inventory filters button, de-selecting the active filter and selecting 1 other filter, and then saving results in all filters being removed
 
 // MARK: - Imported libraries
 
@@ -60,22 +61,31 @@ class InventoryTableViewController: UITableViewController {
         dataSource.delegate = self
         tableView.dataSource = dataSource
         
-        loadData()
+        loadInventory()
+        loadTags()
         stylizeBarButtonItems()
         initializeSegmentedControl()
         updateTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTags()
+    }
+    
     // MARK: - Utility functions
     
     // Fetch the inventory
-    func loadData() {
+    func loadInventory() {
         if let initialInventory = delegate?.checkoutInventory() {
             inventory = initialInventory
         } else {
             print("Failed to fetch initial inventory from DashboardViewController")
         }
-        
+    }
+    
+    // Fetch the tags list
+    func loadTags() {
         if let initialTags = delegate?.checkoutTags() {
             tags = initialTags
         } else {
@@ -187,7 +197,7 @@ class InventoryTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIndexPath, animated: false)
             inventory[selectedIndexPath.row] = disc
-            updateTableView()
+            updateTableView(animated: false)
         } else {
             // If not, add a new disc to the inventory and add a new table view row
             inventory.append(disc)
@@ -196,12 +206,12 @@ class InventoryTableViewController: UITableViewController {
         
         delegate?.updateInventory(newInventory: inventory)
         
-        Disc.saveInventory(inventory)
+        Disc.saveInventoryToDisk(inventory)
     }
     
     // Configure the incoming SelectTagsTableViewController for selecting tags to filter on
     @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> SelectTagTableViewController? {
-        return SelectTagTableViewController(coder: coder, allTags: tags, activeTagFilters: activeTagFilters)
+        return SelectTagTableViewController(coder: coder, allTags: tags, activeTagFilters: activeTagFilters, delegate: self)
     }
     
     // Handle the incoming data being passed back from TagFilterDiscTableViewController
@@ -211,8 +221,7 @@ class InventoryTableViewController: UITableViewController {
         guard segue.identifier == "saveUnwindToInventoryFromTagFilters",
               let sourceViewController = segue.source as? SelectTagTableViewController else { return }
         
-        activeTagFilters = sourceViewController.selectedTags
-        filterInventory()
+        filterInventory(tagFilters: sourceViewController.selectedTags)
     }
 }
     
@@ -245,6 +254,9 @@ extension InventoryTableViewController: TagFilterDelegate {
                     createFilterView(tagFilter: tagFilter)
                 }
             }
+            
+            // Set the provided tag filters as the new active tag filters
+            activeTagFilters = tagFilters
         }
         
         // Filter the inventory on the active tag filters
@@ -362,7 +374,7 @@ extension InventoryTableViewController: RemoveInventoryDelegate {
         
         delegate?.updateInventory(newInventory: inventory)
         
-        Disc.saveInventory(inventory)
+        Disc.saveInventoryToDisk(inventory)
     }
 }
 

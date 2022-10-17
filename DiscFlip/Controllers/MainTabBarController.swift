@@ -37,8 +37,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //fetchData() // Uncomment to use real data
-        loadDummyData() // Uncomment to use dummy data
+        fetchData() // Uncomment to use real data
+        //loadDummyData() // Uncomment to use dummy data
         setDelegates()
         stylizeTabBarItems()
     }

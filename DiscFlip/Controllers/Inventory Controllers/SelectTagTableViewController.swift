@@ -20,7 +20,7 @@ class SelectTagTableViewController: UITableViewController {
     // MARK: - Class properties
     
     var context: TagSelectNavigationContext
-    weak var delegate: TagFilterDelegate? // Not needed once instantiated via IBSegueAction
+    weak var delegate: TagFilterDelegate?
     var allTags: [Tag]
     var selectedTags: [Tag]
     private lazy var dataSource = createDataSource()
@@ -36,10 +36,11 @@ class SelectTagTableViewController: UITableViewController {
     }
     
     // Initialize from InventoryFilterTableViewController
-    init?(coder: NSCoder, allTags: [Tag], activeTagFilters: [Tag]) {
+    init?(coder: NSCoder, allTags: [Tag], activeTagFilters: [Tag], delegate: TagFilterDelegate?) {
         self.allTags = allTags
         self.selectedTags = activeTagFilters
         self.context = .inventoryFilter
+        self.delegate = delegate
         super.init(coder: coder)
     }
     
@@ -53,8 +54,9 @@ class SelectTagTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = dataSource
+        title = (context == .inventoryFilter) ? "Select Tag Filters" : "Select Tags"
         
+        tableView.dataSource = dataSource
         updateTableView()
     }
     
@@ -63,7 +65,11 @@ class SelectTagTableViewController: UITableViewController {
     // Unwind to the appropriate view controller with the save segue
     @IBAction func saveButtonPressed(_ sender: Any) {
         if context == .inventoryFilter {
-            performSegue(withIdentifier: "saveUnwindToInventoryFromTagFilters", sender: self)
+            dismiss(animated: true) {
+                if self.context == .inventoryFilter {
+                    self.delegate?.filterInventory(tagFilters: self.selectedTags)
+                }
+            }
         } else {
             performSegue(withIdentifier: "saveUnwindToAddEditDisc", sender: self)
         }

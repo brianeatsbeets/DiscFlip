@@ -15,7 +15,11 @@ struct Tag: Codable, CustomStringConvertible, Hashable {
     // MARK: - Class properties
 
     let id: UUID
-    var title: String
+    var title: String {
+        didSet {
+            description = "Tag: \(title)"
+        }
+    }
     
     // Property required by CustomStringConvertible protocol
     var description: String
@@ -31,7 +35,7 @@ struct Tag: Codable, CustomStringConvertible, Hashable {
     // MARK: - Utility functions
     
     // Save the updated tags
-    static func saveTags(_ tagsList: [Tag]) {
+    static func saveTagsToDisk(_ tagsList: [Tag]) {
         // Create path to Documents directory
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let archiveURL = documentsDirectory.appendingPathComponent("tags") . appendingPathExtension("plist")

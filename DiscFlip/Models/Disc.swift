@@ -46,7 +46,7 @@ struct Disc: Codable, CustomStringConvertible, Hashable {
     // MARK: - Utility functions
     
     // Save the updated inventory
-    static func saveInventory(_ inventory: [Disc]) {
+    static func saveInventoryToDisk(_ inventory: [Disc]) {
         // Create path to Documents directory
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let archiveURL = documentsDirectory.appendingPathComponent("inventory") . appendingPathExtension("plist")

@@ -240,13 +240,13 @@ class AddEditDiscTableViewController: UITableViewController {
             let estSellPrice = Int(estSellPriceTextField.text!) ?? 0
             let soldPrice = soldPriceTextField.text!.isEmpty ? 0 : (Int(soldPriceTextField.text!) ?? 0) // Provide a value of zero if field is empty; otherwise, parse and validate it like the previous two fields
             
-            disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice)
+            disc = Disc(name: name, plastic: plastic, purchasePrice: purchasePrice, estSellPrice: estSellPrice, wasSold: soldDiscSwitch.isOn, soldPrice: soldPrice, tags: tagsToAssign)
         }
     }
     
     // Configure the incoming SelectTagsTableViewController for selecting tags to assign
     @IBSegueAction func selectTags(_ coder: NSCoder, sender: Any?) -> SelectTagTableViewController? {
-            return SelectTagTableViewController(coder: coder, allTags: allTags, currentTags: disc?.tags ?? [Tag]())
+        return SelectTagTableViewController(coder: coder, allTags: allTags, currentTags: disc?.tags ?? [Tag]())
     }
     
     // Handle the incoming data being passed back from TagFilterDiscTableViewController
@@ -256,6 +256,6 @@ class AddEditDiscTableViewController: UITableViewController {
         guard segue.identifier == "saveUnwindToAddEditDisc",
               let sourceViewController = segue.source as? SelectTagTableViewController else { return }
         
-        disc?.tags = sourceViewController.selectedTags
+        tagsToAssign = sourceViewController.selectedTags
     }
 }
