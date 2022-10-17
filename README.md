@@ -6,6 +6,7 @@ This project incorporates a variety of UIKit interactible elements and utilizes 
 Other features:
 - Colored theme and styling
 - Standard and Keyframe animations
+- Local data storage & persistence
 - Diffable data sources
 - Input field validation
 - Dynamic unwind navigation flow based on context
