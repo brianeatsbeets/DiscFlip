@@ -9,7 +9,7 @@
 
 import Foundation
 
-// This class represents cash funds added to the overall total
+// This class represents a tag, which can be used to group and filter discs
 struct Tag: Codable, CustomStringConvertible, Hashable {
     
     // MARK: - Class properties
@@ -43,7 +43,7 @@ struct Tag: Codable, CustomStringConvertible, Hashable {
         // Encode data
         let propertyListEncoder = PropertyListEncoder()
         if let encodedTags = try? propertyListEncoder.encode(tagsList) {
-            // Save cash
+            // Save tags
             try? encodedTags.write(to: archiveURL, options: .noFileProtection)
         }
     }

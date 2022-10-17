@@ -204,6 +204,7 @@ class InventoryTableViewController: UITableViewController {
             updateTableView()
         }
         
+        filterInventory()
         delegate?.updateInventory(newInventory: inventory)
         
         Disc.saveInventoryToDisk(inventory)

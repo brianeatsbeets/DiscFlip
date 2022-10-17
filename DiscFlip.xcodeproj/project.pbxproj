@@ -12,9 +12,6 @@
 		E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E168822228EE27D00006F71D /* TagsTableViewController.swift */; };
 		E17CA36328BE42A300F357B2 /* AddEditDiscTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */; };
 		E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36428C3919800F357B2 /* MainTabBarController.swift */; };
-		E17CA36728C780AC00F357B2 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36628C780AC00F357B2 /* Cash.swift */; };
-		E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36828C786F700F357B2 /* CashTableViewController.swift */; };
-		E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */; };
 		E1A9F35528EC94C3000E2F90 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A9F35428EC94C3000E2F90 /* FilterView.swift */; };
 		E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEF23328CF91AA006CE66C /* Utility.swift */; };
 		E1BB2A7328F0CF4B00DB834B /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BB2A7228F0CF4B00DB834B /* Tag.swift */; };
@@ -35,9 +32,6 @@
 		E168822228EE27D00006F71D /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36228BE42A300F357B2 /* AddEditDiscTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDiscTableViewController.swift; sourceTree = "<group>"; };
 		E17CA36428C3919800F357B2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		E17CA36628C780AC00F357B2 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
-		E17CA36828C786F700F357B2 /* CashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashTableViewController.swift; sourceTree = "<group>"; };
-		E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCashTableViewController.swift; sourceTree = "<group>"; };
 		E1A9F35428EC94C3000E2F90 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		E1AEF23328CF91AA006CE66C /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		E1BB2A7228F0CF4B00DB834B /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -90,15 +84,6 @@
 				E168822228EE27D00006F71D /* TagsTableViewController.swift */,
 			);
 			path = "Tag Controllers";
-			sourceTree = "<group>";
-		};
-		E17CA36C28C79DDD00F357B2 /* Cash Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				E17CA36828C786F700F357B2 /* CashTableViewController.swift */,
-				E17CA36A28C7871200F357B2 /* AddEditCashTableViewController.swift */,
-			);
-			path = "Cash Controllers";
 			sourceTree = "<group>";
 		};
 		E17CA36E28C79DED00F357B2 /* Inventory Controllers */ = {
@@ -171,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				E1F3C46E28BCF1C30039013E /* Disc.swift */,
-				E17CA36628C780AC00F357B2 /* Cash.swift */,
 				E1BB2A7228F0CF4B00DB834B /* Tag.swift */,
 			);
 			path = Models;
@@ -182,7 +166,6 @@
 			children = (
 				E17CA36428C3919800F357B2 /* MainTabBarController.swift */,
 				E1F3C47328BCFB3A0039013E /* DashboardViewController.swift */,
-				E17CA36C28C79DDD00F357B2 /* Cash Controllers */,
 				E17CA36E28C79DED00F357B2 /* Inventory Controllers */,
 				E168822428EE27F10006F71D /* Tag Controllers */,
 			);
@@ -267,10 +250,7 @@
 				E1F3C47428BCFB3A0039013E /* DashboardViewController.swift in Sources */,
 				E1AEF23428CF91AA006CE66C /* Utility.swift in Sources */,
 				E17CA36528C3919800F357B2 /* MainTabBarController.swift in Sources */,
-				E17CA36728C780AC00F357B2 /* Cash.swift in Sources */,
 				E108F68228E4807400766644 /* SelectTagTableViewController.swift in Sources */,
-				E17CA36928C786F700F357B2 /* CashTableViewController.swift in Sources */,
-				E17CA36B28C7871200F357B2 /* AddEditCashTableViewController.swift in Sources */,
 				E168822328EE27D00006F71D /* TagsTableViewController.swift in Sources */,
 				E1F3C45728B7B25A0039013E /* AppDelegate.swift in Sources */,
 				E1F3C45928B7B25A0039013E /* SceneDelegate.swift in Sources */,

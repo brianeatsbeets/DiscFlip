@@ -5,8 +5,7 @@
 //  Created by Aguirre, Brian P. on 9/28/22.
 //
 
-// TODO: Maybe use prototype cell instead of xib
-// TODO: Rename this class via Refactor
+// TODO: Allow for creation of new tags when selecting tags to add to discs
 
 // MARK: - Imported libraries
 
@@ -159,7 +158,7 @@ class SelectTagTableViewController: UITableViewController {
 
 // MARK: - Extensions
 
-// This extention houses table view management functions using the diffable data source API and conforms to the RemoveCashDelegate protocol
+// This extention houses table view management functions using the diffable data source API
 extension SelectTagTableViewController {
     
     // Create the the data source and specify what to do with a provided cell
@@ -178,7 +177,7 @@ extension SelectTagTableViewController {
         }
     }
     
-    // Apply a snapshot with updated cash data
+    // Apply a snapshot with updated tag data
     func updateTableView() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Tag>()
         snapshot.appendSections(Section.allCases)

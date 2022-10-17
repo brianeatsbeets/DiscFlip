@@ -11,12 +11,10 @@ import UIKit
 
 // MARK: - Protocols
 
-// This protocol allows the inventory and cash to be accessed and updated by other views
+// This protocol allows the inventory to be accessed and updated by other views
 protocol DataDelegate: AnyObject {
     func updateInventory(newInventory: [Disc])
     func checkoutInventory() -> [Disc]
-    func updateCashList(newCashList: [Cash])
-    func checkoutCashList() -> [Cash]
     func updateTags(newTagsList: [Tag])
     func checkoutTags() -> [Tag]
 }
@@ -29,7 +27,6 @@ class MainTabBarController: UITabBarController {
     // MARK: - Class properties
     
     var inventory = [Disc]()
-    var cashList = [Cash]()
     var tags = [Tag]()
     
     // MARK: - View life cycle functions
@@ -67,15 +64,9 @@ class MainTabBarController: UITabBarController {
             Disc(name: "Destroyer", plastic: "Pro", purchasePrice: 14, estSellPrice: 18, wasSold: true, soldPrice: 18, tags: [tags[0]]),
             Disc(name: "Katana", plastic: "GStar", purchasePrice: 16, estSellPrice: 22, wasSold: true, soldPrice: 23, tags: [tags[0]])
         ]
-        
-        cashList = [
-            Cash(amount: 10, memo: "Mowed lawn"),
-            Cash(amount: 5, memo: "Sold game"),
-            Cash(amount: 20, memo: "Birthday cash"),
-        ]
     }
     
-    // Fetch the existing disc inventory and cash
+    // Fetch the existing disc inventory
     func fetchData() {
         
         // Create path to Documents directory
@@ -91,15 +82,6 @@ class MainTabBarController: UITabBarController {
         if let inventoryData = try? Data(contentsOf: archiveURL),
            let decodedInventory = try? propertyListDecoder.decode([Disc].self, from: inventoryData) {
             inventory = decodedInventory
-        }
-        
-        // Update archiveURL for cash path
-        archiveURL = documentsDirectory.appendingPathComponent("cashList") . appendingPathExtension("plist")
-        
-        // Fetch and decode cash data
-        if let cashData = try? Data(contentsOf: archiveURL),
-           let decodedCash = try? propertyListDecoder.decode([Cash].self, from: cashData) {
-            cashList = decodedCash
         }
         
         // Update archiveURL for tags path
@@ -147,16 +129,6 @@ extension MainTabBarController: DataDelegate {
     // Retrieve the saved inventory
     func checkoutInventory() -> [Disc] {
         return inventory
-    }
-    
-    // Update the cash list with the provided data
-    func updateCashList(newCashList: [Cash]) {
-        cashList = newCashList
-    }
-    
-    // Retrieve the saved cash list
-    func checkoutCashList() -> [Cash] {
-        return cashList
     }
     
     // Update the tags list with the provided data

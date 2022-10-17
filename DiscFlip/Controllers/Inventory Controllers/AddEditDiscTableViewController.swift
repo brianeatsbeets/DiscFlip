@@ -5,6 +5,8 @@
 //  Created by Aguirre, Brian P. on 8/30/22.
 //
 
+// TODO: Add property to exclude disc from financials (and optionally keep in net calculation) - Use case of adding cash or other entities that may not have been "purchased"
+
 // MARK: - Imported libraries
 
 import UIKit
@@ -43,6 +45,9 @@ class AddEditDiscTableViewController: UITableViewController {
     init?(coder: NSCoder, disc: Disc?, tags: [Tag]) {
         self.disc = disc
         self.allTags = tags
+        if let disc = disc {
+            tagsToAssign = disc.tags
+        }
         super.init(coder: coder)
     }
     
@@ -54,6 +59,7 @@ class AddEditDiscTableViewController: UITableViewController {
     // MARK: - View life cycle methods
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         updateUI()
         updateSaveButtonState()
@@ -62,8 +68,6 @@ class AddEditDiscTableViewController: UITableViewController {
         
         // Initialize a gesture recognizer to dismiss the keyboard when an outside tap is registered
         dismissKeyboardGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        
-        super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {

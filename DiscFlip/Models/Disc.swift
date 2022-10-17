@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: - Main class
 
-// This class represents a disc to be sold
+// This class represents a disc in the inventory
 struct Disc: Codable, CustomStringConvertible, Hashable {
     
     // MARK: - Class properties
